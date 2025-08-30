@@ -2,6 +2,9 @@
 
 A tool for learning Japanese compound words.
 
+This project uses [kanjiapi.dev](https://kanjiapi.dev) to fetch Japanese compound words and related information.  
+See the [kanjiapi.dev documentation](https://kanjiapi.dev/#!/documentation) for details about available endpoints and usage.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
