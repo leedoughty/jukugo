@@ -1,10 +1,10 @@
+import Link from "next/link";
 import styles from "../styles/page.module.css";
-import Header from "./components/header";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Header />
+      <Link href="/jukugo-client">Search Kanji Compounds</Link>
     </div>
   );
 }
