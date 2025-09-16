@@ -6,6 +6,9 @@
 }
 
 .page a {
+  display: block;
+  margin-bottom: 8px;
+  padding: 8px 0;
   color: #3d58e3;
   text-decoration: none;
 }
