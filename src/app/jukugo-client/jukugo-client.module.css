@@ -1,0 +1,52 @@
+.container {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 24px;
+}
+
+.form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.input {
+  flex: 1;
+  font-size: 1.1em;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background: #3d58e3;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.wordList {
+  list-style: none;
+  padding: 0;
+}
+
+.wordCard {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.reading {
+  font-size: 1.1em;
+  color: #3d58e3;
+}
+
+.meaning {
+  font-size: 1em;
+  color: #222;
+}

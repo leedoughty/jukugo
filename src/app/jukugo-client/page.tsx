@@ -2,20 +2,35 @@
 
 import { useActionState } from "react";
 import { fetchJukugoWords } from "./actions";
+import styles from "./jukugo-client.module.css";
 
 export default function JukugoClient() {
   const [state, formAction] = useActionState(fetchJukugoWords, []);
 
   return (
-    <div>
-      <form action={formAction}>
-        <input name="kanji" placeholder="Enter kanji" />
-        <button type="submit">Search</button>
+    <div className={styles.container}>
+      <form action={formAction} className={styles.form}>
+        <input
+          name="kanji"
+          placeholder="Enter kanji"
+          className={styles.input}
+        />
+        <button type="submit" className={styles.button}>
+          Search
+        </button>
       </form>
-      <ul>
+      <ul className={styles.wordList}>
         {state.map((word, i) => (
-          <li key={i}>
-            <strong>{word.compound}</strong> ({word.reading}): {word.meaning}
+          <li key={i} className={styles.wordCard}>
+            <div>
+              <strong>{word.compound}</strong>
+            </div>
+            <div>
+              <span className={styles.reading}>{word.reading}</span>
+            </div>
+            <div>
+              <span className={styles.meaning}>{word.meaning}</span>
+            </div>
           </li>
         ))}
       </ul>
