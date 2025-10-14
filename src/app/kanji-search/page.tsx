@@ -2,9 +2,9 @@
 
 import { useActionState } from "react";
 import { fetchJukugoWords } from "./actions";
-import styles from "./jukugo-client.module.css";
+import styles from "./kanji-search.module.css";
 
-export default function JukugoClient() {
+export default function KanjiSearch() {
   const [state, formAction] = useActionState(fetchJukugoWords, []);
 
   return (

@@ -41,19 +41,23 @@ export default function JLPTQuiz() {
 
     setKanjiList(data);
     setLoading(false);
+
+    if (data.length > 0) {
+      pickRandomKanji(data);
+    }
   };
 
-  const pickRandomKanji = async () => {
-    if (!kanjiList.length) {
-      return;
-    }
+  const pickRandomKanji = async (list?: string[]) => {
+    const sourceList = list ?? kanjiList;
+    if (!sourceList.length) return;
 
     setLoading(true);
     setCurrentIndex(0);
     setFeedback(null);
     setUserInput("");
 
-    const randomKanji = kanjiList[Math.floor(Math.random() * kanjiList.length)];
+    const randomKanji =
+      sourceList[Math.floor(Math.random() * sourceList.length)];
     setSelectedKanji(randomKanji);
     const response = await fetch(
       `https://kanjiapi.dev/v1/words/${randomKanji}`
@@ -99,22 +103,22 @@ export default function JLPTQuiz() {
 
   return (
     <div className={styles.container}>
-      <JLPTLevelSelector
-        levels={JLPT_LEVELS}
-        selected={level}
-        onSelect={(level) => {
-          setLevel(level);
-          fetchKanjiList(level);
-        }}
-      />
+      <div className={styles.selectorRow}>
+        <JLPTLevelSelector
+          levels={JLPT_LEVELS}
+          selected={level}
+          onSelect={(level) => {
+            setLevel(level);
+            fetchKanjiList(level);
+          }}
+        />
+
+        <KanjiPicker kanjiList={kanjiList} onPick={() => pickRandomKanji()} />
+      </div>
+
+      {selectedKanji && <h2 className={styles.kanji}>{selectedKanji}</h2>}
 
       {loading && <div>Loading...</div>}
-
-      <KanjiPicker
-        kanjiList={kanjiList}
-        selectedKanji={selectedKanji}
-        onPick={pickRandomKanji}
-      />
 
       {words.length > 0 && currentIndex < words.length && (
         <QuizCard

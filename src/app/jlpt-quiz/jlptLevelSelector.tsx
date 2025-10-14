@@ -21,7 +21,7 @@ export default function JLPTLevelSelector({
           }`}
           onClick={() => onSelect(level)}
         >
-          JLPT {level}
+          JLPT N{level}
         </button>
       ))}
     </div>
