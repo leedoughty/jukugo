@@ -12,7 +12,11 @@ type Word = { meanings: Meaning[]; variants: Variant[] };
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
-export default function JLPTQuiz() {
+type JLPTQuizProps = {
+  onLevelSelect?: () => void;
+};
+
+export default function JLPTQuiz({ onLevelSelect }: JLPTQuizProps) {
   const [level, setLevel] = useState<number | null>(null);
   const [kanjiList, setKanjiList] = useState<string[]>([]);
   const [selectedKanji, setSelectedKanji] = useState<string | null>(null);
@@ -101,24 +105,25 @@ export default function JLPTQuiz() {
     setCurrentIndex((index) => index + 1);
   };
 
+  const handleLevelSelect = (level: number) => {
+    setLevel(level);
+    fetchKanjiList(level);
+    if (onLevelSelect) onLevelSelect();
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.selectorRow}>
         <JLPTLevelSelector
           levels={JLPT_LEVELS}
           selected={level}
-          onSelect={(level) => {
-            setLevel(level);
-            fetchKanjiList(level);
-          }}
+          onSelect={handleLevelSelect}
         />
 
         <KanjiPicker kanjiList={kanjiList} onPick={() => pickRandomKanji()} />
       </div>
 
       {selectedKanji && <h2 className={styles.kanji}>{selectedKanji}</h2>}
-
-      {loading && <div>Loading...</div>}
 
       {words.length > 0 && currentIndex < words.length && (
         <QuizCard

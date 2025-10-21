@@ -10,7 +10,7 @@ export default function KanjiPicker({ kanjiList, onPick }: Props) {
     <div>
       {kanjiList.length > 0 && (
         <button
-          className={styles.pickButton}
+          className={`${styles.pickButton} ${styles.pickButtonMobile}`}
           onClick={onPick}
           aria-label="Pick Random Kanji"
         >

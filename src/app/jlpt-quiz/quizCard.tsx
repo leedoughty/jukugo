@@ -29,18 +29,14 @@ export default function QuizCard({ word, meaning, onNext }: Props) {
 
   return (
     <div className={styles.quizCard}>
-      <div>
-        <strong>Word:</strong> {word.written}
-      </div>
-      <div>
-        <strong>Meaning:</strong> {meaning}
-      </div>
+      <div className={styles.jukugoWord}>{word.written}</div>
+      <div className={styles.jukugoMeaning}>{meaning}</div>
 
       <form onSubmit={handleSubmit} className={styles.inputRow}>
         <input
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
-          placeholder="Type the hiragana reading"
+          placeholder="ひらがな"
           className={styles.input}
           disabled={feedback !== null}
         />
@@ -62,9 +58,11 @@ export default function QuizCard({ word, meaning, onNext }: Props) {
           {feedback === "correct" ? "✅ Correct!" : "❌ Incorrect."}
           <br />
           <strong>Answer:</strong> {word.pronounced}
-          <button className={styles.nextButton} onClick={onNext}>
-            Next
-          </button>
+          <div>
+            <button className={styles.nextButton} onClick={onNext}>
+              Next
+            </button>
+          </div>
         </div>
       )}
     </div>
