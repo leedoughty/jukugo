@@ -1,4 +1,4 @@
-.searchIcon {
+.themeIcon {
   padding: 5px 10px;
   font-size: 1.3em;
   background: #fff;
@@ -6,7 +6,7 @@
   text-decoration: none;
   transition: background 0.2s;
   border: 1px solid transparent;
-  margin-left: 16px;
+  margin-left: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -14,9 +14,7 @@
   aspect-ratio: 1 / 1;
 }
 
-.searchIcon:hover,
-.searchIcon:focus {
+.themeIcon:hover,
+.themeIcon:focus {
   border: 1px solid #2c2c2c;
-  background: #f0f4ff;
-  outline: none;
 }

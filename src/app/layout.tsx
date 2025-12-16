@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/header";
-import SearchIcon from "./components/searchIcon";
+import ThemeProvider from "./ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Jukugo",
@@ -16,9 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <SearchIcon />
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

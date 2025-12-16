@@ -2,39 +2,54 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32px 32px;
+  padding: 16px 32px;
+  border-bottom: 0.5px solid #333;
+  margin-bottom: 16px;
 }
 
-.header h1 {
-  margin: 0;
-  font-size: 2em;
-  line-height: 1.1;
-  font-weight: 400;
+.nav {
+  display: flex;
+  align-items: center;
 }
 
-.header h1 a {
+.headerDark {
+  border-bottom: 0.5px solid #e0e0e0;
+}
+
+.titleLink {
   color: inherit;
   text-decoration: none;
   outline: none;
   transition: text-decoration 0.2s;
   display: inline;
-}
-
-.header h1 a:hover,
-.header h1 a:focus {
-  text-decoration: underline;
-}
-
-.header nav a {
-  font-size: 2em;
-  text-decoration: none;
-  padding-left: 24px;
-  outline: none;
-  transition: text-decoration 0.2s;
   font-weight: 400;
 }
 
-.header nav a:hover,
-.header nav a:focus {
+.titleLink:hover,
+.titleLink:focus {
   text-decoration: underline;
+}
+
+.navLink {
+  font-size: 2em;
+  text-decoration: none;
+  padding-left: 24px;
+  padding-right: 16px;
+  outline: none;
+  transition: text-decoration 0.2s;
+  font-weight: 400;
+  vertical-align: middle;
+}
+
+.navLink:hover,
+.navLink:focus {
+  text-decoration: underline;
+}
+
+.darkModeToggle {
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  margin-left: 16px;
 }
