@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import styles from "../styles/page.module.css";
-import Introduction from "./components/introduction";
+import QuizMenu from "./components/quizMenu";
 import JLPTQuiz from "./jlpt-quiz/jlptQuiz";
 
 export default function Home() {
@@ -11,8 +12,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <div className={styles.flexRow}>
-        {showIntro && <Introduction />}
-        <JLPTQuiz onLevelSelect={() => setShowIntro(false)} />
+        <QuizMenu />
       </div>
     </div>
   );

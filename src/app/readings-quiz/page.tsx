@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./jlpt-quiz.module.css";
 import QuizCard from "./quizCard";
 import KanjiPicker from "./kanjiPicker";
@@ -12,11 +13,9 @@ type Word = { meanings: Meaning[]; variants: Variant[] };
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
-type JLPTQuizProps = {
-  onLevelSelect?: () => void;
-};
-
-export default function JLPTQuiz({ onLevelSelect }: JLPTQuizProps) {
+export default function JLPTQuiz() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [level, setLevel] = useState<number | null>(null);
   const [kanjiList, setKanjiList] = useState<string[]>([]);
   const [selectedKanji, setSelectedKanji] = useState<string | null>(null);
@@ -28,6 +27,15 @@ export default function JLPTQuiz({ onLevelSelect }: JLPTQuizProps) {
   const [feedback, setFeedback] = useState<null | "correct" | "incorrect">(
     null
   );
+
+  useEffect(() => {
+    const levelParam = searchParams.get("level");
+    if (levelParam) {
+      const lvl = parseInt(levelParam, 10);
+      setLevel(lvl);
+      fetchKanjiList(lvl);
+    }
+  }, [searchParams]);
 
   const fetchKanjiList = async (jlptLevel: number) => {
     setLoading(true);
@@ -53,16 +61,17 @@ export default function JLPTQuiz({ onLevelSelect }: JLPTQuizProps) {
 
   const pickRandomKanji = async (list?: string[]) => {
     const sourceList = list ?? kanjiList;
-    if (!sourceList.length) return;
-
-    setLoading(true);
-    setCurrentIndex(0);
-    setFeedback(null);
-    setUserInput("");
+    if (!sourceList.length) {
+      setLoading(false);
+      setSelectedKanji(null);
+      setWords([]);
+      setMeanings([]);
+      return;
+    }
 
     const randomKanji =
       sourceList[Math.floor(Math.random() * sourceList.length)];
-    setSelectedKanji(randomKanji);
+
     const response = await fetch(
       `https://kanjiapi.dev/v1/words/${randomKanji}`
     );
@@ -73,15 +82,28 @@ export default function JLPTQuiz({ onLevelSelect }: JLPTQuizProps) {
 
     data.forEach((word) => {
       word.variants.forEach((variant) => {
-        if (variant.priorities && variant.priorities.length > 0) {
+        if (
+          variant.priorities &&
+          variant.priorities.length > 0 &&
+          variant.written.includes(randomKanji)
+        ) {
           variants.push(variant);
           meanings.push(word.meanings?.[0]?.glosses?.[0] ?? "");
         }
       });
     });
 
+    if (variants.length === 0) {
+      await pickRandomKanji(sourceList.filter((k) => k !== randomKanji));
+      return;
+    }
+
+    setSelectedKanji(randomKanji);
     setWords(variants);
     setMeanings(meanings);
+    setCurrentIndex(0);
+    setFeedback(null);
+    setUserInput("");
     setLoading(false);
   };
 
@@ -105,10 +127,8 @@ export default function JLPTQuiz({ onLevelSelect }: JLPTQuizProps) {
     setCurrentIndex((index) => index + 1);
   };
 
-  const handleLevelSelect = (level: number) => {
-    setLevel(level);
-    fetchKanjiList(level);
-    if (onLevelSelect) onLevelSelect();
+  const handleLevelSelect = (newLevel: number) => {
+    router.replace(`/readings-quiz?level=${newLevel}`);
   };
 
   return (
