@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./jlpt-quiz.module.css";
 import QuizCard from "./quizCard";
@@ -13,7 +13,15 @@ type Word = { meanings: Meaning[]; variants: Variant[] };
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
-export default function JLPTQuiz() {
+export default function JLPTQuizPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <JLPTQuiz />
+    </Suspense>
+  );
+}
+
+export function JLPTQuiz() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [level, setLevel] = useState<number | null>(null);
