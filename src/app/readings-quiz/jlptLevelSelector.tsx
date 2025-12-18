@@ -1,3 +1,4 @@
+import LevelButton from "../components/levelButton";
 import styles from "./jlpt-quiz.module.css";
 
 type Props = {
@@ -14,15 +15,15 @@ export default function JLPTLevelSelector({
   return (
     <div className={styles.levels}>
       {levels.map((level) => (
-        <button
+        <LevelButton
           key={level}
-          className={`${styles.levelButton} ${
-            selected === level ? styles.selected : ""
-          }`}
-          onClick={() => onSelect(level)}
+          level={level}
+          selected={selected === level}
+          onClick={onSelect}
+          className={styles.levelButton}
         >
           JLPT N{level}
-        </button>
+        </LevelButton>
       ))}
     </div>
   );

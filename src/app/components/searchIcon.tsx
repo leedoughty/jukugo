@@ -1,11 +1,15 @@
 import Link from "next/link";
 import styles from "../../styles/searchIcon.module.css";
 
-export default function SearchIcon() {
+type SearchIconProps = {
+  dark: boolean;
+};
+
+export default function SearchIcon({ dark }: SearchIconProps) {
   return (
     <Link
       href="/kanji-search"
-      className={styles.searchIcon}
+      className={`${styles.searchIcon} ${dark ? styles.searchIconDark : ""}`}
       aria-label="Search Kanji Compounds"
     >
       🔍

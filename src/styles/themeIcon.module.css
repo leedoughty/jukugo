@@ -5,16 +5,21 @@
   border-radius: 50%;
   text-decoration: none;
   transition: background 0.2s;
-  border: 1px solid transparent;
+  border: 1px solid #2c2c2c;
   margin-left: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #2c2c2c;
   aspect-ratio: 1 / 1;
 }
 
 .themeIcon:hover,
 .themeIcon:focus {
-  border: 1px solid #2c2c2c;
+  box-shadow: 0 0 0 1.3px currentColor;
+}
+
+.themeIconDark {
+  background: #181a1b;
+  color: #fff;
+  border: 1px solid #fff;
 }

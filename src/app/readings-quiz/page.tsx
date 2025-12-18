@@ -21,7 +21,6 @@ export default function JLPTQuiz() {
   const [selectedKanji, setSelectedKanji] = useState<string | null>(null);
   const [words, setWords] = useState<Variant[]>([]);
   const [meanings, setMeanings] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
   const [feedback, setFeedback] = useState<null | "correct" | "incorrect">(
@@ -38,7 +37,6 @@ export default function JLPTQuiz() {
   }, [searchParams]);
 
   const fetchKanjiList = async (jlptLevel: number) => {
-    setLoading(true);
     setSelectedKanji(null);
     setWords([]);
     setMeanings([]);
@@ -52,7 +50,6 @@ export default function JLPTQuiz() {
     const data: string[] = await response.json();
 
     setKanjiList(data);
-    setLoading(false);
 
     if (data.length > 0) {
       pickRandomKanji(data);
@@ -62,7 +59,6 @@ export default function JLPTQuiz() {
   const pickRandomKanji = async (list?: string[]) => {
     const sourceList = list ?? kanjiList;
     if (!sourceList.length) {
-      setLoading(false);
       setSelectedKanji(null);
       setWords([]);
       setMeanings([]);
@@ -104,7 +100,6 @@ export default function JLPTQuiz() {
     setCurrentIndex(0);
     setFeedback(null);
     setUserInput("");
-    setLoading(false);
   };
 
   const handleSubmit = (event: React.FormEvent) => {

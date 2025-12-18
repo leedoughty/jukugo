@@ -1,0 +1,38 @@
+.levelButton {
+  background: transparent;
+  border: 2px solid #181a1b;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+  outline: none;
+  color: #181a1b;
+}
+
+.levelButtonDark {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.levelButton:hover,
+.levelButton:focus {
+  background: #3d58e3;
+  color: #fff;
+}
+
+.selected {
+  background: #3d58e3;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .levelButton {
+    background: #fff;
+    color: #181a1b;
+    border-color: #fff;
+  }
+}

@@ -13,7 +13,13 @@
   max-width: 95vw;
   min-width: 400px;
   z-index: 20;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #333;
+}
+
+.introContainerDark {
+  background: #181a1b;
+  color: #fff;
+  border-color: #e0e0e0;
 }
 
 .heading {
@@ -26,9 +32,9 @@
   margin-bottom: 0.8em;
 }
 
-.startButton {
-  margin-top: 1em;
-  padding: 8px 20px;
+.levelButtons {
+  margin-top: 10px;
+  padding: 8px 8px;
   font-size: 1em;
   border-radius: 6px;
   color: #fff;
@@ -37,32 +43,16 @@
   transition: background 0.2s;
 }
 
-.startButton:hover,
-.startButton:focus {
-  background: #2c2c2c;
+.startButtonLight {
+  border: 2px solid #181a1b;
+  color: #181a1b;
+  background: transparent;
 }
 
-.arrow {
-  font-size: 1.5em;
-  margin-top: 1.5em;
-  animation: bounce 1s infinite;
-  display: flex;
-  justify-content: center;
-}
-
-.arrowRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5em;
-  margin-top: 1.5em;
-}
-
-.arrowIcon {
-  display: inline-block;
-  transition: transform 0.2s;
-  font-size: 1.5em;
-  transform: rotate(0deg);
+.startButtonDark {
+  border: 2px solid #fff;
+  color: #fff;
+  background: transparent;
 }
 
 @keyframes bounce {
@@ -80,4 +70,12 @@
     max-width: 60%;
     min-width: 300px;
   }
+}
+
+.levelsRow {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 1em;
 }
