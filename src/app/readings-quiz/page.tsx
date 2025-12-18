@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./jlpt-quiz.module.css";
 import QuizCard from "./quizCard";
@@ -31,25 +31,12 @@ export function JLPTQuiz() {
   const [meanings, setMeanings] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
-  const [feedback, setFeedback] = useState<null | "correct" | "incorrect">(
-    null
-  );
 
-  useEffect(() => {
-    const levelParam = searchParams.get("level");
-    if (levelParam) {
-      const lvl = parseInt(levelParam, 10);
-      setLevel(lvl);
-      fetchKanjiList(lvl);
-    }
-  }, [searchParams]);
-
-  const fetchKanjiList = async (jlptLevel: number) => {
+  const fetchKanjiList = useCallback(async (jlptLevel: number) => {
     setSelectedKanji(null);
     setWords([]);
     setMeanings([]);
     setCurrentIndex(0);
-    setFeedback(null);
     setUserInput("");
 
     const response = await fetch(
@@ -62,7 +49,16 @@ export function JLPTQuiz() {
     if (data.length > 0) {
       pickRandomKanji(data);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const levelParam = searchParams.get("level");
+    if (levelParam) {
+      const lvl = parseInt(levelParam, 10);
+      setLevel(lvl);
+      fetchKanjiList(lvl);
+    }
+  }, [searchParams, fetchKanjiList]);
 
   const pickRandomKanji = async (list?: string[]) => {
     const sourceList = list ?? kanjiList;
@@ -106,26 +102,10 @@ export function JLPTQuiz() {
     setWords(variants);
     setMeanings(meanings);
     setCurrentIndex(0);
-    setFeedback(null);
     setUserInput("");
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (!words.length) {
-      return;
-    }
-
-    if (userInput.trim() === words[currentIndex].pronounced.trim()) {
-      setFeedback("correct");
-    } else {
-      setFeedback("incorrect");
-    }
-  };
-
   const handleNext = () => {
-    setFeedback(null);
     setUserInput("");
     setCurrentIndex((index) => index + 1);
   };
