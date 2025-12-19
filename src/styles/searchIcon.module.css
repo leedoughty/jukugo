@@ -1,7 +1,7 @@
 .searchIcon {
   padding: 5px 10px;
   font-size: 1.3em;
-  background: #fff;
+  background: transparent;
   border-radius: 50%;
   text-decoration: none;
   transition: background 0.2s;
