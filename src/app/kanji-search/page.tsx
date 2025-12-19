@@ -3,9 +3,11 @@
 import { useActionState } from "react";
 import { fetchJukugoWords } from "./actions";
 import styles from "./kanji-search.module.css";
+import { useTheme } from "../ThemeProvider";
 
 export default function KanjiSearch() {
   const [state, formAction] = useActionState(fetchJukugoWords, []);
+  const { dark } = useTheme();
 
   return (
     <div className={styles.container}>
@@ -21,15 +23,30 @@ export default function KanjiSearch() {
       </form>
       <ul className={styles.wordList}>
         {state.map((word, i) => (
-          <li key={i} className={styles.wordCard}>
+          <li
+            key={i}
+            className={`${styles.wordCard} ${dark ? styles.wordCardDark : ""}`}
+          >
             <div>
               <strong>{word.compound}</strong>
             </div>
             <div>
-              <span className={styles.reading}>{word.reading}</span>
+              <span
+                className={`${styles.reading} ${
+                  dark ? styles.readingDark : ""
+                }`}
+              >
+                {word.reading}
+              </span>
             </div>
             <div>
-              <span className={styles.meaning}>{word.meaning}</span>
+              <span
+                className={`${styles.meaning} ${
+                  dark ? styles.meaningDark : ""
+                }`}
+              >
+                {word.meaning}
+              </span>
             </div>
           </li>
         ))}

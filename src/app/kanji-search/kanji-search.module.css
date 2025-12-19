@@ -1,13 +1,25 @@
 .container {
-  max-width: 600px;
-  margin: 32px auto;
-  padding: 24px;
+  width: 100%;
+  padding: 24px 32px;
+  margin: 32px 0;
 }
 
 .form {
   display: flex;
   gap: 12px;
   margin-bottom: 24px;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+@media (min-width: 900px) {
+  .form {
+    width: 33.33%;
+    min-width: 320px;
+    max-width: 400px;
+    padding-left: 0;
+  }
 }
 
 .input {
@@ -31,14 +43,34 @@
 .wordList {
   list-style: none;
   padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .wordList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .wordList {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .wordCard {
-  background: #fafafa;
-  border: 1px solid #eee;
+  background: #f7f7f6;
+  border: 1px solid #bbb;
   border-radius: 8px;
   padding: 16px;
-  margin-bottom: 16px;
+}
+
+.wordCardDark {
+  background: #181a1b;
+  border: 1px solid #444;
+  color: #ededed;
 }
 
 .reading {
@@ -46,7 +78,15 @@
   color: #3d58e3;
 }
 
+.readingDark {
+  color: #8faaff;
+}
+
 .meaning {
   font-size: 1em;
   color: #222;
+}
+
+.meaningDark {
+  color: #ededed;
 }
