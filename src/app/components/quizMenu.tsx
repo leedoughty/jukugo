@@ -15,13 +15,8 @@ export default function QuizMenu() {
         dark ? styles.introContainerDark : ""
       }`}
     >
-      <h2 className={styles.heading}>Jukugo Quizzes</h2>
-      <p className={styles.text}>
-        Practice your Japanese by quizzing yourself on kanji compounds (熟語).
-      </p>
-      <p className={styles.text}>
-        Choose a JLPT level to start the Readings Quiz:
-      </p>
+      <h2 className={styles.heading}>Reading Quiz</h2>
+      <p className={styles.text}>JLPT Level:</p>
       <div className={styles.levelsRow}>
         {JLPT_LEVELS.map((level) => (
           <Link
@@ -31,7 +26,7 @@ export default function QuizMenu() {
             passHref
           >
             <LevelButton level={level} className={styles.startButton}>
-              JLPT N{level}
+              N{level}
             </LevelButton>
           </Link>
         ))}
