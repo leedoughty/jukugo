@@ -110,6 +110,7 @@
 .levelsRow {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: 1em;
 }
