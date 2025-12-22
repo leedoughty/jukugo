@@ -22,7 +22,7 @@ export default function JLPTLevelSelector({
           onClick={onSelect}
           className={styles.levelButton}
         >
-          JLPT N{level}
+          N{level}
         </LevelButton>
       ))}
     </div>
