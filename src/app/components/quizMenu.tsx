@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styles from "../../styles/quizMenu.module.css";
+import buttonStyles from "../../styles/levelButton.module.css";
 import LevelButton from "./levelButton";
 import { useTheme } from "../ThemeProvider";
 
@@ -10,26 +11,34 @@ export default function QuizMenu() {
   const { dark } = useTheme();
 
   return (
-    <div
-      className={`${styles.introContainer} ${
-        dark ? styles.introContainerDark : ""
-      }`}
-    >
+    <div className={styles.layoutRow}>
       <h2 className={styles.heading}>Reading Quiz</h2>
-      <p className={styles.text}>JLPT Level:</p>
-      <div className={styles.levelsRow}>
-        {JLPT_LEVELS.map((level) => (
-          <Link
-            key={level}
-            className={styles.levelButtons}
-            href={`/readings-quiz?level=${level}`}
-            passHref
-          >
-            <LevelButton level={level} className={styles.startButton}>
-              N{level}
-            </LevelButton>
-          </Link>
-        ))}
+      <div className={styles.buttonGroup}>
+        <div className={styles.levelsSection}>
+          <p className={styles.text}>Level:</p>
+          <div className={styles.levelsRow}>
+            {JLPT_LEVELS.map((level) => (
+              <Link
+                key={level}
+                className={styles.levelButtons}
+                href={`/readings-quiz?level=${level}`}
+                passHref
+              >
+                <LevelButton
+                  level={level}
+                  className={`${styles.levelButtonLarge} `}
+                >
+                  N{level}
+                </LevelButton>
+              </Link>
+            ))}
+            <Link href="/search-quiz" className={styles.levelButtons}>
+              <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
+                Search mode
+              </LevelButton>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

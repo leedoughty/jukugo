@@ -37,7 +37,7 @@
 }
 
 .text {
-  font-size: 1em;
+  font-size: 1.3em;
   margin-bottom: 0.8em;
   text-align: left;
 }
@@ -63,6 +63,14 @@
   background: transparent;
 }
 
+.levelsRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1em;
+}
+
 @keyframes bounce {
   0%,
   100% {
@@ -79,8 +87,9 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 48px;
+    gap: 100px;
     width: 100%;
+    padding-top: 50px;
   }
 
   .introContainer {
@@ -105,12 +114,4 @@
   .text {
     text-align: left;
   }
-}
-
-.levelsRow {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 1em;
 }

@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   max-width: 600px;
   margin: auto;
   font-size: 1rem;
@@ -85,10 +86,11 @@
 
 .jukugoMeaning {
   font-size: 1.5rem;
+  width: 90vw;
 }
 
 .inputRow {
-  padding-top: 25%;
+  padding-top: 25px;
   padding-bottom: 24px;
   display: flex;
   align-items: center;
@@ -148,7 +150,7 @@
 
 @media (min-width: 920px) {
   .container {
-    padding-top: 60px;
+    padding-top: 150px;
   }
 
   .levels {
@@ -166,7 +168,7 @@
     align-items: flex-start;
     position: fixed;
     left: 32px;
-    bottom: 32px;
+    top: 60px;
     width: 120px;
     margin-bottom: 0;
   }
@@ -174,13 +176,6 @@
   .jukugoWord {
     white-space: nowrap;
     font-size: 8rem;
-  }
-
-  .pickButtonMobile {
-    position: static;
-    bottom: auto;
-    left: auto;
-    z-index: auto;
   }
 
   .inputRow {
