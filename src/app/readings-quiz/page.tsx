@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./jlpt-quiz.module.css";
 import QuizCard from "../components/quizCard";
-import KanjiPicker from "./kanjiPicker";
+import KanjiPicker from "../components/kanjiPicker";
 import JLPTLevelSelector from "./jlptLevelSelector";
 
 type Meaning = { glosses: string[] };
@@ -123,7 +123,7 @@ export function JLPTQuiz() {
           onSelect={handleLevelSelect}
         />
 
-        <KanjiPicker kanjiList={kanjiList} onPick={() => pickRandomKanji()} />
+        <KanjiPicker onPick={() => pickRandomKanji()} />
       </div>
 
       {selectedKanji && <h2 className={styles.kanji}>{selectedKanji}</h2>}

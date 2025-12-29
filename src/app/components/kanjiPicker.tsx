@@ -1,4 +1,4 @@
-import styles from "./search-quiz.module.css";
+import styles from "@/styles/kanjiPicker.module.css";
 import { useTheme } from "../ThemeProvider";
 
 type Props = {
@@ -7,6 +7,7 @@ type Props = {
 
 export default function KanjiPicker({ onPick }: Props) {
   const { dark } = useTheme();
+
   return (
     <button
       className={`${styles.pickButton} ${styles.pickButtonMobile} ${

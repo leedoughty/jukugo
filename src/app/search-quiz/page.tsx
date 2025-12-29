@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import styles from "../search-quiz/search-quiz.module.css";
 import QuizCard from "../components/quizCard";
-import KanjiPicker from "./kanjiPicker";
+import KanjiPicker from "../components/kanjiPicker";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };
@@ -44,7 +44,6 @@ export default function SearchQuizPage() {
     setLoading(false);
   };
 
-  // Only fetch when searchKanji changes
   useEffect(() => {
     fetchWords(searchKanji);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,7 +86,6 @@ export default function SearchQuizPage() {
             {loading ? "Searching..." : "Search"}
           </button>
         </form>
-
         <KanjiPicker onPick={handleNext} />
       </div>
 
