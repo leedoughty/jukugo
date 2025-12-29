@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./jlpt-quiz.module.css";
+import styles from "../../styles/quizCard.module.css";
 
 type Props = {
   word: { written: string; pronounced: string };
@@ -31,7 +31,6 @@ export default function QuizCard({ word, meaning, onNext }: Props) {
     <div className={styles.quizCard}>
       <div className={styles.jukugoWord}>{word.written}</div>
       <div className={styles.jukugoMeaning}>{meaning}</div>
-
       <form onSubmit={handleSubmit} className={styles.inputRow}>
         <input
           value={userInput}
@@ -48,7 +47,6 @@ export default function QuizCard({ word, meaning, onNext }: Props) {
           Submit
         </button>
       </form>
-
       {feedback && (
         <div
           className={`${styles.feedback} ${
