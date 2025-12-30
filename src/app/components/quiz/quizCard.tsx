@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "../../styles/quizCard.module.css";
+import styles from "./quizCard.module.css";
 
 type Props = {
   word: { written: string; pronounced: string };

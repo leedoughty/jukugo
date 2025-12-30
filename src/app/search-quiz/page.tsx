@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import styles from "../search-quiz/search-quiz.module.css";
-import QuizCard from "../components/quizCard";
+import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "../components/kanjiPicker";
 
 type Meaning = { glosses: string[] };

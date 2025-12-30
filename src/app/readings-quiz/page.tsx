@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./jlpt-quiz.module.css";
-import QuizCard from "../components/quizCard";
+import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "../components/kanjiPicker";
 import JLPTLevelSelector from "./jlptLevelSelector";
 
