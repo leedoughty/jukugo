@@ -18,6 +18,7 @@
 
 .levelButton:hover,
 .levelButton:focus {
+  text-decoration: none;
   background: #3d58e3;
   color: #fff;
 }

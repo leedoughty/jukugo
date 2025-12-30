@@ -27,15 +27,34 @@
 }
 
 .levelButton {
-  width: 110px;
-  padding: 6px 0;
-  font-size: 0.95em;
-  background: #eee;
-  color: #222;
-  border: none;
-  border-radius: 6px;
+  background: transparent;
+  border: 1px solid #181a1b;
+  padding: 10px;
+  font-size: 1.5rem;
+  font-weight: 400;
   cursor: pointer;
-  text-align: center;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+  outline: none;
+  color: #181a1b;
+}
+
+.levelButtonDark {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.levelButton:hover,
+.levelButton:focus {
+  text-decoration: none;
+  background: #3d58e3;
+  color: #fff;
+}
+
+.selected {
+  background: #3d58e3;
+  color: #fff;
+  text-decoration: none;
 }
 
 .pickButton {
@@ -193,5 +212,13 @@
     align-items: center;
     font-size: 1em;
     gap: 12px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .levelButton {
+    background: #fff;
+    color: #181a1b;
+    border-color: #fff;
   }
 }

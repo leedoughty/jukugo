@@ -1,4 +1,6 @@
-import LevelButton from "@/app/components/quiz/levelButton";
+"use client";
+
+import { useTheme } from "@/app/ThemeProvider";
 import styles from "./jlpt-quiz.module.css";
 
 type Props = {
@@ -12,18 +14,25 @@ export default function JLPTLevelSelector({
   selected,
   onSelect,
 }: Props) {
+  const { dark } = useTheme();
+
   return (
     <div className={styles.levels}>
       {levels.map((level) => (
-        <LevelButton
+        <span
           key={level}
-          level={level}
-          selected={selected === level}
-          onClick={onSelect}
-          className={styles.levelButton}
+          role="button"
+          tabIndex={0}
+          className={[
+            styles.levelButton,
+            dark ? styles.levelButtonDark : "",
+            selected === level ? styles.selected : "",
+          ].join(" ")}
+          aria-pressed={selected === level}
+          onClick={() => onSelect(level)}
         >
           N{level}
-        </LevelButton>
+        </span>
       ))}
     </div>
   );
