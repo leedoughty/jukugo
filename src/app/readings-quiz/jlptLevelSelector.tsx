@@ -1,4 +1,4 @@
-import LevelButton from "../components/levelButton";
+import LevelButton from "@/app/components/quiz/levelButton";
 import styles from "./jlpt-quiz.module.css";
 
 type Props = {

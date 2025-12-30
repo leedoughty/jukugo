@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import styles from "../../styles/header.module.css";
-import { useTheme } from "../ThemeProvider";
+import styles from "./header.module.css";
+import { useTheme } from "@/app/ThemeProvider";
 import ThemeIcon from "./themeIcon";
 import SearchIcon from "./searchIcon";
 

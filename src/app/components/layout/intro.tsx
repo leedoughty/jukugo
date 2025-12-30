@@ -1,4 +1,4 @@
-import styles from "../../styles/intro.module.css";
+import styles from "./intro.module.css";
 import JukugoText from "./jukugoText";
 
 export default function Intro() {

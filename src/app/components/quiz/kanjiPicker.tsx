@@ -1,5 +1,5 @@
-import styles from "@/styles/kanjiPicker.module.css";
-import { useTheme } from "../ThemeProvider";
+import styles from "./kanjiPicker.module.css";
+import { useTheme } from "@/app/ThemeProvider";
 
 type Props = {
   onPick: () => void;

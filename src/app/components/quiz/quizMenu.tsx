@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import styles from "../../styles/quizMenu.module.css";
-import buttonStyles from "../../styles/levelButton.module.css";
+import styles from "./quizMenu.module.css";
 import LevelButton from "./levelButton";
-import { useTheme } from "../ThemeProvider";
+import { useTheme } from "@/app/ThemeProvider";
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 

@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import styles from "../search-quiz/search-quiz.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
-import KanjiPicker from "../components/kanjiPicker";
+import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };

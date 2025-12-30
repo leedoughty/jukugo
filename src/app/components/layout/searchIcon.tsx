@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../../styles/searchIcon.module.css";
+import styles from "./searchIcon.module.css";
 
 type SearchIconProps = {
   dark: boolean;

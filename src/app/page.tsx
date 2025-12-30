@@ -1,8 +1,8 @@
 "use client";
 
-import styles from "../styles/page.module.css";
-import QuizMenu from "./components/quizMenu";
-import Intro from "./components/Intro";
+import styles from "./page.module.css";
+import QuizMenu from "@/app/components/quiz/quizMenu";
+import Intro from "@/app/components/layout/intro";
 
 export default function Home() {
   return (

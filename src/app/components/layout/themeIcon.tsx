@@ -1,4 +1,4 @@
-import styles from "../../styles/themeIcon.module.css";
+import styles from "./themeIcon.module.css";
 
 type ThemeIconProps = {
   dark: boolean;

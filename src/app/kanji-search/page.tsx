@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { useEffect, useRef } from "react";
 import { fetchJukugoWords } from "./actions";
 import styles from "./kanji-search.module.css";
-import { useTheme } from "../ThemeProvider";
+import { useTheme } from "@/app/ThemeProvider";
 
 export default function KanjiSearch() {
   const [state, formAction] = useActionState(fetchJukugoWords, []);

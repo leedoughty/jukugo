@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./jlpt-quiz.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
-import KanjiPicker from "../components/kanjiPicker";
+import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import JLPTLevelSelector from "./jlptLevelSelector";
 
 type Meaning = { glosses: string[] };

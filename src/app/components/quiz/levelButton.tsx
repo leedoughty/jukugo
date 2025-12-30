@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "@/styles/levelButton.module.css";
-import { useTheme } from "../ThemeProvider";
+import styles from "./levelButton.module.css";
+import { useTheme } from "@/app/ThemeProvider";
 
 type LevelButtonProps = {
   level: number;
