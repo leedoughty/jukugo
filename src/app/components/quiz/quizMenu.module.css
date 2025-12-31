@@ -12,12 +12,15 @@
 }
 
 .levelButtons {
-  padding: 8px 8px;
-  font-size: 1em;
+  display: flex;
+  align-items: stretch;
   color: #fff;
   border: none;
   cursor: pointer;
   transition: background 0.2s;
+  min-height: 120px;
+  max-height: 300px;
+  box-sizing: border-box;
 }
 
 .levelsRow {
@@ -25,7 +28,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 1em;
+  row-gap: 10px;
+  margin-top: 10px;
 }
 
 @media (min-width: 900px) {
@@ -36,6 +40,10 @@
     justify-content: flex-start;
     gap: 100px;
     width: 100%;
-    padding-top: 50px;
+  }
+
+  .levelsRow {
+    margin-top: 150px;
+    gap: 20px;
   }
 }
