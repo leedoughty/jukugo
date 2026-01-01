@@ -1,0 +1,37 @@
+.button {
+  background: transparent;
+  border: 1px solid #181a1b;
+  padding: 6px 18px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+  outline: none;
+  color: #181a1b;
+}
+
+.buttonDark {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.button:hover,
+.button:focus {
+  text-decoration: none;
+  background: #3d58e3;
+  color: #fff;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button {
+    background: #fff;
+    color: #181a1b;
+    border-color: #fff;
+  }
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./quizCard.module.css";
+import Button from "../layout/button";
 
 type Props = {
   word: { written: string; pronounced: string };
@@ -39,13 +40,9 @@ export default function QuizCard({ word, meaning, onNext }: Props) {
           className={styles.input}
           disabled={feedback !== null}
         />
-        <button
-          type="submit"
-          className={styles.submitButton}
-          disabled={feedback !== null}
-        >
+        <Button type="submit" disabled={feedback !== null}>
           Submit
-        </button>
+        </Button>
       </form>
       {feedback && (
         <div
@@ -57,9 +54,9 @@ export default function QuizCard({ word, meaning, onNext }: Props) {
           <br />
           <strong>Answer:</strong> {word.pronounced}
           <div>
-            <button className={styles.nextButton} onClick={onNext}>
+            <Button className={styles.nextButton} onClick={onNext}>
               Next
-            </button>
+            </Button>
           </div>
         </div>
       )}

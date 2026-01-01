@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import styles from "../search-quiz/search-quiz.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
+import Button from "@/app/components/layout/button";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };
@@ -78,13 +79,9 @@ export default function SearchQuizPage() {
             className={styles.input}
             disabled={loading}
           />
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={loading}
-          >
+          <Button type="submit" disabled={loading}>
             {loading ? "Searching..." : "Search"}
-          </button>
+          </Button>
         </form>
         <KanjiPicker onPick={handleNext} />
       </div>

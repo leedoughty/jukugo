@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { fetchJukugoWords } from "./actions";
 import styles from "./kanji-search.module.css";
 import { useTheme } from "@/app/ThemeProvider";
+import Button from "@/app/components/layout/button";
 
 export default function KanjiSearch() {
   const [state, formAction] = useActionState(fetchJukugoWords, []);
@@ -33,9 +34,7 @@ export default function KanjiSearch() {
           className={styles.input}
           defaultValue="字"
         />
-        <button type="submit" className={styles.button}>
-          Search
-        </button>
+        <Button type="submit">Search</Button>
       </form>
       <ul className={styles.wordList}>
         {state.map((word, i) => (
