@@ -9,11 +9,5 @@
   display: block;
   margin-bottom: 8px;
   padding: 8px 0;
-  color: #3d58e3;
   text-decoration: none;
-}
-
-.page a:hover,
-.page a:focus {
-  text-decoration: underline;
 }

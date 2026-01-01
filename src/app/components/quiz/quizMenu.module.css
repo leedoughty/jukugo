@@ -14,7 +14,7 @@
 .levelButtons {
   display: flex;
   align-items: stretch;
-  color: #fff;
+  color: var(--off-white);
   border: none;
   cursor: pointer;
   transition: background 0.2s;

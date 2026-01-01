@@ -10,7 +10,7 @@
 }
 
 .inlineLink {
-  color: #5a7cff;
+  color: var(----cobalt-blue);
   text-decoration: underline;
   word-break: break-all;
 }

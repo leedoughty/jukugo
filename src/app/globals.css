@@ -1,11 +1,20 @@
 :root {
-  --background: #f7f7f6;
-  --foreground: #181a1b;
+  --off-white: #f7f7f6;
+  --charcoal: #181a1b;
+  --grey: #333;
+  --light-grey: #ccc;
+  --cobalt-blue: #3d58e3;
+  --light-cobalt-blue: #8faaff;
+  --green: #54ab1d;
+  --red: #e8441f;
+
+  --background: var(--off-white);
+  --foreground: var(--charcoal);
 }
 
 html.dark {
-  --background: #181a1b;
-  --foreground: #ededed;
+  --background: var(--charcoal);
+  --foreground: var(--off-white);
   color-scheme: dark;
 }
 

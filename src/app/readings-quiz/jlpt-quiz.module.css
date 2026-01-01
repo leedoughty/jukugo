@@ -28,32 +28,32 @@
 
 .levelButton {
   background: transparent;
-  border: 1px solid #181a1b;
+  border: 1px solid var(--charcoal);
   padding: 10px;
   font-size: 1.5rem;
   font-weight: 400;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
   outline: none;
-  color: #181a1b;
+  color: var(--charcoal);
 }
 
 .levelButtonDark {
   background: transparent;
-  color: #fff;
-  border-color: #fff;
+  color: var(--off-white);
+  border-color: var(--off-white);
 }
 
 .levelButton:hover,
 .levelButton:focus {
   text-decoration: none;
-  background: #3d58e3;
-  color: #fff;
+  background: var(--cobalt-blue);
+  color: var(--off-white);
 }
 
 .selected {
-  background: #3d58e3;
-  color: #fff;
+  background: var(--cobalt-blue);
+  color: var(--off-white);
   text-decoration: none;
 }
 
@@ -62,8 +62,8 @@
   border-radius: 50%;
   padding: 8px 16px;
   font-size: 2em;
-  border: 1px solid #2c2c2c;
-  color: #2c2c2c;
+  border: 1px solid var(--charcoal);
+  color: var(--charcoal);
   text-decoration: none;
   transition: background 0.2s, border-color 0.2s;
   cursor: pointer;
@@ -71,13 +71,13 @@
 }
 
 .pickButtonDark {
-  border: 1.5px solid #eee;
-  color: #eee;
+  border: 1.5px solid var(--off-white);
+  color: var(--off-white);
 }
 
 .pickButton:hover,
 .pickButton:focus {
-  border-color: #2c2c2c;
+  border-color: var(--charcoal);
 }
 
 .kanji {
@@ -124,8 +124,8 @@
   font-size: 1em;
   border-radius: 6px;
   border: none;
-  background: #3d58e3;
-  color: #fff;
+  background: var(--cobalt-blue);
+  color: var(--off-white);
   cursor: pointer;
 }
 
@@ -135,11 +135,11 @@
 }
 
 .correct {
-  color: green;
+  color: var(--green);
 }
 
 .incorrect {
-  color: red;
+  color: var(--red);
 }
 
 .nextButton {
@@ -148,8 +148,8 @@
   border-radius: 6px;
   font-size: 1em;
   border: none;
-  background: #3d58e3;
-  color: #fff;
+  background: var(--cobalt-blue);
+  color: var(--off-white);
   cursor: pointer;
 }
 
@@ -217,8 +217,8 @@
 
 @media (prefers-color-scheme: dark) {
   .levelButton {
-    background: #fff;
-    color: #181a1b;
-    border-color: #fff;
+    background: var(--off-white);
+    color: var(--charcoal);
+    border-color: var(--off-white);
   }
 }

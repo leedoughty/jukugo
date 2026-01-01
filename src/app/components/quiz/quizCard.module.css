@@ -34,11 +34,11 @@
 }
 
 .correct {
-  color: green;
+  color: var(--green);
 }
 
 .incorrect {
-  color: red;
+  color: var(--red);
 }
 
 .nextButton {
@@ -47,8 +47,8 @@
   border-radius: 6px;
   font-size: 1em;
   border: none;
-  background: #3d58e3;
-  color: #fff;
+  background: var(--cobalt-blue);
+  color: var(--off-white);
   cursor: pointer;
 }
 

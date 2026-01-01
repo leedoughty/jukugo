@@ -26,15 +26,15 @@
   font-size: 1.1em;
   padding: 8px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--light-grey);
 }
 
 .button {
   padding: 8px 16px;
   border-radius: 6px;
   border: none;
-  background: #3d58e3;
-  color: #fff;
+  background: var(--cobalt-blue);
+  color: var(--off-white);
   font-size: 1em;
   cursor: pointer;
 }
@@ -60,32 +60,32 @@
 }
 
 .wordCard {
-  background: #f7f7f6;
-  border: 1px solid #bbb;
+  background: var(--off-white);
+  border: 1px solid var(--light-grey);
   border-radius: 8px;
   padding: 16px;
 }
 
 .wordCardDark {
-  background: #181a1b;
-  border: 1px solid #444;
-  color: #ededed;
+  background: var(--charcoal);
+  border: 1px solid var(--grey);
+  color: var(--off-white);
 }
 
 .reading {
   font-size: 1.1em;
-  color: #3d58e3;
+  color: var(--cobalt-blue);
 }
 
 .readingDark {
-  color: #8faaff;
+  color: var(--light-cobalt-blue);
 }
 
 .meaning {
   font-size: 1em;
-  color: #222;
+  color: var(--charcoal);
 }
 
 .meaningDark {
-  color: #ededed;
+  color: var(--off-white);
 }
