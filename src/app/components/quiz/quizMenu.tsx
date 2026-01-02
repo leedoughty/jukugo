@@ -11,10 +11,9 @@ export default function QuizMenu() {
 
   return (
     <div className={styles.layoutRow}>
-      <h2 className={styles.heading}>Reading Quiz</h2>
       <div className={styles.buttonGroup}>
         <div className={styles.levelsSection}>
-          <p className={styles.text}>Level:</p>
+          <p className={styles.text}>Level</p>
           <div className={styles.levelsRow}>
             {JLPT_LEVELS.map((level) => (
               <Link
@@ -27,7 +26,7 @@ export default function QuizMenu() {
                   level={level}
                   className={`${styles.levelButtonLarge} `}
                 >
-                  N{level}
+                  JLPT N{level}
                 </LevelButton>
               </Link>
             ))}

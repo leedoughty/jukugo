@@ -1,13 +1,6 @@
-.heading {
-  font-size: 1.3em;
-  margin-bottom: 0.5em;
-  font-weight: 300;
-  text-align: left;
-}
-
 .text {
-  font-size: 1.3em;
-  margin-bottom: 0.8em;
+  font-size: 1.2em;
+  margin-bottom: 10px;
   text-align: left;
 }
 
@@ -18,21 +11,23 @@
   border: none;
   cursor: pointer;
   transition: background 0.2s;
-  min-height: 120px;
-  max-height: 300px;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .levelsRow {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 12px;
-  row-gap: 10px;
   margin-top: 10px;
 }
 
 @media (min-width: 900px) {
+  .text {
+    font-size: 1.3em;
+    margin-bottom: 0.8em;
+  }
+
   .layoutRow {
     display: flex;
     flex-direction: row;
@@ -43,7 +38,21 @@
   }
 
   .levelsRow {
-    margin-top: 150px;
-    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+
+  .levelsRow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .levelButtons {
+    width: auto;
   }
 }
