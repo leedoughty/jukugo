@@ -111,7 +111,7 @@ export function JLPTQuiz() {
   };
 
   const handleLevelSelect = (newLevel: number) => {
-    router.replace(`/readings-quiz?level=${newLevel}`);
+    router.replace(`/jlpt-quiz?level=${newLevel}`);
   };
 
   return (

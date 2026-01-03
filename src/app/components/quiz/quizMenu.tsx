@@ -19,7 +19,7 @@ export default function QuizMenu() {
               <Link
                 key={level}
                 className={styles.levelButtons}
-                href={`/readings-quiz?level=${level}`}
+                href={`/jlpt-quiz?level=${level}`}
                 passHref
               >
                 <LevelButton
