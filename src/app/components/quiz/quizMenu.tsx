@@ -35,6 +35,11 @@ export default function QuizMenu() {
                 Jōyō
               </LevelButton>
             </Link>
+            <Link href="/freestyle-quiz" className={styles.levelButtons}>
+              <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
+                Freestyle
+              </LevelButton>
+            </Link>
             <Link href="/search-quiz" className={styles.levelButtons}>
               <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
                 Search mode

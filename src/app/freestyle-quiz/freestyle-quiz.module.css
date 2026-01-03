@@ -1,0 +1,153 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+  font-size: 1rem;
+  padding: 16px 32px;
+}
+
+.selectorRow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: left;
+  width: 100%;
+  position: static;
+}
+
+.kanji {
+  margin-bottom: 8px;
+  font-weight: 300;
+  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Meiryo",
+    "Yu Gothic", "MS PGothic", sans-serif;
+  font-size: 30px;
+}
+
+.quizCard {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+.jukugoWord {
+  font-size: 3.5rem;
+  width: 100%;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.jukugoMeaning {
+  font-size: 1.5rem;
+}
+
+.inputRow {
+  padding-top: 25%;
+  padding-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  font-size: 1.2em;
+  padding: 6px 12px;
+}
+
+.feedback {
+  margin-top: 12px;
+  font-size: 1.2em;
+}
+
+.correct {
+  color: var(--green);
+}
+
+.incorrect {
+  color: var(--red);
+}
+
+.nextButton {
+  margin-top: 16px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 1em;
+  border: none;
+  background: var(--cobalt-blue);
+  color: var(--off-white);
+  cursor: pointer;
+}
+
+.complete {
+  font-size: 1.2em;
+  margin-top: 24px;
+}
+
+.pickButton {
+  background: transparent;
+  border-radius: 50%;
+  padding: 8px 16px;
+  font-size: 2em;
+  border: 1px solid var(--charcoal);
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
+  outline: none;
+}
+
+.pickButtonDark {
+  border: 1.5px solid var(--off-white);
+  color: var(--off-white);
+}
+
+.pickButton:hover,
+.pickButton:focus {
+  border-color: var(--charcoal);
+}
+
+.pickButtonMobile {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  z-index: 100;
+}
+
+@media (min-width: 920px) {
+  .kanji {
+    font-size: 50px;
+  }
+
+  .container {
+    padding-top: 60px;
+  }
+
+  .selectorRow {
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    left: 32px;
+    bottom: 32px;
+    width: 120px;
+    margin-bottom: 0;
+  }
+
+  .jukugoWord {
+    white-space: nowrap;
+    font-size: 8rem;
+  }
+
+  .pickButtonMobile {
+    position: static;
+    bottom: auto;
+    left: auto;
+    z-index: auto;
+  }
+
+  .inputRow {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    gap: 12px;
+  }
+}
