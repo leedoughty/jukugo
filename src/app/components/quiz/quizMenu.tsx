@@ -30,6 +30,11 @@ export default function QuizMenu() {
                 </LevelButton>
               </Link>
             ))}
+            <Link href="/joyo-quiz" className={styles.levelButtons}>
+              <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
+                Jōyō
+              </LevelButton>
+            </Link>
             <Link href="/search-quiz" className={styles.levelButtons}>
               <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
                 Search mode
