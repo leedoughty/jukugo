@@ -45,6 +45,11 @@ export default function QuizMenu() {
                 Search mode
               </LevelButton>
             </Link>
+            <Link href="/review-quiz" className={styles.levelButtons}>
+              <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
+                Review
+              </LevelButton>
+            </Link>
           </div>
         </div>
       </div>

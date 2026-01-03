@@ -25,6 +25,25 @@ export default function QuizCard({ word, meaning, onNext }: Props) {
       setFeedback("correct");
     } else {
       setFeedback("incorrect");
+
+      const reviewList = JSON.parse(
+        localStorage.getItem("jukugoReviewList") || "[]"
+      );
+
+      if (
+        !reviewList.some(
+          (item: any) =>
+            item.written === word.written && item.pronounced === word.pronounced
+        )
+      ) {
+        reviewList.push({
+          written: word.written,
+          pronounced: word.pronounced,
+          meaning,
+        });
+
+        localStorage.setItem("jukugoReviewList", JSON.stringify(reviewList));
+      }
     }
   };
 
