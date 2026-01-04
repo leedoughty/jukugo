@@ -15,14 +15,18 @@
   width: 100%;
 }
 
-.levelsRow {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-top: 10px;
+.levelsRow .levelButtons:last-child {
+  grid-column: 1 / -1;
+  width: 100%;
 }
 
-@media (min-width: 900px) {
+.levelsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 960px) {
   .text {
     font-size: 1.3em;
     margin-bottom: 0.8em;
@@ -53,6 +57,12 @@
   }
 
   .levelButtons {
+    width: auto;
+    padding: 8px 0;
+  }
+
+  .levelsRow .levelButtons:last-child {
+    grid-column: auto;
     width: auto;
   }
 }
