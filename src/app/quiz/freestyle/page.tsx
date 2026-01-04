@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import styles from "./freestyle-quiz.module.css";
+import styles from "./freestyle.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useState, useCallback } from "react";
-import styles from "./joyo-quiz.module.css";
+import styles from "./joyo.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 

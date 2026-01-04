@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "../joyo-quiz/joyo-quiz.module.css";
+import styles from "./review.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 
 type ReviewItem = {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import styles from "../search-quiz/search-quiz.module.css";
+import styles from "./search.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import Button from "@/app/components/layout/button";

@@ -19,7 +19,7 @@ export default function QuizMenu() {
               <Link
                 key={level}
                 className={styles.levelButtons}
-                href={`/jlpt-quiz?level=${level}`}
+                href={`/quiz/jlpt?level=${level}`}
                 passHref
               >
                 <LevelButton
@@ -30,22 +30,22 @@ export default function QuizMenu() {
                 </LevelButton>
               </Link>
             ))}
-            <Link href="/joyo-quiz" className={styles.levelButtons}>
+            <Link href="/quiz/joyo" className={styles.levelButtons}>
               <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
                 Jōyō
               </LevelButton>
             </Link>
-            <Link href="/freestyle-quiz" className={styles.levelButtons}>
+            <Link href="/quiz/freestyle" className={styles.levelButtons}>
               <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
                 Freestyle
               </LevelButton>
             </Link>
-            <Link href="/search-quiz" className={styles.levelButtons}>
+            <Link href="/quiz/search" className={styles.levelButtons}>
               <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
                 Search mode
               </LevelButton>
             </Link>
-            <Link href="/review-quiz" className={styles.levelButtons}>
+            <Link href="/quiz/review" className={styles.levelButtons}>
               <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
                 Review
               </LevelButton>

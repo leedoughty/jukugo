@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/app/ThemeProvider";
-import styles from "./jlpt-quiz.module.css";
+import styles from "./jlpt.module.css";
 
 type Props = {
   levels: number[];
