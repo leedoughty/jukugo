@@ -15,48 +15,6 @@
   position: static;
 }
 
-.levels {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  justify-content: center;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto 24px auto;
-  position: static;
-}
-
-.levelButton {
-  background: transparent;
-  border: 1px solid var(--charcoal);
-  padding: 10px;
-  font-size: 1.5rem;
-  font-weight: 400;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
-  outline: none;
-  color: var(--charcoal);
-}
-
-.levelButtonDark {
-  background: transparent;
-  color: var(--off-white);
-  border-color: var(--off-white);
-}
-
-.levelButton:hover,
-.levelButton:focus {
-  text-decoration: none;
-  background: var(--cobalt-blue);
-  color: var(--off-white);
-}
-
-.selected {
-  background: var(--cobalt-blue);
-  color: var(--off-white);
-  text-decoration: none;
-}
-
 .pickButton {
   background: transparent;
   border-radius: 50%;
@@ -174,16 +132,6 @@
     padding-top: 60px;
   }
 
-  .levels {
-    flex-direction: column;
-    align-items: flex-start;
-    position: fixed;
-    left: 32px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 120px;
-  }
-
   .selectorRow {
     flex-direction: column;
     align-items: flex-start;
@@ -212,13 +160,5 @@
     align-items: center;
     font-size: 1em;
     gap: 12px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .levelButton {
-    background: var(--off-white);
-    color: var(--charcoal);
-    border-color: var(--off-white);
   }
 }

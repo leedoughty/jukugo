@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./jlpt.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
-import JLPTLevelSelector from "./jlptLevelSelector";
+import LevelSelector from "@/app/components/quiz/levelSelector";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };
@@ -117,7 +117,7 @@ export function JLPTQuiz() {
   return (
     <div className={styles.container}>
       <div className={styles.selectorRow}>
-        <JLPTLevelSelector
+        <LevelSelector
           levels={JLPT_LEVELS}
           selected={level}
           onSelect={handleLevelSelect}

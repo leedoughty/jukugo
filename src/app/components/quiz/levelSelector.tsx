@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/app/ThemeProvider";
-import styles from "./jlpt.module.css";
+import styles from "./levelSelector.module.css";
 
 type Props = {
   levels: number[];
@@ -9,11 +9,7 @@ type Props = {
   onSelect: (level: number) => void;
 };
 
-export default function JLPTLevelSelector({
-  levels,
-  selected,
-  onSelect,
-}: Props) {
+export default function LevelSelector({ levels, selected, onSelect }: Props) {
   const { dark } = useTheme();
 
   return (
