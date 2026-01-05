@@ -1,20 +1,3 @@
-.container {
-  max-width: 600px;
-  margin: auto;
-  font-size: 1rem;
-  padding: 16px 32px;
-}
-
-.selectorRow {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 16px;
-  align-items: left;
-  width: 100%;
-  position: static;
-}
-
 .pickButton {
   background: transparent;
   border-radius: 50%;
@@ -36,6 +19,16 @@
 .pickButton:hover,
 .pickButton:focus {
   border-color: var(--charcoal);
+}
+
+.selectorRow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: left;
+  width: 100%;
+  position: static;
 }
 
 .kanji {
@@ -128,30 +121,9 @@
     font-size: 50px;
   }
 
-  .container {
-    padding-top: 60px;
-  }
-
-  .selectorRow {
-    flex-direction: column;
-    align-items: flex-start;
-    position: fixed;
-    left: 32px;
-    bottom: 32px;
-    width: 120px;
-    margin-bottom: 0;
-  }
-
   .jukugoWord {
     white-space: nowrap;
     font-size: 8rem;
-  }
-
-  .pickButtonMobile {
-    position: static;
-    bottom: auto;
-    left: auto;
-    z-index: auto;
   }
 
   .inputRow {

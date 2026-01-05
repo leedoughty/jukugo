@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import styles from "./search.module.css";
+import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import Button from "@/app/components/layout/button";
@@ -68,7 +69,7 @@ export default function SearchQuizPage() {
   };
 
   return (
-    <div className={styles.container}>
+    <QuizLayout>
       <div className={styles.selectorRow}>
         <form onSubmit={handleSearch} className={styles.inputRow}>
           <input
@@ -99,6 +100,6 @@ export default function SearchQuizPage() {
       {words.length === 0 && !loading && (
         <div className={styles.complete}>No results found.</div>
       )}
-    </div>
+    </QuizLayout>
   );
 }

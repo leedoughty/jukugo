@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import styles from "./freestyle.module.css";
+import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 
@@ -79,7 +80,7 @@ export default function FreestyleQuizPage() {
   };
 
   return (
-    <div className={styles.container}>
+    <QuizLayout>
       <div className={styles.selectorRow}>
         <KanjiPicker onPick={() => pickRandomKanji()} />
       </div>
@@ -97,6 +98,6 @@ export default function FreestyleQuizPage() {
       {words.length > 0 && currentIndex >= words.length && (
         <div className={styles.complete}>Quiz complete!</div>
       )}
-    </div>
+    </QuizLayout>
   );
 }

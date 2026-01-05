@@ -1,10 +1,3 @@
-.container {
-  max-width: 600px;
-  margin: auto;
-  font-size: 1rem;
-  padding: 16px 32px;
-}
-
 .selectorRow {
   display: flex;
   flex-direction: column;
@@ -117,10 +110,6 @@
     font-size: 50px;
   }
 
-  .container {
-    padding-top: 60px;
-  }
-
   .selectorRow {
     flex-direction: column;
     align-items: flex-start;
@@ -134,13 +123,6 @@
   .jukugoWord {
     white-space: nowrap;
     font-size: 8rem;
-  }
-
-  .pickButtonMobile {
-    position: static;
-    bottom: auto;
-    left: auto;
-    z-index: auto;
   }
 
   .inputRow {

@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useState, useCallback } from "react";
+import QuizLayout from "../layout";
 import styles from "./joyo.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
@@ -93,11 +94,7 @@ export function JoyoQuiz() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.selectorRow}>
-        <KanjiPicker onPick={() => pickRandomKanji()} />
-      </div>
-
+    <QuizLayout>
       {selectedKanji && <h2 className={styles.kanji}>{selectedKanji}</h2>}
 
       {words.length > 0 && currentIndex < words.length && (
@@ -111,6 +108,10 @@ export function JoyoQuiz() {
       {words.length > 0 && currentIndex >= words.length && (
         <div className={styles.complete}>Quiz complete!</div>
       )}
-    </div>
+
+      <div className="selectorRow">
+        <KanjiPicker onPick={() => pickRandomKanji()} />
+      </div>
+    </QuizLayout>
   );
 }

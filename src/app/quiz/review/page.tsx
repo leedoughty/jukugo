@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import QuizLayout from "../layout";
 import styles from "./review.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import Button from "@/app/components/layout/button";
@@ -33,7 +34,7 @@ export default function ReviewQuizPage() {
   };
 
   return (
-    <div className={styles.container}>
+    <QuizLayout>
       {reviewList.length > 0 && currentIndex < reviewList.length ? (
         <>
           <QuizCard
@@ -68,6 +69,6 @@ export default function ReviewQuizPage() {
           )}
         </div>
       )}
-    </div>
+    </QuizLayout>
   );
 }
