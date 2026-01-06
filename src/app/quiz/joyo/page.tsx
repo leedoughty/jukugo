@@ -6,6 +6,7 @@ import styles from "./joyo.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import { fetchKanjiWithWords } from "@/lib/utils/fetchKanjiWithWords";
+import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import type { Variant } from "@/lib/types/kanji";
 
 export default function JoyoQuizPage() {
@@ -23,14 +24,8 @@ export function JoyoQuiz() {
   const [meanings, setMeanings] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const fetchKanjiList = useCallback(async () => {
-    setSelectedKanji(null);
-    setWords([]);
-    setMeanings([]);
-    setCurrentIndex(0);
-
-    const response = await fetch("https://kanjiapi.dev/v1/kanji/joyo");
-    const data: string[] = await response.json();
+  const loadKanjiList = useCallback(async () => {
+    const data = await fetchKanjiList("joyo");
 
     setKanjiList(data);
 
@@ -40,8 +35,8 @@ export function JoyoQuiz() {
   }, []);
 
   useEffect(() => {
-    fetchKanjiList();
-  }, [fetchKanjiList]);
+    loadKanjiList();
+  }, [loadKanjiList]);
 
   const pickRandomKanji = async (list?: string[]) => {
     const sourceList = list ?? kanjiList;

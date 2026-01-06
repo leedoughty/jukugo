@@ -6,6 +6,7 @@ import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import { fetchKanjiWithWords } from "@/lib/utils/fetchKanjiWithWords";
+import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import type { Variant } from "@/lib/types/kanji";
 
 export default function FreestyleQuizPage() {
@@ -15,15 +16,15 @@ export default function FreestyleQuizPage() {
   const [meanings, setMeanings] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    async function fetchAllKanji() {
-      const response = await fetch("https://kanjiapi.dev/v1/kanji/all");
-      const data: string[] = await response.json();
-      setKanjiList(data);
-    }
+  const loadKanjiList = useCallback(async () => {
+    const data = await fetchKanjiList("all");
 
-    fetchAllKanji();
+    setKanjiList(data);
   }, []);
+
+  useEffect(() => {
+    loadKanjiList();
+  }, [loadKanjiList]);
 
   const pickRandomKanji = useCallback(
     async (list?: string[]) => {

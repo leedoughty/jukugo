@@ -7,20 +7,21 @@ import styles from "./jlpt.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import LevelSelector from "@/app/components/quiz/levelSelector";
+import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import { fetchKanjiWithWords } from "@/lib/utils/fetchKanjiWithWords";
 import type { Variant } from "@/lib/types/kanji";
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
-export default function JLPTQuizPage() {
+export default function JlptQuizPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <JLPTQuiz />
+      <JlptQuiz />
     </Suspense>
   );
 }
 
-export function JLPTQuiz() {
+export function JlptQuiz() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [level, setLevel] = useState<number | null>(null);
@@ -31,18 +32,14 @@ export function JLPTQuiz() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
 
-  const fetchKanjiList = useCallback(async (jlptLevel: number) => {
+  const fetchJlptKanjiList = useCallback(async (jlptLevel: number) => {
     setSelectedKanji(null);
     setWords([]);
     setMeanings([]);
     setCurrentIndex(0);
     setUserInput("");
 
-    const response = await fetch(
-      `https://kanjiapi.dev/v1/kanji/jlpt-${jlptLevel}`
-    );
-    const data: string[] = await response.json();
-
+    const data = await fetchKanjiList(`jlpt-${jlptLevel}`);
     setKanjiList(data);
 
     if (data.length > 0) {
@@ -52,12 +49,13 @@ export function JLPTQuiz() {
 
   useEffect(() => {
     const levelParam = searchParams.get("level");
+
     if (levelParam) {
-      const lvl = parseInt(levelParam, 10);
-      setLevel(lvl);
-      fetchKanjiList(lvl);
+      const jlptLevel = parseInt(levelParam, 10);
+      setLevel(jlptLevel);
+      fetchJlptKanjiList(jlptLevel);
     }
-  }, [searchParams, fetchKanjiList]);
+  }, [searchParams, fetchJlptKanjiList]);
 
   const pickRandomKanji = async (list?: string[]) => {
     const sourceList = list ?? kanjiList;
