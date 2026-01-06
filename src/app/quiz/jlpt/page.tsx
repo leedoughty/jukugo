@@ -8,8 +8,8 @@ import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import LevelSelector from "@/app/components/quiz/levelSelector";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
-import { fetchKanjiWithWords } from "@/lib/utils/fetchKanjiWithWords";
-import type { Variant } from "@/lib/types/kanji";
+import { fetchRandomizedJukugoQuizData } from "@/lib/utils/fetchRandomizedJukugoQuizData";
+import type { Variant } from "@/lib/types/jukugoData";
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
@@ -59,7 +59,7 @@ export function JlptQuiz() {
 
   const pickRandomKanji = async (list?: string[]) => {
     const sourceList = list ?? kanjiList;
-    const result = await fetchKanjiWithWords(
+    const result = await fetchRandomizedJukugoQuizData(
       sourceList,
       (variant, randomKanji) =>
         Array.isArray(variant.priorities) &&

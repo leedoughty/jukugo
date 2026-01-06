@@ -5,9 +5,9 @@ import QuizLayout from "../layout";
 import styles from "./joyo.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
-import { fetchKanjiWithWords } from "@/lib/utils/fetchKanjiWithWords";
+import { fetchRandomizedJukugoQuizData } from "@/lib/utils/fetchRandomizedJukugoQuizData";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
-import type { Variant } from "@/lib/types/kanji";
+import type { Variant } from "@/lib/types/jukugoData";
 
 export default function JoyoQuizPage() {
   return (
@@ -40,7 +40,7 @@ export function JoyoQuiz() {
 
   const pickRandomKanji = async (list?: string[]) => {
     const sourceList = list ?? kanjiList;
-    const result = await fetchKanjiWithWords(
+    const result = await fetchRandomizedJukugoQuizData(
       sourceList,
       (variant, randomKanji) =>
         Array.isArray(variant.priorities) &&

@@ -1,7 +1,7 @@
-const KANJI_API_BASE_URL = "https://kanjiapi.dev/v1/kanji";
+import { KANJI_ENDPOINT } from "./endpoints";
 
 export async function fetchKanjiList(path: string): Promise<string[]> {
-  const url = `${KANJI_API_BASE_URL}/${path}`;
+  const url = `${KANJI_ENDPOINT}/${path}`;
   const response = await fetch(url);
 
   if (!response.ok) {

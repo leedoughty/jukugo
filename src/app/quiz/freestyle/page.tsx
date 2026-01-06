@@ -5,9 +5,9 @@ import styles from "./freestyle.module.css";
 import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
-import { fetchKanjiWithWords } from "@/lib/utils/fetchKanjiWithWords";
+import { fetchRandomizedJukugoQuizData } from "@/lib/utils/fetchRandomizedJukugoQuizData";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
-import type { Variant } from "@/lib/types/kanji";
+import type { Variant } from "@/lib/types/jukugoData";
 
 export default function FreestyleQuizPage() {
   const [kanjiList, setKanjiList] = useState<string[]>([]);
@@ -29,7 +29,7 @@ export default function FreestyleQuizPage() {
   const pickRandomKanji = useCallback(
     async (list?: string[]) => {
       const sourceList = list ?? kanjiList;
-      const result = await fetchKanjiWithWords(sourceList);
+      const result = await fetchRandomizedJukugoQuizData(sourceList);
 
       if (!result) {
         setSelectedKanji(null);

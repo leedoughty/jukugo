@@ -6,6 +6,7 @@ import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import Button from "@/app/components/layout/button";
+import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };
@@ -20,29 +21,16 @@ export default function SearchQuizPage() {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const fetchWords = async (kanjiChar: string) => {
+  const fetchWords = async (kanjiCharacter: string) => {
     setLoading(true);
     setWords([]);
     setMeanings([]);
     setCurrentIndex(0);
 
-    const response = await fetch(`https://kanjiapi.dev/v1/words/${kanjiChar}`);
-    const data: Word[] = await response.json();
-
-    const variants: Variant[] = [];
-    const meaningsArr: string[] = [];
-
-    data.forEach((word) => {
-      word.variants.forEach((variant) => {
-        if (variant.written.includes(kanjiChar)) {
-          variants.push(variant);
-          meaningsArr.push(word.meanings?.[0]?.glosses?.[0] ?? "");
-        }
-      });
-    });
+    const { variants, meanings } = await fetchJukugoData(kanjiCharacter);
 
     setWords(variants);
-    setMeanings(meaningsArr);
+    setMeanings(meanings);
     setLoading(false);
   };
 

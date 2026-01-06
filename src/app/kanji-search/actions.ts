@@ -1,5 +1,7 @@
 "use server";
 
+import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
+
 type Meaning = {
   glosses: string[];
 };
@@ -25,22 +27,16 @@ export async function fetchJukugoWords(
   formData: FormData
 ): Promise<JukugoResult[]> {
   const kanji = formData.get("kanji");
-  if (!kanji) {
+
+  if (!kanji || typeof kanji !== "string") {
     return [];
   }
 
-  const response = await fetch(`https://kanjiapi.dev/v1/words/${kanji}`);
-  if (!response.ok) {
-    return [];
-  }
+  const { variants, meanings } = await fetchJukugoData(kanji);
 
-  const words: Word[] = await response.json();
-
-  return words.flatMap((word) =>
-    word.variants.map((variant) => ({
-      compound: variant.written,
-      reading: variant.pronounced,
-      meaning: word.meanings?.[0]?.glosses?.[0] ?? "",
-    }))
-  );
+  return variants.map((variant, i) => ({
+    compound: variant.written,
+    reading: variant.pronounced,
+    meaning: meanings[i] ?? "",
+  }));
 }
