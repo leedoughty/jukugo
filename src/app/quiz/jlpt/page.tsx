@@ -1,14 +1,14 @@
 "use client";
 
-import { Suspense, useEffect, useState, useCallback } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import QuizLayout from "../layout";
 import styles from "./jlpt.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import LevelSelector from "@/app/components/quiz/levelSelector";
+import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
-import { fetchRandomizedJukugoQuizData } from "@/lib/utils/fetchRandomizedJukugoQuizData";
 import type { Variant } from "@/lib/types/jukugoData";
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
@@ -22,69 +22,41 @@ export default function JlptQuizPage() {
 }
 
 export function JlptQuiz() {
+  const {
+    kanjiList,
+    setKanjiList,
+    selectedKanji,
+    words,
+    meanings,
+    currentIndex,
+    pickRandomKanji,
+    handleNext,
+  } = useJukugoQuiz(
+    [],
+    (variant, randomKanji) =>
+      Array.isArray(variant.priorities) &&
+      variant.priorities.length > 0 &&
+      variant.written.includes(randomKanji)
+  );
+
   const searchParams = useSearchParams();
   const router = useRouter();
   const [level, setLevel] = useState<number | null>(null);
-  const [kanjiList, setKanjiList] = useState<string[]>([]);
-  const [selectedKanji, setSelectedKanji] = useState<string | null>(null);
-  const [words, setWords] = useState<Variant[]>([]);
-  const [meanings, setMeanings] = useState<string[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [userInput, setUserInput] = useState("");
-
-  const fetchJlptKanjiList = useCallback(async (jlptLevel: number) => {
-    setSelectedKanji(null);
-    setWords([]);
-    setMeanings([]);
-    setCurrentIndex(0);
-    setUserInput("");
-
-    const data = await fetchKanjiList(`jlpt-${jlptLevel}`);
-    setKanjiList(data);
-
-    if (data.length > 0) {
-      pickRandomKanji(data);
-    }
-  }, []);
 
   useEffect(() => {
     const levelParam = searchParams.get("level");
-
     if (levelParam) {
       const jlptLevel = parseInt(levelParam, 10);
       setLevel(jlptLevel);
-      fetchJlptKanjiList(jlptLevel);
+      fetchKanjiList(`jlpt-${jlptLevel}`).then((list) => {
+        setKanjiList(list);
+        if (list.length > 0) {
+          pickRandomKanji(list);
+        }
+      });
     }
-  }, [searchParams, fetchJlptKanjiList]);
-
-  const pickRandomKanji = async (list?: string[]) => {
-    const sourceList = list ?? kanjiList;
-    const result = await fetchRandomizedJukugoQuizData(
-      sourceList,
-      (variant, randomKanji) =>
-        Array.isArray(variant.priorities) &&
-        variant.priorities.length > 0 &&
-        variant.written.includes(randomKanji)
-    );
-
-    if (!result) {
-      setSelectedKanji(null);
-      setWords([]);
-      setMeanings([]);
-      return;
-    }
-
-    setSelectedKanji(result.kanji);
-    setWords(result.variants);
-    setMeanings(result.meanings);
-    setCurrentIndex(0);
-    setUserInput("");
-  };
-
-  const handleNext = () => {
-    setUserInput("");
-    setCurrentIndex((index) => index + 1);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, setKanjiList]);
 
   const handleLevelSelect = (newLevel: number) => {
     router.replace(`/quiz/jlpt?level=${newLevel}`);

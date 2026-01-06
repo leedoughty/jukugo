@@ -1,61 +1,35 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
+import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
+import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
+import type { Variant } from "@/lib/types/jukugoData";
 import styles from "./freestyle.module.css";
 import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
-import { fetchRandomizedJukugoQuizData } from "@/lib/utils/fetchRandomizedJukugoQuizData";
-import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
-import type { Variant } from "@/lib/types/jukugoData";
 
 export default function FreestyleQuizPage() {
-  const [kanjiList, setKanjiList] = useState<string[]>([]);
-  const [selectedKanji, setSelectedKanji] = useState<string | null>(null);
-  const [words, setWords] = useState<Variant[]>([]);
-  const [meanings, setMeanings] = useState<string[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const loadKanjiList = useCallback(async () => {
-    const data = await fetchKanjiList("all");
-
-    setKanjiList(data);
-  }, []);
+  const {
+    kanjiList,
+    setKanjiList,
+    selectedKanji,
+    words,
+    meanings,
+    currentIndex,
+    pickRandomKanji,
+    handleNext,
+  } = useJukugoQuiz();
 
   useEffect(() => {
-    loadKanjiList();
-  }, [loadKanjiList]);
-
-  const pickRandomKanji = useCallback(
-    async (list?: string[]) => {
-      const sourceList = list ?? kanjiList;
-      const result = await fetchRandomizedJukugoQuizData(sourceList);
-
-      if (!result) {
-        setSelectedKanji(null);
-        setWords([]);
-        setMeanings([]);
-        setCurrentIndex(0);
-        return;
+    fetchKanjiList("all").then((list) => {
+      setKanjiList(list);
+      if (list.length > 0) {
+        pickRandomKanji(list);
       }
-
-      setSelectedKanji(result.kanji);
-      setWords(result.variants);
-      setMeanings(result.meanings);
-      setCurrentIndex(0);
-    },
-    [kanjiList]
-  );
-
-  useEffect(() => {
-    if (kanjiList.length > 0) {
-      pickRandomKanji(kanjiList);
-    }
-  }, [kanjiList, pickRandomKanji]);
-
-  const handleNext = () => {
-    setCurrentIndex((index) => index + 1);
-  };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setKanjiList]);
 
   return (
     <QuizLayout>
