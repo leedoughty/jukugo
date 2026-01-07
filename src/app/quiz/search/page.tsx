@@ -13,8 +13,8 @@ type Variant = { written: string; pronounced: string; priorities?: string[] };
 type Word = { meanings: Meaning[]; variants: Variant[] };
 
 export default function SearchQuizPage() {
-  const [kanji, setKanji] = useState("字");
-  const [searchKanji, setSearchKanji] = useState("字");
+  const [kanji, setKanji] = useState("");
+  const [searchKanji, setSearchKanji] = useState("");
   const [words, setWords] = useState<Variant[]>([]);
   const [meanings, setMeanings] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);

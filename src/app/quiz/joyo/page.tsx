@@ -2,9 +2,8 @@
 
 import { Suspense, useEffect } from "react";
 import QuizLayout from "../layout";
-import styles from "./joyo.module.css";
-import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
+import QuizScreen from "@/app/components/quiz/quizScreen";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 
@@ -35,34 +34,29 @@ export function JoyoQuiz() {
   );
 
   useEffect(() => {
-    fetchKanjiList("joyo").then((list) => {
-      setKanjiList(list);
-      if (list.length > 0) {
-        pickRandomKanji(list);
+    const fetchAndSetKanji = async () => {
+      const kanjiList = await fetchKanjiList("joyo");
+
+      setKanjiList(kanjiList);
+
+      if (kanjiList.length > 0) {
+        pickRandomKanji(kanjiList);
       }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    };
+
+    fetchAndSetKanji();
   }, [setKanjiList]);
 
   return (
     <QuizLayout>
-      {selectedKanji && <h2 className={styles.kanji}>{selectedKanji}</h2>}
-
-      {words.length > 0 && currentIndex < words.length && (
-        <QuizCard
-          word={words[currentIndex]}
-          meaning={meanings[currentIndex]}
-          onNext={handleNext}
-        />
-      )}
-
-      {words.length > 0 && currentIndex >= words.length && (
-        <div className={styles.complete}>Quiz complete!</div>
-      )}
-
-      <div className="selectorRow">
-        <KanjiPicker onPick={() => pickRandomKanji()} />
-      </div>
+      <QuizScreen
+        selectedKanji={selectedKanji}
+        words={words}
+        meanings={meanings}
+        currentIndex={currentIndex}
+        handleNext={handleNext}
+      />
+      <KanjiPicker onPick={() => pickRandomKanji()} />
     </QuizLayout>
   );
 }
