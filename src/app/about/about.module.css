@@ -1,20 +1,30 @@
 .main {
-  padding: 24px 32px;
+  padding: 8px 16px;
 }
 
 .paragraph {
   margin: 0;
   padding: 0 0 40px;
   line-height: 1.2;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .inlineLink {
-  color: var(----cobalt-blue);
+  color: var(--cobalt-blue);
   text-decoration: underline;
   word-break: break-all;
 }
 
 .inlineLink:hover {
   text-decoration: none;
+}
+
+@media (min-width: 600px) {
+  .main {
+    padding: 24px 32px;
+  }
+
+  .paragraph {
+    font-size: 2em;
+  }
 }
