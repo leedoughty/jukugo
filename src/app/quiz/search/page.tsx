@@ -7,6 +7,7 @@ import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import Button from "@/app/components/layout/button";
 import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
+import { isKanji } from "@/lib/utils/kanji";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };
@@ -19,6 +20,7 @@ export default function SearchQuizPage() {
   const [meanings, setMeanings] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const fetchWords = async (kanjiCharacter: string) => {
@@ -36,14 +38,16 @@ export default function SearchQuizPage() {
 
   useEffect(() => {
     fetchWords(searchKanji);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchKanji]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (kanji.trim()) {
-      setSearchKanji(kanji.trim());
+    if (!isKanji(kanji.trim())) {
+      setError("Please enter a single kanji character.");
+      return;
     }
+    setError("");
+    setSearchKanji(kanji.trim());
   };
 
   const handleNext = () => {
@@ -63,15 +67,20 @@ export default function SearchQuizPage() {
           <input
             ref={inputRef}
             value={kanji}
-            onChange={(e) => setKanji(e.target.value)}
+            onChange={(e) => {
+              setKanji(e.target.value);
+              if (error) setError("");
+            }}
             placeholder="Enter kanji"
             className={styles.input}
             disabled={loading}
+            maxLength={1}
           />
           <Button type="submit" disabled={loading}>
             {loading ? "Searching..." : "Search"}
           </Button>
         </form>
+        {error && <div className={styles.feedback}>{error}</div>}
         <KanjiPicker onPick={handleNext} />
       </div>
 

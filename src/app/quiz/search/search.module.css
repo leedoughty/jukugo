@@ -1,3 +1,13 @@
+.feedback {
+  font-size: 1.1em;
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 4px;
+  padding: 6px 12px;
+  min-width: 230px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
 .container {
   position: relative;
   max-width: 600px;
@@ -91,7 +101,6 @@
 
 .inputRow {
   padding-top: 25px;
-  padding-bottom: 24px;
   display: flex;
   align-items: center;
 }
@@ -102,7 +111,6 @@
 }
 
 .feedback {
-  margin-top: 12px;
   font-size: 1.2em;
 }
 
