@@ -19,7 +19,6 @@ export default function KanjiSearch() {
       ) as HTMLInputElement;
 
       if (input) {
-        input.value = "字";
         formRef.current.requestSubmit();
       }
     }
@@ -32,10 +31,18 @@ export default function KanjiSearch() {
           name="kanji"
           placeholder="Enter kanji"
           className={styles.input}
-          defaultValue="字"
         />
         <Button type="submit">Search</Button>
       </form>
+      {state.length === 0 && (
+        <div
+          className={`${styles.emptyPrompt} ${
+            dark ? styles.emptyPromptDark : ""
+          }`}
+        >
+          Enter a kanji to explore related Jukugo meanings and readings.
+        </div>
+      )}
       <ul className={styles.wordList}>
         {state.map((word, i) => (
           <li
