@@ -1,5 +1,6 @@
 import QuizCard from "@/app/components/quiz/quizCard";
 import styles from "./quizScreen.module.css";
+import SearchKanji from "@/app/components/quiz/searchKanji";
 
 type QuizScreenProps = {
   selectedKanji: string | null;
@@ -23,7 +24,7 @@ export default function QuizScreen({
   return (
     <>
       <div className={styles.selectorRow}>{Selector}</div>
-      {selectedKanji && <h2 className={styles.kanji}>{selectedKanji}</h2>}
+      {selectedKanji && <SearchKanji kanji={selectedKanji} />}
 
       {words.length > 0 && currentIndex < words.length && (
         <QuizCard

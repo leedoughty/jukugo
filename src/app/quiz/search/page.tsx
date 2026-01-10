@@ -8,6 +8,7 @@ import KanjiPicker from "@/app/components/quiz/kanjiPicker";
 import Button from "@/app/components/layout/button";
 import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 import { isKanji } from "@/lib/utils/kanji";
+import SearchKanji from "@/app/components/quiz/searchKanji";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };
@@ -84,7 +85,7 @@ export default function SearchQuizPage() {
         <KanjiPicker onPick={handleNext} />
       </div>
 
-      {searchKanji && <h2 className={styles.kanji}>{searchKanji}</h2>}
+      <SearchKanji kanji={searchKanji} />
 
       {words.length > 0 && (
         <QuizCard
