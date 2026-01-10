@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import styles from "./search.module.css";
 import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
-import KanjiPicker from "@/app/components/quiz/kanjiPicker";
+import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import Button from "@/app/components/layout/button";
 import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 import { isKanji } from "@/lib/utils/kanji";
@@ -82,7 +82,7 @@ export default function SearchQuizPage() {
           </Button>
         </form>
         {error && <div className={styles.feedback}>{error}</div>}
-        <KanjiPicker onPick={handleNext} />
+        <KanjiRefresh onPick={handleNext} />
       </div>
 
       <SearchKanji kanji={searchKanji} />

@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect } from "react";
 import QuizLayout from "../layout";
-import KanjiPicker from "@/app/components/quiz/kanjiPicker";
+import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import QuizScreen from "@/app/components/quiz/quizScreen";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
@@ -56,7 +56,7 @@ export function JoyoQuiz() {
         currentIndex={currentIndex}
         handleNext={handleNext}
       />
-      <KanjiPicker onPick={() => pickRandomKanji()} />
+      <KanjiRefresh onPick={() => pickRandomKanji()} />
     </QuizLayout>
   );
 }

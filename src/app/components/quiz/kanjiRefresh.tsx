@@ -1,11 +1,11 @@
-import styles from "./kanjiPicker.module.css";
+import styles from "./kanjiRefresh.module.css";
 import { useTheme } from "@/app/ThemeProvider";
 
 type Props = {
   onPick: () => void;
 };
 
-export default function KanjiPicker({ onPick }: Props) {
+export default function KanjiRefresh({ onPick }: Props) {
   const { dark } = useTheme();
 
   return (

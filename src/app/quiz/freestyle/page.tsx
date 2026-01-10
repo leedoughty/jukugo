@@ -5,7 +5,7 @@ import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import type { Variant } from "@/lib/types/jukugoData";
 import QuizLayout from "../layout";
-import KanjiPicker from "@/app/components/quiz/kanjiPicker";
+import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import QuizScreen from "@/app/components/quiz/quizScreen";
 
 export default function FreestyleQuizPage() {
@@ -43,7 +43,7 @@ export default function FreestyleQuizPage() {
         currentIndex={currentIndex}
         handleNext={handleNext}
       />
-      <KanjiPicker onPick={() => pickRandomKanji()} />
+      <KanjiRefresh onPick={() => pickRandomKanji()} />
     </QuizLayout>
   );
 }

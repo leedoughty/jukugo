@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import QuizScreen from "@/app/components/quiz/quizScreen";
 import QuizLayout from "../layout";
 import styles from "./jlpt.module.css";
-import KanjiPicker from "@/app/components/quiz/kanjiPicker";
+import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import LevelSelector from "@/app/components/quiz/levelSelector";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
@@ -80,7 +80,7 @@ export function JlptQuiz() {
           </>
         }
       />
-      <KanjiPicker onPick={() => pickRandomKanji()} />
+      <KanjiRefresh onPick={() => pickRandomKanji()} />
     </QuizLayout>
   );
 }
