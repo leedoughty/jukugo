@@ -94,7 +94,11 @@ export default function SearchQuizPage() {
         />
       )}
 
-      {words.length === 0 && !loading && (
+      {!searchKanji && !loading && (
+        <div className={styles.complete}>Search a kanji to start the quiz.</div>
+      )}
+
+      {searchKanji && words.length === 0 && !loading && (
         <div className={styles.complete}>No results found.</div>
       )}
     </QuizLayout>
