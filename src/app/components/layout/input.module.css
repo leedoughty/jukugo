@@ -1,0 +1,30 @@
+.input {
+  box-sizing: border-box;
+  max-width: 320px;
+  font-size: 1.2rem;
+  border: 1.5px solid var(--charcoal);
+  border-radius: 0;
+  background: var(--white);
+  color: var(--charcoal);
+  font-family: inherit;
+  transition: border-color 0.2s;
+  padding: 6px 12px;
+  font-weight: 400;
+}
+
+.input:focus {
+  outline: 2px solid var(--grey);
+  outline-offset: 0;
+  border-color: var(--grey);
+}
+
+.inputDark {
+  background: var(--charcoal);
+  color: var(--off-white);
+  border-color: var(--off-white);
+}
+
+.inputDark:focus {
+  outline: 2px solid var(--grey);
+  border-color: var(--grey);
+}

@@ -6,6 +6,7 @@ import { fetchJukugoWords } from "./actions";
 import styles from "./kanji-search.module.css";
 import { useTheme } from "@/app/ThemeProvider";
 import Button from "@/app/components/layout/button";
+import Input from "@/app/components/layout/input";
 import { isKanji } from "@/lib/utils/kanji";
 
 export default function KanjiSearch() {
@@ -35,10 +36,9 @@ export default function KanjiSearch() {
         className={styles.form}
         onSubmit={handleSubmit}
       >
-        <input
+        <Input
           name="kanji"
           placeholder="Enter kanji"
-          className={styles.input}
           maxLength={1}
           value={inputValue}
           onChange={handleInputChange}

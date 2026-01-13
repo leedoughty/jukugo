@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./quizCard.module.css";
 import Button from "../layout/button";
 import SearchKanji from "./searchKanji";
+import Input from "../layout/input";
 
 type Props = {
   word: { written: string; pronounced: string };
@@ -55,11 +56,10 @@ export default function QuizCard({ word, meaning, onNext, kanji }: Props) {
       <div className={styles.jukugoWord}>{word.written}</div>
       <div className={styles.jukugoMeaning}>{meaning}</div>
       <form onSubmit={handleSubmit} className={styles.inputRow}>
-        <input
+        <Input
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
           placeholder="ひらがな"
-          className={styles.input}
           disabled={feedback !== null}
         />
         <Button type="submit" disabled={feedback !== null}>

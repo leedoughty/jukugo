@@ -12,45 +12,43 @@ export default function QuizMenu() {
   return (
     <div className={styles.layoutRow}>
       <div className={styles.buttonGroup}>
-        <div className={styles.levelsSection}>
-          <p className={styles.text}>Level</p>
-          <div className={styles.levelsRow}>
-            {JLPT_LEVELS.map((level) => (
-              <Link
-                key={level}
-                className={styles.levelButtons}
-                href={`/quiz/jlpt?level=${level}`}
-                passHref
+        <p className={styles.text}>Level</p>
+        <div className={styles.levelsRow}>
+          {JLPT_LEVELS.map((level) => (
+            <Link
+              key={level}
+              className={styles.levelButtons}
+              href={`/quiz/jlpt?level=${level}`}
+              passHref
+            >
+              <LevelButton
+                level={level}
+                className={`${styles.levelButtonLarge} `}
               >
-                <LevelButton
-                  level={level}
-                  className={`${styles.levelButtonLarge} `}
-                >
-                  JLPT N{level}
-                </LevelButton>
-              </Link>
-            ))}
-            <Link href="/quiz/joyo" className={styles.levelButtons}>
-              <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
-                Jōyō
+                JLPT N{level}
               </LevelButton>
             </Link>
-            <Link href="/quiz/freestyle" className={styles.levelButtons}>
-              <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
-                Freestyle
-              </LevelButton>
-            </Link>
-            <Link href="/quiz/search" className={styles.levelButtons}>
-              <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
-                Search mode
-              </LevelButton>
-            </Link>
-            <Link href="/quiz/review" className={styles.levelButtons}>
-              <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
-                Review
-              </LevelButton>
-            </Link>
-          </div>
+          ))}
+          <Link href="/quiz/joyo" className={styles.levelButtons}>
+            <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
+              Jōyō
+            </LevelButton>
+          </Link>
+          <Link href="/quiz/freestyle" className={styles.levelButtons}>
+            <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
+              Freestyle
+            </LevelButton>
+          </Link>
+          <Link href="/quiz/search" className={styles.levelButtons}>
+            <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
+              Search mode
+            </LevelButton>
+          </Link>
+          <Link href="/quiz/review" className={styles.levelButtons}>
+            <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
+              Review
+            </LevelButton>
+          </Link>
         </div>
       </div>
     </div>

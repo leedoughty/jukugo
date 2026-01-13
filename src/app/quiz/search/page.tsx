@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import styles from "./search.module.css";
 import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
 import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import Button from "@/app/components/layout/button";
+import Input from "@/app/components/layout/input";
 import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 import { isKanji } from "@/lib/utils/kanji";
 import Sidebar from "@/app/components/quiz/sidebar";
@@ -22,7 +23,6 @@ export default function SearchQuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const fetchWords = async (kanjiCharacter: string) => {
     setLoading(true);
@@ -65,15 +65,13 @@ export default function SearchQuizPage() {
     <QuizLayout>
       <Sidebar>
         <form onSubmit={handleSearch} className={styles.inputRow}>
-          <input
-            ref={inputRef}
+          <Input
             value={kanji}
             onChange={(e) => {
               setKanji(e.target.value);
               if (error) setError("");
             }}
             placeholder="Enter kanji"
-            className={styles.input}
             disabled={loading}
             maxLength={1}
           />
