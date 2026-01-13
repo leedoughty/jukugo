@@ -1,0 +1,21 @@
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  position: static;
+  top: auto;
+  left: auto;
+}
+
+@media (min-width: 920px) {
+  .sidebar {
+    flex-direction: column;
+    gap: 16px;
+    width: 200px;
+    position: fixed;
+    left: 32px;
+    top: 100px;
+  }
+}

@@ -10,9 +10,7 @@ export default function KanjiRefresh({ onPick }: Props) {
 
   return (
     <button
-      className={`${styles.pickButton} ${styles.pickButtonMobile} ${
-        dark ? styles.pickButtonDark : ""
-      }`}
+      className={`${styles.pickButton} ${dark ? styles.pickButtonDark : ""}`}
       onClick={onPick}
       aria-label="Pick Random Word"
       type="button"

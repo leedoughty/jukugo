@@ -9,6 +9,8 @@
   transition: background 0.2s, border-color 0.2s;
   cursor: pointer;
   outline: none;
+  width: 60px;
+  aspect-ratio: 1 / 1;
 }
 
 .pickButtonDark {
@@ -21,18 +23,10 @@
   box-shadow: 0 0 0 1.3px currentColor;
 }
 
-.pickButtonMobile {
-  position: fixed;
-  bottom: 32px;
-  left: 32px;
-  z-index: 100;
-}
-
-@media (min-width: 920px) {
-  .pickButtonMobile {
-    position: static;
-    bottom: auto;
-    left: auto;
-    z-index: auto;
+@media (max-width: 919px) {
+  .pickButton {
+    width: 50px;
+    aspect-ratio: 1 / 1;
+    padding: 4px 8px;
   }
 }

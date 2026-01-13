@@ -6,6 +6,7 @@ import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import QuizScreen from "@/app/components/quiz/quizScreen";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
+import Sidebar from "@/app/components/quiz/sidebar";
 
 export default function JoyoQuizPage() {
   return (
@@ -49,6 +50,9 @@ export function JoyoQuiz() {
 
   return (
     <QuizLayout>
+      <Sidebar>
+        <KanjiRefresh onPick={() => pickRandomKanji()} />
+      </Sidebar>
       <QuizScreen
         selectedKanji={selectedKanji}
         words={words}
@@ -56,7 +60,6 @@ export function JoyoQuiz() {
         currentIndex={currentIndex}
         handleNext={handleNext}
       />
-      <KanjiRefresh onPick={() => pickRandomKanji()} />
     </QuizLayout>
   );
 }

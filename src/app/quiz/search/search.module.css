@@ -100,7 +100,6 @@
 }
 
 .inputRow {
-  padding-top: 25px;
   display: flex;
   align-items: center;
 }
@@ -180,7 +179,6 @@
   }
 
   .inputRow {
-    margin-top: 12px;
     display: flex;
     align-items: center;
     font-size: 1em;

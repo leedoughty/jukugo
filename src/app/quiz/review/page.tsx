@@ -6,6 +6,7 @@ import styles from "./review.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import Button from "@/app/components/layout/button";
 import SearchKanji from "@/app/components/quiz/searchKanji";
+import Sidebar from "@/app/components/quiz/sidebar"; // <-- Import Sidebar
 
 type ReviewItem = {
   written: string;
@@ -41,6 +42,15 @@ export default function ReviewQuizPage() {
 
   return (
     <QuizLayout>
+      <Sidebar>
+        <Button
+          className={styles.nextButton}
+          onClick={handleClear}
+          type="button"
+        >
+          Clear Review Questions
+        </Button>
+      </Sidebar>
       {reviewList.length > 0 && currentIndex < reviewList.length ? (
         <>
           <SearchKanji kanji={currentKanji} />
@@ -52,28 +62,12 @@ export default function ReviewQuizPage() {
             meaning={reviewList[currentIndex].meaning}
             onNext={handleNext}
           />
-          <Button
-            className={styles.nextButton}
-            onClick={handleClear}
-            type="button"
-          >
-            Clear Review Questions
-          </Button>
         </>
       ) : (
         <div className={styles.complete}>
           {reviewList.length === 0
             ? "No words to review, answer some quiz cards and then come back here!"
             : "Review complete!"}
-          {reviewList.length > 0 && (
-            <Button
-              className={styles.nextButton}
-              onClick={handleClear}
-              type="button"
-            >
-              Clear Review Questions
-            </Button>
-          )}
         </div>
       )}
     </QuizLayout>

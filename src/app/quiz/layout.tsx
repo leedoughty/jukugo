@@ -8,11 +8,5 @@ type QuizLayoutProps = {
 };
 
 export default function QuizLayout({ children }: QuizLayoutProps) {
-  return (
-    <div className={styles.quizLayout}>
-      <main className={styles.quizMain}>
-        <div className={styles.container}>{children}</div>
-      </main>
-    </div>
-  );
+  return <main className={styles.quizMain}>{children}</main>;
 }

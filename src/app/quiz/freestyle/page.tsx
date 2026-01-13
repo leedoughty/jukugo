@@ -7,6 +7,7 @@ import type { Variant } from "@/lib/types/jukugoData";
 import QuizLayout from "../layout";
 import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import QuizScreen from "@/app/components/quiz/quizScreen";
+import Sidebar from "@/app/components/quiz/sidebar";
 
 export default function FreestyleQuizPage() {
   const {
@@ -36,6 +37,9 @@ export default function FreestyleQuizPage() {
 
   return (
     <QuizLayout>
+      <Sidebar>
+        <KanjiRefresh onPick={() => pickRandomKanji()} />
+      </Sidebar>
       <QuizScreen
         selectedKanji={selectedKanji}
         words={words}
@@ -43,7 +47,6 @@ export default function FreestyleQuizPage() {
         currentIndex={currentIndex}
         handleNext={handleNext}
       />
-      <KanjiRefresh onPick={() => pickRandomKanji()} />
     </QuizLayout>
   );
 }

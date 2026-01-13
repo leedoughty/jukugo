@@ -9,6 +9,7 @@ import Button from "@/app/components/layout/button";
 import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 import { isKanji } from "@/lib/utils/kanji";
 import SearchKanji from "@/app/components/quiz/searchKanji";
+import Sidebar from "@/app/components/quiz/sidebar";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };
@@ -63,7 +64,7 @@ export default function SearchQuizPage() {
 
   return (
     <QuizLayout>
-      <div className={styles.selectorRow}>
+      <Sidebar>
         <form onSubmit={handleSearch} className={styles.inputRow}>
           <input
             ref={inputRef}
@@ -81,9 +82,9 @@ export default function SearchQuizPage() {
             {loading ? "Searching..." : "Search"}
           </Button>
         </form>
-        {error && <div className={styles.feedback}>{error}</div>}
         <KanjiRefresh onPick={handleNext} />
-      </div>
+        {error && <div className={styles.feedback}>{error}</div>}
+      </Sidebar>
 
       <SearchKanji kanji={searchKanji} />
 
