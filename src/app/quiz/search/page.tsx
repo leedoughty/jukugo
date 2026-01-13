@@ -82,7 +82,7 @@ export default function SearchQuizPage() {
             {loading ? "Searching..." : "Search"}
           </Button>
         </form>
-        <KanjiRefresh onPick={handleNext} />
+        {searchKanji && <KanjiRefresh onPick={handleNext} />}
         {error && <div className={styles.feedback}>{error}</div>}
       </Sidebar>
 

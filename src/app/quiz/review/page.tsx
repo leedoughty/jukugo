@@ -43,13 +43,15 @@ export default function ReviewQuizPage() {
   return (
     <QuizLayout>
       <Sidebar>
-        <Button
-          className={styles.nextButton}
-          onClick={handleClear}
-          type="button"
-        >
-          Clear Review Questions
-        </Button>
+        {reviewList.length > 0 && (
+          <Button
+            className={styles.nextButton}
+            onClick={handleClear}
+            type="button"
+          >
+            Clear Review Questions
+          </Button>
+        )}
       </Sidebar>
       {reviewList.length > 0 && currentIndex < reviewList.length ? (
         <>
@@ -66,8 +68,8 @@ export default function ReviewQuizPage() {
       ) : (
         <div className={styles.complete}>
           {reviewList.length === 0
-            ? "No words to review, answer some quiz cards and then come back here!"
-            : "Review complete!"}
+            ? "No words to review, answer some quiz cards and then come back here."
+            : "Review complete."}
         </div>
       )}
     </QuizLayout>
