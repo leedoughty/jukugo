@@ -15,18 +15,17 @@
 
 .jukugoMeaning {
   font-size: 1.5rem;
+  height: 80px;
+  overflow-y: auto;
+  margin-bottom: 8px;
 }
 
 .inputRow {
-  padding-top: 25%;
+  padding-top: 30px;
   padding-bottom: 24px;
   display: flex;
   align-items: center;
-}
-
-.input {
-  font-size: 1.2em;
-  padding: 6px 12px;
+  gap: 12px;
 }
 
 .feedback {
@@ -65,10 +64,13 @@
   }
 
   .inputRow {
-    margin-top: 12px;
+    padding-top: 50px;
     display: flex;
     align-items: center;
     font-size: 1em;
-    gap: 12px;
+  }
+
+  .jukugoMeaning {
+    height: 100px;
   }
 }
