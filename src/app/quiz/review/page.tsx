@@ -5,8 +5,7 @@ import QuizLayout from "../layout";
 import styles from "./review.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import Button from "@/app/components/layout/button";
-import SearchKanji from "@/app/components/quiz/searchKanji";
-import Sidebar from "@/app/components/quiz/sidebar"; // <-- Import Sidebar
+import Sidebar from "@/app/components/quiz/sidebar";
 
 type ReviewItem = {
   written: string;
@@ -55,7 +54,6 @@ export default function ReviewQuizPage() {
       </Sidebar>
       {reviewList.length > 0 && currentIndex < reviewList.length ? (
         <>
-          <SearchKanji kanji={currentKanji} />
           <QuizCard
             word={{
               written: reviewList[currentIndex].written,
@@ -63,6 +61,7 @@ export default function ReviewQuizPage() {
             }}
             meaning={reviewList[currentIndex].meaning}
             onNext={handleNext}
+            kanji={currentKanji}
           />
         </>
       ) : (

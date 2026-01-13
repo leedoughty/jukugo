@@ -8,7 +8,6 @@ import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import Button from "@/app/components/layout/button";
 import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 import { isKanji } from "@/lib/utils/kanji";
-import SearchKanji from "@/app/components/quiz/searchKanji";
 import Sidebar from "@/app/components/quiz/sidebar";
 
 type Meaning = { glosses: string[] };
@@ -86,13 +85,12 @@ export default function SearchQuizPage() {
         {error && <div className={styles.feedback}>{error}</div>}
       </Sidebar>
 
-      <SearchKanji kanji={searchKanji} />
-
       {words.length > 0 && (
         <QuizCard
           word={words[currentIndex]}
           meaning={meanings[currentIndex]}
           onNext={handleNext}
+          kanji={searchKanji}
         />
       )}
 

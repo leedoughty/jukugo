@@ -1,4 +1,5 @@
 .quizCard {
+  margin-top: 30px;
   margin-bottom: 12px;
   display: flex;
   flex-direction: column;
@@ -53,6 +54,11 @@
 }
 
 @media (min-width: 920px) {
+  .quizCard {
+    margin-top: 70px;
+    padding-left: 30px;
+  }
+
   .jukugoWord {
     white-space: nowrap;
     font-size: 8rem;

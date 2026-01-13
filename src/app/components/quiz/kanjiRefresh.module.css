@@ -23,7 +23,7 @@
   box-shadow: 0 0 0 1.3px currentColor;
 }
 
-@media (max-width: 919px) {
+@media (max-width: 920px) {
   .pickButton {
     width: 50px;
     aspect-ratio: 1 / 1;

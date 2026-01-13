@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import styles from "./quizCard.module.css";
 import Button from "../layout/button";
+import SearchKanji from "./searchKanji";
 
 type Props = {
   word: { written: string; pronounced: string };
   meaning: string;
   onNext: () => void;
+  kanji?: string;
 };
 
-export default function QuizCard({ word, meaning, onNext }: Props) {
+export default function QuizCard({ word, meaning, onNext, kanji }: Props) {
   const [userInput, setUserInput] = useState("");
   const [feedback, setFeedback] = useState<null | "correct" | "incorrect">(
     null
@@ -49,6 +51,7 @@ export default function QuizCard({ word, meaning, onNext }: Props) {
 
   return (
     <div className={styles.quizCard}>
+      {kanji && <SearchKanji kanji={kanji} />}
       <div className={styles.jukugoWord}>{word.written}</div>
       <div className={styles.jukugoMeaning}>{meaning}</div>
       <form onSubmit={handleSubmit} className={styles.inputRow}>
