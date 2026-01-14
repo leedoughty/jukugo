@@ -60,3 +60,26 @@
     align-self: flex-start;
   }
 }
+
+.historyWrapperDark {
+  background: var(--charcoal);
+}
+
+.cardDark {
+  background: var(--charcoal);
+  color: var(--off-white);
+  border-top: 1px solid var(--off-white);
+  border-right: 1px solid var(--off-white);
+  border-bottom: 1px solid var(--off-white);
+}
+
+.cardDark .kanji,
+.cardDark .jukugo,
+.cardDark .answers,
+.cardDark .label {
+  color: var(--off-white);
+}
+
+.cardDark .meaning {
+  color: var(--light-grey);
+}
