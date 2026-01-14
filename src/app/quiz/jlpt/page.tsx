@@ -11,6 +11,16 @@ import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import LevelSelector from "@/app/components/quiz/levelSelector";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
+import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
+
+type AnswerHistoryItem = {
+  kanji: string;
+  jukugo: string;
+  meaning: string;
+  userAnswer: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+};
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
@@ -59,6 +69,29 @@ function JlptQuiz() {
     router.replace(`/quiz/jlpt?level=${newLevel}`);
   };
 
+  const [answerHistory, setAnswerHistory] = useState<AnswerHistoryItem[]>([]);
+
+  const handleAnswer = (
+    result: "correct" | "incorrect",
+    userAnswer: string,
+    jukugo: string,
+    meaning: string,
+    kanji: string,
+    correctAnswer: string
+  ) => {
+    setAnswerHistory((prev) => [
+      ...prev,
+      {
+        kanji,
+        jukugo,
+        meaning,
+        userAnswer,
+        correctAnswer,
+        isCorrect: result === "correct",
+      },
+    ]);
+  };
+
   return (
     <QuizLayout>
       <Sidebar>
@@ -76,13 +109,29 @@ function JlptQuiz() {
         />
         <KanjiRefresh onPick={() => pickRandomKanji()} />
       </Sidebar>
-      <QuizScreen
-        selectedKanji={selectedKanji}
-        words={words}
-        meanings={meanings}
-        currentIndex={currentIndex}
-        handleNext={handleNext}
-      />
+      <div className={styles.quizMainWrapper}>
+        <QuizScreen
+          selectedKanji={selectedKanji}
+          words={words}
+          meanings={meanings}
+          currentIndex={currentIndex}
+          handleNext={handleNext}
+          onAnswer={(result, userAnswer) =>
+            handleAnswer(
+              result,
+              userAnswer,
+              words[currentIndex]?.written || "",
+              meanings[currentIndex]?.toString() || "",
+              selectedKanji?.toString() || "",
+              words[currentIndex]?.pronounced || ""
+            )
+          }
+        />
+        <QuizAnswerHistory
+          history={answerHistory}
+          className={styles.historyWrapper}
+        />
+      </div>
     </QuizLayout>
   );
 }

@@ -9,7 +9,7 @@ type QuizScreenProps = {
   handleNext: () => void;
   Selector?: React.ReactNode;
   completeMessage?: string;
-  onAnswer?: (result: "correct" | "incorrect") => void;
+  onAnswer?: (result: "correct" | "incorrect", userAnswer: string) => void;
 };
 
 export default function QuizScreen({

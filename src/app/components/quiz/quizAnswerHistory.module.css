@@ -1,0 +1,62 @@
+.historyWrapper {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  background: var(--off-white);
+  border: 1px solid var(--light-grey);
+  padding: 12px;
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+.correct {
+  border-left: 4px solid var(--green);
+}
+
+.incorrect {
+  border-left: 4px solid var(--red);
+}
+
+.kanji {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.jukugo {
+  font-size: 1.1em;
+  margin-bottom: 4px;
+}
+
+.meaning {
+  font-size: 0.95em;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+
+.answers {
+  font-size: 0.95em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+@media (min-width: 920px) {
+  .historyWrapper {
+    margin-top: 0;
+    margin-left: 32px;
+    flex: 1 1 0;
+    max-width: 200px;
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+  }
+}

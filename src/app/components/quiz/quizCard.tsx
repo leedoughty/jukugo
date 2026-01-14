@@ -9,7 +9,7 @@ type Props = {
   meaning: string;
   onNext: () => void;
   kanji?: string;
-  onAnswer?: (result: "correct" | "incorrect") => void;
+  onAnswer?: (result: "correct" | "incorrect", userAnswer: string) => void;
 };
 
 export default function QuizCard({
@@ -33,10 +33,10 @@ export default function QuizCard({
     event.preventDefault();
     if (userInput.trim() === word.pronounced.trim()) {
       setFeedback("correct");
-      onAnswer?.("correct");
+      onAnswer?.("correct", userInput);
     } else {
       setFeedback("incorrect");
-      onAnswer?.("incorrect");
+      onAnswer?.("incorrect", userInput);
 
       const reviewList = JSON.parse(
         localStorage.getItem("jukugoReviewList") || "[]"
