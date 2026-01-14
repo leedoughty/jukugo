@@ -10,6 +10,7 @@
   cursor: pointer;
   outline: none;
   width: 60px;
+  height: 60px;
   aspect-ratio: 1 / 1;
 }
 
@@ -21,12 +22,4 @@
 .pickButton:hover,
 .pickButton:focus {
   box-shadow: 0 0 0 1.3px currentColor;
-}
-
-@media (max-width: 920px) {
-  .pickButton {
-    width: 50px;
-    aspect-ratio: 1 / 1;
-    padding: 4px 8px;
-  }
 }

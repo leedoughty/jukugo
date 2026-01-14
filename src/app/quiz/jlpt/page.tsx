@@ -6,6 +6,7 @@ import QuizScreen from "@/app/components/quiz/quizScreen";
 import QuizLayout from "../layout";
 import styles from "./jlpt.module.css";
 import Sidebar from "@/app/components/quiz/sidebar";
+import ProgressTracker from "@/app/components/quiz/progressTracker";
 import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import LevelSelector from "@/app/components/quiz/levelSelector";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
@@ -13,15 +14,7 @@ import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
-export default function JlptQuizPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <JlptQuiz />
-    </Suspense>
-  );
-}
-
-export function JlptQuiz() {
+function JlptQuiz() {
   const {
     kanjiList,
     setKanjiList,
@@ -38,6 +31,9 @@ export function JlptQuiz() {
       variant.priorities.length > 0 &&
       variant.written.includes(randomKanji)
   );
+
+  const totalCount = words.length;
+  const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -66,6 +62,13 @@ export function JlptQuiz() {
   return (
     <QuizLayout>
       <Sidebar>
+        {selectedKanji && (
+          <ProgressTracker
+            kanji={selectedKanji}
+            progress={progress}
+            totalCount={totalCount}
+          />
+        )}
         <LevelSelector
           levels={JLPT_LEVELS}
           selected={level}
@@ -81,5 +84,13 @@ export function JlptQuiz() {
         handleNext={handleNext}
       />
     </QuizLayout>
+  );
+}
+
+export default function JlptQuizPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <JlptQuiz />
+    </Suspense>
   );
 }

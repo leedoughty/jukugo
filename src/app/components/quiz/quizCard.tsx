@@ -9,9 +9,16 @@ type Props = {
   meaning: string;
   onNext: () => void;
   kanji?: string;
+  onAnswer?: (result: "correct" | "incorrect") => void;
 };
 
-export default function QuizCard({ word, meaning, onNext, kanji }: Props) {
+export default function QuizCard({
+  word,
+  meaning,
+  onNext,
+  kanji,
+  onAnswer,
+}: Props) {
   const [userInput, setUserInput] = useState("");
   const [feedback, setFeedback] = useState<null | "correct" | "incorrect">(
     null
@@ -26,8 +33,10 @@ export default function QuizCard({ word, meaning, onNext, kanji }: Props) {
     event.preventDefault();
     if (userInput.trim() === word.pronounced.trim()) {
       setFeedback("correct");
+      onAnswer?.("correct");
     } else {
       setFeedback("incorrect");
+      onAnswer?.("incorrect");
 
       const reviewList = JSON.parse(
         localStorage.getItem("jukugoReviewList") || "[]"

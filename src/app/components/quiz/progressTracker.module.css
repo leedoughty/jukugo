@@ -1,0 +1,26 @@
+.scoreDisplay {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 16px;
+  border: 1px solid var(--charcoal);
+  background: var(--off-white);
+  border-radius: 6px;
+  padding: 8px 16px;
+  justify-content: center;
+}
+
+.scoreKanji {
+  font-size: 1.3em;
+  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Meiryo",
+    "Yu Gothic", "MS PGothic", sans-serif;
+  font-weight: 400;
+}
+
+.scoreCount {
+  color: var(--charcoal);
+  font-size: 1em;
+  font-weight: 400;
+}

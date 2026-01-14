@@ -8,6 +8,7 @@ import QuizLayout from "../layout";
 import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import QuizScreen from "@/app/components/quiz/quizScreen";
 import Sidebar from "@/app/components/quiz/sidebar";
+import ProgressTracker from "@/app/components/quiz/progressTracker";
 
 export default function FreestyleQuizPage() {
   const {
@@ -35,9 +36,19 @@ export default function FreestyleQuizPage() {
     fetchAndSetKanji();
   }, [setKanjiList]);
 
+  const totalCount = words.length;
+  const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
+
   return (
     <QuizLayout>
       <Sidebar>
+        {selectedKanji && (
+          <ProgressTracker
+            kanji={selectedKanji}
+            progress={progress}
+            totalCount={totalCount}
+          />
+        )}
         <KanjiRefresh onPick={() => pickRandomKanji()} />
       </Sidebar>
       <QuizScreen

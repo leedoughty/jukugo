@@ -58,6 +58,15 @@
   cursor: pointer;
 }
 
+.clearButton {
+  border-radius: 6px;
+  font-size: 1em;
+  border: none;
+  background: var(--cobalt-blue);
+  color: var(--off-white);
+  cursor: pointer;
+}
+
 .complete {
   display: flex;
   flex-direction: column;

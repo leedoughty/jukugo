@@ -9,6 +9,7 @@ type QuizScreenProps = {
   handleNext: () => void;
   Selector?: React.ReactNode;
   completeMessage?: string;
+  onAnswer?: (result: "correct" | "incorrect") => void;
 };
 
 export default function QuizScreen({
@@ -19,6 +20,7 @@ export default function QuizScreen({
   handleNext,
   Selector,
   completeMessage = "Quiz complete!",
+  onAnswer,
 }: QuizScreenProps) {
   return (
     <>
@@ -30,6 +32,7 @@ export default function QuizScreen({
           meaning={meanings[currentIndex]}
           onNext={handleNext}
           kanji={selectedKanji ?? undefined}
+          onAnswer={onAnswer}
         />
       )}
 

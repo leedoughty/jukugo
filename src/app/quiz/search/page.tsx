@@ -10,6 +10,7 @@ import Input from "@/app/components/layout/input";
 import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 import { isKanji } from "@/lib/utils/kanji";
 import Sidebar from "@/app/components/quiz/sidebar";
+import ProgressTracker from "@/app/components/quiz/progressTracker";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };
@@ -61,6 +62,9 @@ export default function SearchQuizPage() {
     }
   };
 
+  const totalCount = words.length;
+  const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
+
   return (
     <QuizLayout>
       <Sidebar>
@@ -79,6 +83,13 @@ export default function SearchQuizPage() {
             {loading ? "Searching..." : "Search"}
           </Button>
         </form>
+        {searchKanji && totalCount > 0 && (
+          <ProgressTracker
+            kanji={searchKanji}
+            progress={progress}
+            totalCount={totalCount}
+          />
+        )}
         {searchKanji && <KanjiRefresh onPick={handleNext} />}
         {error && <div className={styles.feedback}>{error}</div>}
       </Sidebar>

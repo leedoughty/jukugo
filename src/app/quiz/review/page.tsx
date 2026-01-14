@@ -6,6 +6,7 @@ import styles from "./review.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import Button from "@/app/components/layout/button";
 import Sidebar from "@/app/components/quiz/sidebar";
+import ProgressTracker from "@/app/components/quiz/progressTracker";
 
 type ReviewItem = {
   written: string;
@@ -34,6 +35,8 @@ export default function ReviewQuizPage() {
     setCurrentIndex(0);
   };
 
+  const totalCount = reviewList.length;
+  const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
   const currentKanji =
     reviewList.length > 0 && currentIndex < reviewList.length
       ? reviewList[currentIndex].written[0]
@@ -42,9 +45,16 @@ export default function ReviewQuizPage() {
   return (
     <QuizLayout>
       <Sidebar>
+        {reviewList.length > 0 && currentKanji && (
+          <ProgressTracker
+            kanji={currentKanji}
+            progress={progress}
+            totalCount={totalCount}
+          />
+        )}
         {reviewList.length > 0 && (
           <Button
-            className={styles.nextButton}
+            className={styles.clearButton}
             onClick={handleClear}
             type="button"
           >
