@@ -11,10 +11,20 @@ import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 import { isKanji } from "@/lib/utils/kanji";
 import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
+import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
 
 type Meaning = { glosses: string[] };
 type Variant = { written: string; pronounced: string; priorities?: string[] };
 type Word = { meanings: Meaning[]; variants: Variant[] };
+
+type AnswerHistoryItem = {
+  kanji: string;
+  jukugo: string;
+  meaning: string;
+  userAnswer: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+};
 
 export default function SearchQuizPage() {
   const [kanji, setKanji] = useState("");
@@ -24,6 +34,8 @@ export default function SearchQuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [answerHistory, setAnswerHistory] = useState<AnswerHistoryItem[]>([]);
 
   const fetchWords = async (kanjiCharacter: string) => {
     setLoading(true);
@@ -39,7 +51,7 @@ export default function SearchQuizPage() {
   };
 
   useEffect(() => {
-    fetchWords(searchKanji);
+    if (searchKanji) fetchWords(searchKanji);
   }, [searchKanji]);
 
   const handleSearch = (e: React.FormEvent) => {
@@ -64,6 +76,27 @@ export default function SearchQuizPage() {
 
   const totalCount = words.length;
   const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
+
+  const handleAnswer = (
+    result: "correct" | "incorrect",
+    userAnswer: string,
+    jukugo: string,
+    meaning: string,
+    kanji: string,
+    correctAnswer: string
+  ) => {
+    setAnswerHistory((prev) => [
+      ...prev,
+      {
+        kanji,
+        jukugo,
+        meaning,
+        userAnswer,
+        correctAnswer,
+        isCorrect: result === "correct",
+      },
+    ]);
+  };
 
   return (
     <QuizLayout>
@@ -94,22 +127,41 @@ export default function SearchQuizPage() {
         {error && <div className={styles.feedback}>{error}</div>}
       </Sidebar>
 
-      {words.length > 0 && (
-        <QuizCard
-          word={words[currentIndex]}
-          meaning={meanings[currentIndex]}
-          onNext={handleNext}
-          kanji={searchKanji}
+      <div className={styles.quizMainWrapper}>
+        {words.length > 0 && (
+          <QuizCard
+            word={words[currentIndex]}
+            meaning={meanings[currentIndex]}
+            onNext={handleNext}
+            kanji={searchKanji}
+            onAnswer={(result, userAnswer) =>
+              handleAnswer(
+                result,
+                userAnswer,
+                words[currentIndex]?.written || "",
+                meanings[currentIndex]?.toString() || "",
+                searchKanji,
+                words[currentIndex]?.pronounced || ""
+              )
+            }
+          />
+        )}
+
+        <QuizAnswerHistory
+          history={answerHistory}
+          className={styles.historyWrapper}
         />
-      )}
 
-      {!searchKanji && !loading && (
-        <div className={styles.complete}>Search a kanji to start the quiz.</div>
-      )}
+        {!searchKanji && !loading && (
+          <div className={styles.complete}>
+            Search a kanji to start the quiz.
+          </div>
+        )}
 
-      {searchKanji && words.length === 0 && !loading && (
-        <div className={styles.complete}>No results found.</div>
-      )}
+        {searchKanji && words.length === 0 && !loading && (
+          <div className={styles.complete}>No results found.</div>
+        )}
+      </div>
     </QuizLayout>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import QuizLayout from "../layout";
 import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import QuizScreen from "@/app/components/quiz/quizScreen";
@@ -8,6 +8,17 @@ import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
+import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
+import styles from "./joyo.module.css";
+
+type AnswerHistoryItem = {
+  kanji: string;
+  jukugo: string;
+  meaning: string;
+  userAnswer: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+};
 
 export default function JoyoQuizPage() {
   return (
@@ -52,6 +63,29 @@ export function JoyoQuiz() {
   const totalCount = words.length;
   const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
 
+  const [answerHistory, setAnswerHistory] = useState<AnswerHistoryItem[]>([]);
+
+  const handleAnswer = (
+    result: "correct" | "incorrect",
+    userAnswer: string,
+    jukugo: string,
+    meaning: string,
+    kanji: string,
+    correctAnswer: string
+  ) => {
+    setAnswerHistory((prev) => [
+      ...prev,
+      {
+        kanji,
+        jukugo,
+        meaning,
+        userAnswer,
+        correctAnswer,
+        isCorrect: result === "correct",
+      },
+    ]);
+  };
+
   return (
     <QuizLayout>
       <Sidebar>
@@ -64,13 +98,29 @@ export function JoyoQuiz() {
         )}
         <KanjiRefresh onPick={() => pickRandomKanji()} />
       </Sidebar>
-      <QuizScreen
-        selectedKanji={selectedKanji}
-        words={words}
-        meanings={meanings}
-        currentIndex={currentIndex}
-        handleNext={handleNext}
-      />
+      <div className={styles.quizMainWrapper}>
+        <QuizScreen
+          selectedKanji={selectedKanji}
+          words={words}
+          meanings={meanings}
+          currentIndex={currentIndex}
+          handleNext={handleNext}
+          onAnswer={(result, userAnswer) =>
+            handleAnswer(
+              result,
+              userAnswer,
+              words[currentIndex]?.written || "",
+              meanings[currentIndex]?.toString() || "",
+              selectedKanji?.toString() || "",
+              words[currentIndex]?.pronounced || ""
+            )
+          }
+        />
+        <QuizAnswerHistory
+          history={answerHistory}
+          className={styles.historyWrapper}
+        />
+      </div>
     </QuizLayout>
   );
 }

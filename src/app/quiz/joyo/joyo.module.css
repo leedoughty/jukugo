@@ -105,6 +105,11 @@
   z-index: 100;
 }
 
+.quizMainWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 920px) {
   .kanji {
     font-size: 50px;
@@ -131,5 +136,24 @@
     align-items: center;
     font-size: 1em;
     gap: 12px;
+  }
+
+  .quizMainWrapper {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .historyWrapper {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    max-width: 320px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    align-self: flex-start;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 10;
   }
 }

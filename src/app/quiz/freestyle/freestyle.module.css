@@ -143,4 +143,23 @@
     font-size: 1em;
     gap: 12px;
   }
+
+  .quizMainWrapper {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .historyWrapper {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    max-width: 320px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    align-self: flex-start;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 10;
+  }
 }
