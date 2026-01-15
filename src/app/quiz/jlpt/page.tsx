@@ -12,15 +12,7 @@ import LevelSelector from "@/app/components/quiz/levelSelector";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
-
-type AnswerHistoryItem = {
-  kanji: string;
-  jukugo: string;
-  meaning: string;
-  userAnswer: string;
-  correctAnswer: string;
-  isCorrect: boolean;
-};
+import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 

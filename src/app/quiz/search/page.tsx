@@ -12,19 +12,8 @@ import { isKanji } from "@/lib/utils/kanji";
 import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
-
-type Meaning = { glosses: string[] };
-type Variant = { written: string; pronounced: string; priorities?: string[] };
-type Word = { meanings: Meaning[]; variants: Variant[] };
-
-type AnswerHistoryItem = {
-  kanji: string;
-  jukugo: string;
-  meaning: string;
-  userAnswer: string;
-  correctAnswer: string;
-  isCorrect: boolean;
-};
+import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
+import type { Variant, Word } from "@/lib/types/jukugoData";
 
 export default function SearchQuizPage() {
   const [kanji, setKanji] = useState("");

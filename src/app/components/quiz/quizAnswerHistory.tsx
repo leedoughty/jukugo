@@ -1,15 +1,7 @@
 import React from "react";
 import styles from "./quizAnswerHistory.module.css";
 import { useTheme } from "@/app/ThemeProvider";
-
-type AnswerHistoryItem = {
-  kanji: string;
-  jukugo: string;
-  meaning: string;
-  userAnswer: string;
-  correctAnswer: string;
-  isCorrect: boolean;
-};
+import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
 
 type Props = {
   history: AnswerHistoryItem[];

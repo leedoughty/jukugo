@@ -11,15 +11,7 @@ import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
 import styles from "./freestyle.module.css";
-
-type AnswerHistoryItem = {
-  kanji: string;
-  jukugo: string;
-  meaning: string;
-  userAnswer: string;
-  correctAnswer: string;
-  isCorrect: boolean;
-};
+import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
 
 export default function FreestyleQuizPage() {
   const {
