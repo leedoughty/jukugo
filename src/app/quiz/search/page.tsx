@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import Timer from "@/app/components/quiz/timer";
 import styles from "./search.module.css";
 import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
@@ -25,6 +26,25 @@ export default function SearchQuizPage() {
   const [error, setError] = useState("");
 
   const [answerHistory, setAnswerHistory] = useState<AnswerHistoryItem[]>([]);
+  const [timerKey, setTimerKey] = useState(0);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [timerEnabled, setTimerEnabled] = useState(false);
+  const [hasAnswered, setHasAnswered] = useState(false);
+
+  useEffect(() => {
+    setHasAnswered(false);
+    setTimerKey((k) => k + 1);
+    if (timerEnabled && words.length > 0) {
+      setTimerRunning(true);
+    } else {
+      setTimerRunning(false);
+    }
+  }, [currentIndex, searchKanji, timerEnabled, words.length]);
+
+  const hasAnsweredRef = useRef(false);
+  useEffect(() => {
+    hasAnsweredRef.current = false;
+  }, [currentIndex, searchKanji]);
 
   const fetchWords = async (kanjiCharacter: string) => {
     setLoading(true);
@@ -72,8 +92,12 @@ export default function SearchQuizPage() {
     jukugo: string,
     meaning: string,
     kanji: string,
-    correctAnswer: string
+    correctAnswer: string,
+    isTimeout = false,
   ) => {
+    if (hasAnsweredRef.current) return;
+    hasAnsweredRef.current = true;
+    setHasAnswered(true);
     setAnswerHistory((prev) => [
       ...prev,
       {
@@ -85,6 +109,29 @@ export default function SearchQuizPage() {
         isCorrect: result === "correct",
       },
     ]);
+    setTimerRunning(false);
+    if (isTimeout) {
+      setTimeout(() => {
+        handleNext();
+      }, 500);
+    }
+  };
+
+  const handleTimeout = () => {
+    if (!timerRunning || !searchKanji || hasAnsweredRef.current) {
+      return;
+    }
+    setTimeout(() => {
+      handleAnswer(
+        "incorrect",
+        "",
+        words[currentIndex]?.written || "",
+        meanings[currentIndex]?.toString() || "",
+        searchKanji,
+        words[currentIndex]?.pronounced || "",
+        true,
+      );
+    }, 0);
   };
 
   return (
@@ -106,13 +153,41 @@ export default function SearchQuizPage() {
           </Button>
         </form>
         {searchKanji && totalCount > 0 && (
-          <ProgressTracker
-            kanji={searchKanji}
-            progress={progress}
-            totalCount={totalCount}
-          />
+          <>
+            <ProgressTracker
+              kanji={searchKanji}
+              progress={progress}
+              totalCount={totalCount}
+            />
+            <KanjiRefresh onPick={handleNext} />
+            <div className={styles.selectorRow}>
+              {currentIndex < totalCount &&
+                (!timerEnabled ? (
+                  <button
+                    type="button"
+                    className={styles.timerButton}
+                    onClick={() => {
+                      setTimerEnabled(true);
+                      setTimerRunning(true);
+                    }}
+                  >
+                    Use timer
+                  </button>
+                ) : (
+                  <Timer
+                    onTimeout={handleTimeout}
+                    isRunning={timerRunning}
+                    keyReset={timerKey}
+                    duration={10}
+                    onClick={() => {
+                      setTimerEnabled(false);
+                      setTimerRunning(false);
+                    }}
+                  />
+                ))}
+            </div>
+          </>
         )}
-        {searchKanji && <KanjiRefresh onPick={handleNext} />}
         {error && <div className={styles.feedback}>{error}</div>}
       </Sidebar>
 
@@ -130,7 +205,7 @@ export default function SearchQuizPage() {
                 words[currentIndex]?.written || "",
                 meanings[currentIndex]?.toString() || "",
                 searchKanji,
-                words[currentIndex]?.pronounced || ""
+                words[currentIndex]?.pronounced || "",
               )
             }
           />

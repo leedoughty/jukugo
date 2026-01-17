@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import QuizLayout from "../layout";
 import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import QuizScreen from "@/app/components/quiz/quizScreen";
@@ -9,6 +9,7 @@ import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
+import Timer from "@/app/components/quiz/timer";
 import styles from "./joyo.module.css";
 import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
 
@@ -35,7 +36,7 @@ export function JoyoQuiz() {
     (variant, randomKanji) =>
       Array.isArray(variant.priorities) &&
       variant.priorities.length > 0 &&
-      variant.written.includes(randomKanji)
+      variant.written.includes(randomKanji),
   );
 
   useEffect(() => {
@@ -56,6 +57,25 @@ export function JoyoQuiz() {
   const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
 
   const [answerHistory, setAnswerHistory] = useState<AnswerHistoryItem[]>([]);
+  const [timerKey, setTimerKey] = useState(0);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [timerEnabled, setTimerEnabled] = useState(false);
+  const [hasAnswered, setHasAnswered] = useState(false);
+
+  useEffect(() => {
+    setHasAnswered(false);
+    setTimerKey((k) => k + 1);
+    if (timerEnabled) {
+      setTimerRunning(true);
+    } else {
+      setTimerRunning(false);
+    }
+  }, [currentIndex, selectedKanji, timerEnabled]);
+
+  const hasAnsweredRef = useRef(false);
+  useEffect(() => {
+    hasAnsweredRef.current = false;
+  }, [currentIndex, selectedKanji]);
 
   const handleAnswer = (
     result: "correct" | "incorrect",
@@ -63,8 +83,12 @@ export function JoyoQuiz() {
     jukugo: string,
     meaning: string,
     kanji: string,
-    correctAnswer: string
+    correctAnswer: string,
+    isTimeout = false,
   ) => {
+    if (hasAnsweredRef.current) return;
+    hasAnsweredRef.current = true;
+    setHasAnswered(true);
     setAnswerHistory((prev) => [
       ...prev,
       {
@@ -76,6 +100,29 @@ export function JoyoQuiz() {
         isCorrect: result === "correct",
       },
     ]);
+    setTimerRunning(false);
+    if (isTimeout) {
+      setTimeout(() => {
+        handleNext();
+      }, 500);
+    }
+  };
+
+  const handleTimeout = () => {
+    if (!timerRunning || !selectedKanji || hasAnsweredRef.current) {
+      return;
+    }
+    setTimeout(() => {
+      handleAnswer(
+        "incorrect",
+        "",
+        words[currentIndex]?.written || "",
+        meanings[currentIndex]?.toString() || "",
+        selectedKanji?.toString() || "",
+        words[currentIndex]?.pronounced || "",
+        true,
+      );
+    }, 0);
   };
 
   return (
@@ -89,6 +136,32 @@ export function JoyoQuiz() {
           />
         )}
         <KanjiRefresh onPick={() => pickRandomKanji()} />
+        <div className={styles.selectorRow}>
+          {currentIndex < totalCount &&
+            (!timerEnabled ? (
+              <button
+                type="button"
+                className={styles.timerButton}
+                onClick={() => {
+                  setTimerEnabled(true);
+                  setTimerRunning(true);
+                }}
+              >
+                Use timer
+              </button>
+            ) : (
+              <Timer
+                onTimeout={handleTimeout}
+                isRunning={timerRunning}
+                keyReset={timerKey}
+                duration={10}
+                onClick={() => {
+                  setTimerEnabled(false);
+                  setTimerRunning(false);
+                }}
+              />
+            ))}
+        </div>
       </Sidebar>
       <div className={styles.quizMainWrapper}>
         <QuizScreen
@@ -104,7 +177,8 @@ export function JoyoQuiz() {
               words[currentIndex]?.written || "",
               meanings[currentIndex]?.toString() || "",
               selectedKanji?.toString() || "",
-              words[currentIndex]?.pronounced || ""
+              words[currentIndex]?.pronounced || "",
+              false,
             )
           }
         />
