@@ -108,17 +108,6 @@
   z-index: 100;
 }
 
-.timerButton {
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-size: 1em;
-  border: 1px solid var(--charcoal);
-  background: transparent;
-  color: var(--charcoal);
-  cursor: pointer;
-  width: 100%;
-}
-
 @media (min-width: 920px) {
   .kanji {
     font-size: 50px;

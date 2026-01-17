@@ -10,7 +10,7 @@ import QuizScreen from "@/app/components/quiz/quizScreen";
 import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
-import Timer from "@/app/components/quiz/timer";
+import TimerButton from "@/app/components/quiz/timerButton";
 import styles from "./freestyle.module.css";
 import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
 
@@ -124,30 +124,23 @@ export default function FreestyleQuizPage() {
         )}
         <KanjiRefresh onPick={() => pickRandomKanji()} />
         <div className={styles.selectorRow}>
-          {currentIndex < totalCount &&
-            (!timerEnabled ? (
-              <button
-                type="button"
-                className={styles.timerButton}
-                onClick={() => {
-                  setTimerEnabled(true);
-                  setTimerRunning(true);
-                }}
-              >
-                Use timer
-              </button>
-            ) : (
-              <Timer
-                onTimeout={handleTimeout}
-                isRunning={timerRunning}
-                keyReset={timerKey}
-                duration={10}
-                onClick={() => {
-                  setTimerEnabled(false);
-                  setTimerRunning(false);
-                }}
-              />
-            ))}
+          {currentIndex < totalCount && (
+            <TimerButton
+              timerEnabled={timerEnabled}
+              timerRunning={timerRunning}
+              timerKey={timerKey}
+              onEnable={() => {
+                setTimerEnabled(true);
+                setTimerRunning(true);
+              }}
+              onDisable={() => {
+                setTimerEnabled(false);
+                setTimerRunning(false);
+              }}
+              onTimeout={handleTimeout}
+              duration={10}
+            />
+          )}
         </div>
       </Sidebar>
       <div className={styles.quizMainWrapper}>

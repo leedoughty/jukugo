@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Timer from "@/app/components/quiz/timer";
+import TimerButton from "@/app/components/quiz/timerButton";
 import styles from "./search.module.css";
 import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
@@ -161,30 +162,23 @@ export default function SearchQuizPage() {
             />
             <KanjiRefresh onPick={handleNext} />
             <div className={styles.selectorRow}>
-              {currentIndex < totalCount &&
-                (!timerEnabled ? (
-                  <button
-                    type="button"
-                    className={styles.timerButton}
-                    onClick={() => {
-                      setTimerEnabled(true);
-                      setTimerRunning(true);
-                    }}
-                  >
-                    Use timer
-                  </button>
-                ) : (
-                  <Timer
-                    onTimeout={handleTimeout}
-                    isRunning={timerRunning}
-                    keyReset={timerKey}
-                    duration={10}
-                    onClick={() => {
-                      setTimerEnabled(false);
-                      setTimerRunning(false);
-                    }}
-                  />
-                ))}
+              {currentIndex < totalCount && (
+                <TimerButton
+                  timerEnabled={timerEnabled}
+                  timerRunning={timerRunning}
+                  timerKey={timerKey}
+                  onEnable={() => {
+                    setTimerEnabled(true);
+                    setTimerRunning(true);
+                  }}
+                  onDisable={() => {
+                    setTimerEnabled(false);
+                    setTimerRunning(false);
+                  }}
+                  onTimeout={handleTimeout}
+                  duration={10}
+                />
+              )}
             </div>
           </>
         )}

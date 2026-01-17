@@ -7,7 +7,7 @@ import QuizLayout from "../layout";
 import styles from "./jlpt.module.css";
 import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
-import Timer from "@/app/components/quiz/timer";
+import TimerButton from "@/app/components/quiz/timerButton";
 import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import LevelSelector from "@/app/components/quiz/levelSelector";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
@@ -149,30 +149,23 @@ function JlptQuiz() {
             selected={level}
             onSelect={handleLevelSelect}
           />
-          {currentIndex < totalCount &&
-            (!timerEnabled ? (
-              <button
-                type="button"
-                className={styles.timerButton}
-                onClick={() => {
-                  setTimerEnabled(true);
-                  setTimerRunning(true);
-                }}
-              >
-                Use timer
-              </button>
-            ) : (
-              <Timer
-                onTimeout={handleTimeout}
-                isRunning={timerRunning}
-                keyReset={timerKey}
-                duration={10}
-                onClick={() => {
-                  setTimerEnabled(false);
-                  setTimerRunning(false);
-                }}
-              />
-            ))}
+          {currentIndex < totalCount && (
+            <TimerButton
+              timerEnabled={timerEnabled}
+              timerRunning={timerRunning}
+              timerKey={timerKey}
+              onEnable={() => {
+                setTimerEnabled(true);
+                setTimerRunning(true);
+              }}
+              onDisable={() => {
+                setTimerEnabled(false);
+                setTimerRunning(false);
+              }}
+              onTimeout={handleTimeout}
+              duration={10}
+            />
+          )}
         </div>
       </Sidebar>
       <div className={styles.quizMainWrapper}>
