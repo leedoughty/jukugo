@@ -5,7 +5,7 @@
   justify-content: left;
   width: 100%;
   max-width: 600px;
-  margin: 0 auto 24px auto;
+  margin: 0;
   position: static;
 }
 
@@ -16,7 +16,11 @@
   font-size: 1.5rem;
   font-weight: 400;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
   outline: none;
   color: var(--charcoal);
 }
@@ -44,10 +48,8 @@
   .levels {
     flex-direction: column;
     align-items: flex-start;
-    position: fixed;
-    left: 32px;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
+    margin: 0;
     width: 120px;
   }
 }

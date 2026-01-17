@@ -1,12 +1,13 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import QuizScreen from "@/app/components/quiz/quizScreen";
 import QuizLayout from "../layout";
 import styles from "./jlpt.module.css";
 import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
+import Timer from "@/app/components/quiz/timer";
 import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import LevelSelector from "@/app/components/quiz/levelSelector";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
@@ -31,7 +32,7 @@ function JlptQuiz() {
     (variant, randomKanji) =>
       Array.isArray(variant.priorities) &&
       variant.priorities.length > 0 &&
-      variant.written.includes(randomKanji)
+      variant.written.includes(randomKanji),
   );
 
   const totalCount = words.length;
@@ -62,6 +63,25 @@ function JlptQuiz() {
   };
 
   const [answerHistory, setAnswerHistory] = useState<AnswerHistoryItem[]>([]);
+  const [timerKey, setTimerKey] = useState(0);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [timerEnabled, setTimerEnabled] = useState(false);
+  const [hasAnswered, setHasAnswered] = useState(false);
+
+  useEffect(() => {
+    setHasAnswered(false);
+    setTimerKey((k) => k + 1);
+    if (timerEnabled) {
+      setTimerRunning(true);
+    } else {
+      setTimerRunning(false);
+    }
+  }, [currentIndex, selectedKanji, timerEnabled]);
+
+  const hasAnsweredRef = useRef(false);
+  useEffect(() => {
+    hasAnsweredRef.current = false;
+  }, [currentIndex, selectedKanji]);
 
   const handleAnswer = (
     result: "correct" | "incorrect",
@@ -69,8 +89,12 @@ function JlptQuiz() {
     jukugo: string,
     meaning: string,
     kanji: string,
-    correctAnswer: string
+    correctAnswer: string,
+    isTimeout = false,
   ) => {
+    if (hasAnsweredRef.current) return;
+    hasAnsweredRef.current = true;
+    setHasAnswered(true);
     setAnswerHistory((prev) => [
       ...prev,
       {
@@ -82,6 +106,30 @@ function JlptQuiz() {
         isCorrect: result === "correct",
       },
     ]);
+    setTimerRunning(false);
+    if (isTimeout) {
+      setTimeout(() => {
+        handleNext();
+      }, 500);
+    }
+  };
+
+  const handleTimeout = () => {
+    if (!timerRunning || !selectedKanji || hasAnsweredRef.current) {
+      return;
+    }
+
+    setTimeout(() => {
+      handleAnswer(
+        "incorrect",
+        "",
+        words[currentIndex]?.written || "",
+        meanings[currentIndex]?.toString() || "",
+        selectedKanji?.toString() || "",
+        words[currentIndex]?.pronounced || "",
+        true,
+      );
+    }, 0);
   };
 
   return (
@@ -94,12 +142,38 @@ function JlptQuiz() {
             totalCount={totalCount}
           />
         )}
-        <LevelSelector
-          levels={JLPT_LEVELS}
-          selected={level}
-          onSelect={handleLevelSelect}
-        />
         <KanjiRefresh onPick={() => pickRandomKanji()} />
+        <div className={styles.selectorRow}>
+          <LevelSelector
+            levels={JLPT_LEVELS}
+            selected={level}
+            onSelect={handleLevelSelect}
+          />
+          {currentIndex < totalCount &&
+            (!timerEnabled ? (
+              <button
+                type="button"
+                className={styles.timerButton}
+                onClick={() => {
+                  setTimerEnabled(true);
+                  setTimerRunning(true);
+                }}
+              >
+                Use timer
+              </button>
+            ) : (
+              <Timer
+                onTimeout={handleTimeout}
+                isRunning={timerRunning}
+                keyReset={timerKey}
+                duration={10}
+                onClick={() => {
+                  setTimerEnabled(false);
+                  setTimerRunning(false);
+                }}
+              />
+            ))}
+        </div>
       </Sidebar>
       <div className={styles.quizMainWrapper}>
         <QuizScreen
@@ -115,7 +189,8 @@ function JlptQuiz() {
               words[currentIndex]?.written || "",
               meanings[currentIndex]?.toString() || "",
               selectedKanji?.toString() || "",
-              words[currentIndex]?.pronounced || ""
+              words[currentIndex]?.pronounced || "",
+              false,
             )
           }
         />

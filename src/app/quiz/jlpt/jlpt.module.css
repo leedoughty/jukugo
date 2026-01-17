@@ -6,7 +6,9 @@
   border: 1px solid var(--charcoal);
   color: var(--charcoal);
   text-decoration: none;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
   cursor: pointer;
   outline: none;
 }
@@ -39,8 +41,9 @@
 .kanji {
   margin-bottom: 8px;
   font-weight: 300;
-  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Meiryo",
-    "Yu Gothic", "MS PGothic", sans-serif;
+  font-family:
+    "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Meiryo", "Yu Gothic",
+    "MS PGothic", sans-serif;
   font-size: 30px;
 }
 
@@ -106,6 +109,16 @@
   border: none;
   background: var(--cobalt-blue);
   color: var(--off-white);
+  cursor: pointer;
+}
+
+.timerButton {
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 1em;
+  border: 1px solid var(--charcoal);
+  background: transparent;
+  color: var(--charcoal);
   cursor: pointer;
 }
 

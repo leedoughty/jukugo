@@ -1,0 +1,33 @@
+.timerWrapper {
+  width: 100%;
+  background: var(--off-white);
+  border-radius: 8px;
+  border: 1px solid var(--charcoal);
+  margin: 12px 0;
+  position: relative;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.timerBar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  background: var(--light-grey);
+  transition: width 0.3s linear;
+  z-index: 1;
+}
+
+.timerText {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  font-size: 1.1em;
+  color: var(--charcoal);
+  font-weight: 500;
+}
