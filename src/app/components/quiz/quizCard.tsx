@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./quizCard.module.css";
 import Button from "../layout/button";
 import SearchKanji from "./searchKanji";
@@ -21,13 +21,28 @@ export default function QuizCard({
 }: Props) {
   const [userInput, setUserInput] = useState("");
   const [feedback, setFeedback] = useState<null | "correct" | "incorrect">(
-    null
+    null,
   );
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setUserInput("");
     setFeedback(null);
+    inputRef.current?.focus();
   }, [word]);
+
+  useEffect(() => {
+    if (feedback && nextButtonRef.current) {
+      nextButtonRef.current.focus();
+    }
+  }, [feedback]);
+
+  useEffect(() => {
+    if (feedback === null) {
+      inputRef.current?.focus();
+    }
+  }, [feedback]);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -39,13 +54,14 @@ export default function QuizCard({
       onAnswer?.("incorrect", userInput);
 
       const reviewList = JSON.parse(
-        localStorage.getItem("jukugoReviewList") || "[]"
+        localStorage.getItem("jukugoReviewList") || "[]",
       );
 
       if (
         !reviewList.some(
           (item: any) =>
-            item.written === word.written && item.pronounced === word.pronounced
+            item.written === word.written &&
+            item.pronounced === word.pronounced,
         )
       ) {
         reviewList.push({
@@ -66,6 +82,7 @@ export default function QuizCard({
       <div className={styles.jukugoMeaning}>{meaning}</div>
       <form onSubmit={handleSubmit} className={styles.inputRow}>
         <Input
+          ref={inputRef}
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
           placeholder="ひらがな"
@@ -80,12 +97,20 @@ export default function QuizCard({
           className={`${styles.feedback} ${
             feedback === "correct" ? styles.correct : styles.incorrect
           }`}
+          aria-live="polite"
+          aria-atomic="true"
         >
-          {feedback === "correct" ? "✅ Correct!" : "❌ Incorrect."}
-          <br />
-          <strong>Answer:</strong> {word.pronounced}
-          <div>
-            <Button className={styles.nextButton} onClick={onNext}>
+          <div className={styles.feedbackRow}>
+            <span tabIndex={-1}>
+              {feedback === "correct" ? "✅ Correct!" : "❌ Incorrect."}
+              <br />
+              <strong>Answer:</strong> {word.pronounced}
+            </span>
+            <Button
+              className={styles.nextButton}
+              onClick={onNext}
+              ref={nextButtonRef}
+            >
               Next
             </Button>
           </div>

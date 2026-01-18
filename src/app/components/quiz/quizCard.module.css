@@ -40,6 +40,12 @@
   color: var(--red);
 }
 
+.feedbackRow {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
 .nextButton {
   margin-top: 16px;
   padding: 10px 16px;
@@ -54,12 +60,11 @@
 @media (min-width: 920px) {
   .quizCard {
     margin-top: 70px;
-    padding-left: 30px;
   }
 
   .jukugoWord {
     white-space: nowrap;
-    font-size: 8rem;
+    font-size: 7rem;
   }
 
   .inputRow {
