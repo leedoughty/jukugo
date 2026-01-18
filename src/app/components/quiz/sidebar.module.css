@@ -1,21 +1,120 @@
+:root {
+  --header-height: 66px;
+}
+
+.featureListWrapper {
+  position: relative;
+  width: 240px;
+}
+
 .sidebar {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
   width: 100%;
-  position: static;
-  top: auto;
-  left: auto;
+  min-width: 0;
+  max-width: 100vw;
+  background: transparent;
+  position: relative;
+  z-index: 20;
+}
+
+.buttonBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  width: 100%;
+  min-width: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  padding: 8px 8px;
+  font-size: 1.3em;
+  cursor: pointer;
+  color: var(--charcoal);
+  border-bottom: 2px solid transparent;
+  flex: 1 1 0;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.iconButton.darkBtn {
+  color: var(--off-white);
+}
+
+.iconButton.active,
+.iconButton:focus {
+  background: var(--light-grey);
+}
+
+.iconButton.active.darkBtn,
+.iconButton:focus.darkBtn {
+  background: var(--dark-grey);
+}
+
+.featureContent {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 0px;
+  box-sizing: border-box;
+}
+
+.featureContent.darkContent {
+  background: var(--charcoal);
+  color: var(--off-white);
+  border-left: 1px solid var(--light-grey);
 }
 
 @media (min-width: 920px) {
   .sidebar {
     flex-direction: column;
-    gap: 16px;
-    width: 200px;
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+    height: calc(100vh - var(--header-height, 56px) - 8px);
+    border-bottom: none;
+    border-right: 0.7px solid var(--light-grey);
     position: fixed;
-    left: 32px;
-    top: 100px;
+    left: 0;
+    top: calc(var(--header-height, 56px) + 8px);
+    background: transparent;
+    z-index: 20;
+  }
+
+  .sidebar.dark {
+    background: var(--charcoal);
+    border-right: 1px solid var(--off-white);
+  }
+
+  .buttonBar {
+    flex-direction: column;
+    border-right: none;
+    border-bottom: none;
+    width: 100%;
+  }
+
+  .iconButton {
+    border-bottom: none;
+    border-right: 2px solid transparent;
+    width: 100%;
+    padding: 18px 0;
+  }
+
+  .iconButton.active,
+  .iconButton:focus {
+    background: var(--light-grey);
+  }
+
+  .featureContent {
+    padding: 10px;
+    width: 240px;
+    position: absolute;
+    left: 60px;
+    z-index: 9;
   }
 }

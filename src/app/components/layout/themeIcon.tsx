@@ -71,8 +71,8 @@ export function MoonIcon(props: React.SVGProps<SVGSVGElement>) {
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 15.41 15.88"
-      width={24}
-      height={24}
+      width={20}
+      height={20}
       aria-hidden="true"
       focusable="false"
       {...props}

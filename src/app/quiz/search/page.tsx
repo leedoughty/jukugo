@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Timer from "@/app/components/quiz/timer";
 import TimerButton from "@/app/components/quiz/timerButton";
 import styles from "./search.module.css";
 import QuizLayout from "../layout";
@@ -15,7 +14,7 @@ import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
 import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
-import type { Variant, Word } from "@/lib/types/jukugoData";
+import type { Variant } from "@/lib/types/jukugoData";
 
 export default function SearchQuizPage() {
   const [kanji, setKanji] = useState("");
@@ -31,6 +30,7 @@ export default function SearchQuizPage() {
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerEnabled, setTimerEnabled] = useState(false);
   const [hasAnswered, setHasAnswered] = useState(false);
+  const [showHistory, setShowHistory] = useState(true);
 
   useEffect(() => {
     setHasAnswered(false);
@@ -137,32 +137,71 @@ export default function SearchQuizPage() {
 
   return (
     <QuizLayout>
-      <Sidebar>
-        <form onSubmit={handleSearch} className={styles.inputRow}>
-          <Input
-            value={kanji}
-            onChange={(e) => {
-              setKanji(e.target.value);
-              if (error) setError("");
-            }}
-            placeholder="Enter kanji"
-            disabled={loading}
-            maxLength={1}
-          />
-          <Button type="submit" disabled={loading}>
-            {loading ? "Searching..." : "Search"}
-          </Button>
-        </form>
-        {searchKanji && totalCount > 0 && (
-          <>
-            <ProgressTracker
-              kanji={searchKanji}
-              progress={progress}
-              totalCount={totalCount}
-            />
-            <KanjiRefresh onPick={handleNext} />
-            <div className={styles.selectorRow}>
-              {currentIndex < totalCount && (
+      <Sidebar
+        features={[
+          {
+            key: "search",
+            icon: (
+              <span role="img" aria-label="Search">
+                🔍
+              </span>
+            ),
+            content: (
+              <form onSubmit={handleSearch} className={styles.inputRow}>
+                <Input
+                  value={kanji}
+                  onChange={(e) => {
+                    setKanji(e.target.value);
+                    if (error) setError("");
+                  }}
+                  placeholder="Enter kanji"
+                  disabled={loading}
+                  maxLength={1}
+                />
+                <Button type="submit" disabled={loading}>
+                  {loading ? "Searching..." : "Search"}
+                </Button>
+              </form>
+            ),
+            label: "Search",
+          },
+          {
+            key: "progress",
+            icon: (
+              <span role="img" aria-label="Progress">
+                📈
+              </span>
+            ),
+            content:
+              searchKanji && totalCount > 0 ? (
+                <ProgressTracker
+                  kanji={searchKanji}
+                  progress={progress}
+                  totalCount={totalCount}
+                />
+              ) : null,
+            label: "Progress",
+          },
+          {
+            key: "refresh",
+            icon: (
+              <span role="img" aria-label="Refresh">
+                🔄
+              </span>
+            ),
+            label: "Refresh",
+            action: handleNext,
+            instant: true,
+          },
+          {
+            key: "timer",
+            icon: (
+              <span role="img" aria-label="Timer">
+                ⏲️
+              </span>
+            ),
+            content:
+              searchKanji && currentIndex < totalCount ? (
                 <TimerButton
                   timerEnabled={timerEnabled}
                   timerRunning={timerRunning}
@@ -178,13 +217,23 @@ export default function SearchQuizPage() {
                   onTimeout={handleTimeout}
                   duration={10}
                 />
-              )}
-            </div>
-          </>
-        )}
-        {error && <div className={styles.feedback}>{error}</div>}
-      </Sidebar>
-
+              ) : null,
+            label: "Timer",
+          },
+          {
+            key: "history",
+            icon: (
+              <span role="img" aria-label="History">
+                🗂️
+              </span>
+            ),
+            label: "History",
+            action: () => setShowHistory((v) => !v),
+            instant: true,
+          },
+        ]}
+        defaultOpen="search"
+      />
       <div className={styles.quizMainWrapper}>
         {words.length > 0 && (
           <QuizCard
@@ -205,10 +254,14 @@ export default function SearchQuizPage() {
           />
         )}
 
-        <QuizAnswerHistory
-          history={answerHistory}
-          className={styles.historyWrapper}
-        />
+        {showHistory && (
+          <QuizAnswerHistory
+            history={answerHistory}
+            className={styles.historyWrapper}
+          />
+        )}
+
+        {error && <div className={styles.feedback}>{error}</div>}
 
         {!searchKanji && !loading && (
           <div className={styles.complete}>

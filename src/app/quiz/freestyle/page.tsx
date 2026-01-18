@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
-import type { Variant } from "@/lib/types/jukugoData";
 import QuizLayout from "../layout";
 import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
 import QuizScreen from "@/app/components/quiz/quizScreen";
@@ -48,6 +47,7 @@ export default function FreestyleQuizPage() {
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerEnabled, setTimerEnabled] = useState(false);
   const [hasAnswered, setHasAnswered] = useState(false);
+  const [showHistory, setShowHistory] = useState(true);
 
   useEffect(() => {
     setHasAnswered(false);
@@ -114,35 +114,76 @@ export default function FreestyleQuizPage() {
 
   return (
     <QuizLayout>
-      <Sidebar>
-        {selectedKanji && (
-          <ProgressTracker
-            kanji={selectedKanji}
-            progress={progress}
-            totalCount={totalCount}
-          />
-        )}
-        <KanjiRefresh onPick={() => pickRandomKanji()} />
-        <div className={styles.selectorRow}>
-          {currentIndex < totalCount && (
-            <TimerButton
-              timerEnabled={timerEnabled}
-              timerRunning={timerRunning}
-              timerKey={timerKey}
-              onEnable={() => {
-                setTimerEnabled(true);
-                setTimerRunning(true);
-              }}
-              onDisable={() => {
-                setTimerEnabled(false);
-                setTimerRunning(false);
-              }}
-              onTimeout={handleTimeout}
-              duration={10}
-            />
-          )}
-        </div>
-      </Sidebar>
+      <Sidebar
+        features={[
+          {
+            key: "progress",
+            icon: (
+              <span role="img" aria-label="Progress">
+                📈
+              </span>
+            ),
+            content: selectedKanji ? (
+              <ProgressTracker
+                kanji={selectedKanji}
+                progress={progress}
+                totalCount={totalCount}
+              />
+            ) : null,
+            label: "Progress",
+          },
+          {
+            key: "refresh",
+            icon: (
+              <span role="img" aria-label="Refresh">
+                🔄
+              </span>
+            ),
+            label: "Refresh",
+            action: () => pickRandomKanji(),
+            instant: true,
+          },
+          {
+            key: "timer",
+            icon: (
+              <span role="img" aria-label="Timer">
+                ⏲️
+              </span>
+            ),
+            content:
+              currentIndex < totalCount ? (
+                <TimerButton
+                  timerEnabled={timerEnabled}
+                  timerRunning={timerRunning}
+                  timerKey={timerKey}
+                  onEnable={() => {
+                    setTimerEnabled(true);
+                    setTimerRunning(true);
+                  }}
+                  onDisable={() => {
+                    setTimerEnabled(false);
+                    setTimerRunning(false);
+                  }}
+                  onTimeout={handleTimeout}
+                  duration={10}
+                />
+              ) : null,
+            label: "Timer",
+          },
+          {
+            key: "history",
+            icon: (
+              <span role="img" aria-label="History">
+                🗂️
+              </span>
+            ),
+            label: "History",
+            action: () => setShowHistory((v) => !v),
+            instant: true,
+          },
+        ]}
+        defaultOpen="progress"
+      />
       <div className={styles.quizMainWrapper}>
         <QuizScreen
           selectedKanji={selectedKanji}
@@ -161,10 +202,12 @@ export default function FreestyleQuizPage() {
             )
           }
         />
-        <QuizAnswerHistory
-          history={answerHistory}
-          className={styles.historyWrapper}
-        />
+        {showHistory && (
+          <QuizAnswerHistory
+            history={answerHistory}
+            className={styles.historyWrapper}
+          />
+        )}
       </div>
     </QuizLayout>
   );

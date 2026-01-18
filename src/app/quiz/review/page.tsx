@@ -44,24 +44,39 @@ export default function ReviewQuizPage() {
 
   return (
     <QuizLayout>
-      <Sidebar>
-        {reviewList.length > 0 && currentKanji && (
-          <ProgressTracker
-            kanji={currentKanji}
-            progress={progress}
-            totalCount={totalCount}
-          />
-        )}
-        {reviewList.length > 0 && (
-          <Button
-            className={styles.clearButton}
-            onClick={handleClear}
-            type="button"
-          >
-            Clear Review Questions
-          </Button>
-        )}
-      </Sidebar>
+      <Sidebar
+        features={[
+          {
+            key: "progress",
+            icon: (
+              <span role="img" aria-label="Progress">
+                📈
+              </span>
+            ),
+            content:
+              reviewList.length > 0 && currentKanji ? (
+                <ProgressTracker
+                  kanji={currentKanji}
+                  progress={progress}
+                  totalCount={totalCount}
+                />
+              ) : null,
+            label: "Progress",
+          },
+          {
+            key: "clear",
+            icon: (
+              <span role="img" aria-label="Clear">
+                🗑️
+              </span>
+            ),
+            label: "Clear Review Questions",
+            action: handleClear,
+            instant: true,
+          },
+        ]}
+        defaultOpen="progress"
+      />
       {reviewList.length > 0 && currentIndex < reviewList.length ? (
         <>
           <QuizCard
