@@ -7,6 +7,7 @@ import QuizCard from "@/app/components/quiz/quizCard";
 import Button from "@/app/components/layout/button";
 import Sidebar from "@/app/components/quiz/sidebar";
 import ProgressTracker from "@/app/components/quiz/progressTracker";
+import { progressFeature, deleteFeature } from "@/app/components/quiz/features";
 
 type ReviewItem = {
   written: string;
@@ -46,34 +47,14 @@ export default function ReviewQuizPage() {
     <QuizLayout>
       <Sidebar
         features={[
-          {
-            key: "progress",
-            icon: (
-              <span role="img" aria-label="Progress">
-                📈
-              </span>
-            ),
-            content:
-              reviewList.length > 0 && currentKanji ? (
-                <ProgressTracker
-                  kanji={currentKanji}
-                  progress={progress}
-                  totalCount={totalCount}
-                />
-              ) : null,
-            label: "Progress",
-          },
-          {
-            key: "clear",
-            icon: (
-              <span role="img" aria-label="Clear">
-                🗑️
-              </span>
-            ),
-            label: "Clear Review Questions",
-            action: handleClear,
-            instant: true,
-          },
+          progressFeature({
+            selectedKanji: currentKanji,
+            progress,
+            totalCount,
+          }),
+          deleteFeature({
+            onDelete: handleClear,
+          }),
         ]}
         defaultOpen="progress"
       />

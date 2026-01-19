@@ -14,6 +14,13 @@ import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
 import { useQuizCommon } from "@/lib/hooks/useQuizCommon";
+import {
+  progressFeature,
+  refreshFeature,
+  timerFeature,
+  historyFeature,
+  levelFeature,
+} from "@/app/components/quiz/features";
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
@@ -81,96 +88,35 @@ function JlptQuiz() {
     handleNext,
   });
 
+  const features = [
+    progressFeature({
+      selectedKanji: selectedKanji ?? "",
+      progress,
+      totalCount,
+    }),
+    refreshFeature({ onRefresh: pickRandomKanji }),
+    levelFeature({
+      levels: JLPT_LEVELS,
+      selected: level,
+      onSelect: handleLevelSelect,
+      className: styles.selectorRow,
+    }),
+    timerFeature({
+      currentIndex,
+      totalCount,
+      timerEnabled,
+      timerRunning,
+      timerKey,
+      setTimerEnabled,
+      setTimerRunning,
+      handleTimeout,
+    }),
+    historyFeature({ setShowHistory }),
+  ];
+
   return (
     <QuizLayout>
-      <Sidebar
-        features={[
-          {
-            key: "progress",
-            icon: (
-              <span role="img" aria-label="Progress">
-                📈
-              </span>
-            ),
-            content: selectedKanji ? (
-              <ProgressTracker
-                kanji={selectedKanji}
-                progress={progress}
-                totalCount={totalCount}
-              />
-            ) : null,
-            label: "Progress",
-          },
-          {
-            key: "refresh",
-            icon: (
-              <span role="img" aria-label="Refresh">
-                🔄
-              </span>
-            ),
-            label: "Refresh",
-            action: () => pickRandomKanji(),
-            instant: true,
-          },
-          {
-            key: "level",
-            icon: (
-              <span role="img" aria-label="Level">
-                🎚️
-              </span>
-            ),
-            content: (
-              <div className={styles.selectorRow}>
-                <LevelSelector
-                  levels={JLPT_LEVELS}
-                  selected={level}
-                  onSelect={handleLevelSelect}
-                />
-              </div>
-            ),
-            label: "Level",
-          },
-          {
-            key: "timer",
-            icon: (
-              <span role="img" aria-label="Timer">
-                ⏲️
-              </span>
-            ),
-            content:
-              currentIndex < totalCount ? (
-                <TimerButton
-                  timerEnabled={timerEnabled}
-                  timerRunning={timerRunning}
-                  timerKey={timerKey}
-                  onEnable={() => {
-                    setTimerEnabled(true);
-                    setTimerRunning(true);
-                  }}
-                  onDisable={() => {
-                    setTimerEnabled(false);
-                    setTimerRunning(false);
-                  }}
-                  onTimeout={handleTimeout}
-                  duration={10}
-                />
-              ) : null,
-            label: "Timer",
-          },
-          {
-            key: "history",
-            icon: (
-              <span role="img" aria-label="History">
-                🗂️
-              </span>
-            ),
-            label: "History",
-            action: () => setShowHistory((v) => !v),
-            instant: true,
-          },
-        ]}
-        defaultOpen="progress"
-      />
+      <Sidebar features={features} defaultOpen="progress" />
       <div className={styles.quizMainWrapper}>
         <QuizScreen
           selectedKanji={selectedKanji}

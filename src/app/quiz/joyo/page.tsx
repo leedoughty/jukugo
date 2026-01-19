@@ -1,27 +1,23 @@
 "use client";
 
 import { Suspense, useEffect } from "react";
-import QuizLayout from "../layout";
-import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
+import { useRouter, useSearchParams } from "next/navigation";
 import QuizScreen from "@/app/components/quiz/quizScreen";
+import QuizLayout from "../layout";
+import styles from "./joyo.module.css";
+import Sidebar from "@/app/components/quiz/sidebar";
+import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
-import Sidebar from "@/app/components/quiz/sidebar";
-import ProgressTracker from "@/app/components/quiz/progressTracker";
-import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
-import TimerButton from "@/app/components/quiz/timerButton";
-import styles from "./joyo.module.css";
 import { useQuizCommon } from "@/lib/hooks/useQuizCommon";
+import {
+  progressFeature,
+  refreshFeature,
+  timerFeature,
+  historyFeature,
+} from "@/app/components/quiz/features";
 
-export default function JoyoQuizPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <JoyoQuiz />
-    </Suspense>
-  );
-}
-
-export function JoyoQuiz() {
+function JoyoQuiz() {
   const {
     kanjiList,
     setKanjiList,
@@ -31,25 +27,16 @@ export function JoyoQuiz() {
     currentIndex,
     pickRandomKanji,
     handleNext,
-  } = useJukugoQuiz(
-    [],
-    (variant, randomKanji) =>
-      Array.isArray(variant.priorities) &&
-      variant.priorities.length > 0 &&
-      variant.written.includes(randomKanji),
-  );
+  } = useJukugoQuiz();
 
   useEffect(() => {
     const fetchAndSetKanji = async () => {
       const kanjiList = await fetchKanjiList("joyo");
-
       setKanjiList(kanjiList);
-
       if (kanjiList.length > 0) {
         pickRandomKanji(kanjiList);
       }
     };
-
     fetchAndSetKanji();
   }, [setKanjiList]);
 
@@ -75,78 +62,29 @@ export function JoyoQuiz() {
     handleNext,
   });
 
+  const features = [
+    progressFeature({
+      selectedKanji: selectedKanji ?? "",
+      progress,
+      totalCount,
+    }),
+    refreshFeature({ onRefresh: pickRandomKanji }),
+    timerFeature({
+      currentIndex,
+      totalCount,
+      timerEnabled,
+      timerRunning,
+      timerKey,
+      setTimerEnabled,
+      setTimerRunning,
+      handleTimeout,
+    }),
+    historyFeature({ setShowHistory }),
+  ];
+
   return (
     <QuizLayout>
-      <Sidebar
-        features={[
-          {
-            key: "progress",
-            icon: (
-              <span role="img" aria-label="Progress">
-                📈
-              </span>
-            ),
-            content: selectedKanji ? (
-              <ProgressTracker
-                kanji={selectedKanji}
-                progress={progress}
-                totalCount={totalCount}
-              />
-            ) : null,
-            label: "Progress",
-          },
-          {
-            key: "refresh",
-            icon: (
-              <span role="img" aria-label="Refresh">
-                🔄
-              </span>
-            ),
-            label: "Refresh",
-            action: () => pickRandomKanji(),
-            instant: true,
-          },
-          {
-            key: "timer",
-            icon: (
-              <span role="img" aria-label="Timer">
-                ⏲️
-              </span>
-            ),
-            content:
-              currentIndex < totalCount ? (
-                <TimerButton
-                  timerEnabled={timerEnabled}
-                  timerRunning={timerRunning}
-                  timerKey={timerKey}
-                  onEnable={() => {
-                    setTimerEnabled(true);
-                    setTimerRunning(true);
-                  }}
-                  onDisable={() => {
-                    setTimerEnabled(false);
-                    setTimerRunning(false);
-                  }}
-                  onTimeout={handleTimeout}
-                  duration={10}
-                />
-              ) : null,
-            label: "Timer",
-          },
-          {
-            key: "history",
-            icon: (
-              <span role="img" aria-label="History">
-                🗂️
-              </span>
-            ),
-            label: "History",
-            action: () => setShowHistory((v) => !v),
-            instant: true,
-          },
-        ]}
-        defaultOpen="progress"
-      />
+      <Sidebar features={features} defaultOpen="progress" />
       <div className={styles.quizMainWrapper}>
         <QuizScreen
           selectedKanji={selectedKanji}
@@ -174,5 +112,13 @@ export function JoyoQuiz() {
         )}
       </div>
     </QuizLayout>
+  );
+}
+
+export default function JoyoQuizPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <JoyoQuiz />
+    </Suspense>
   );
 }

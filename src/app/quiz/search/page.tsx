@@ -15,6 +15,13 @@ import ProgressTracker from "@/app/components/quiz/progressTracker";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
 import type { Variant } from "@/lib/types/jukugoData";
 import { useQuizCommon } from "@/lib/hooks/useQuizCommon";
+import {
+  progressFeature,
+  refreshFeature,
+  timerFeature,
+  historyFeature,
+  searchFeature,
+} from "@/app/components/quiz/features";
 
 export default function SearchQuizPage() {
   const [kanji, setKanji] = useState("");
@@ -86,105 +93,42 @@ export default function SearchQuizPage() {
     handleNext,
   });
 
+  const features = [
+    searchFeature({
+      kanji,
+      setKanji,
+      error,
+      setError,
+      loading,
+      handleSearch,
+      styles,
+    }),
+    progressFeature({
+      selectedKanji: searchKanji,
+      progress,
+      totalCount,
+    }),
+    refreshFeature({
+      onRefresh: handleNext,
+    }),
+    timerFeature({
+      currentIndex,
+      totalCount,
+      timerEnabled,
+      timerRunning,
+      timerKey,
+      setTimerEnabled,
+      setTimerRunning,
+      handleTimeout,
+    }),
+    historyFeature({
+      setShowHistory,
+    }),
+  ];
+
   return (
     <QuizLayout>
-      <Sidebar
-        features={[
-          {
-            key: "search",
-            icon: (
-              <span role="img" aria-label="Search">
-                🔍
-              </span>
-            ),
-            content: (
-              <form onSubmit={handleSearch} className={styles.inputRow}>
-                <Input
-                  value={kanji}
-                  onChange={(e) => {
-                    setKanji(e.target.value);
-                    if (error) setError("");
-                  }}
-                  placeholder="Enter kanji"
-                  disabled={loading}
-                  maxLength={1}
-                />
-                <Button type="submit" disabled={loading}>
-                  {loading ? "Searching..." : "Search"}
-                </Button>
-              </form>
-            ),
-            label: "Search",
-          },
-          {
-            key: "progress",
-            icon: (
-              <span role="img" aria-label="Progress">
-                📈
-              </span>
-            ),
-            content:
-              searchKanji && totalCount > 0 ? (
-                <ProgressTracker
-                  kanji={searchKanji}
-                  progress={progress}
-                  totalCount={totalCount}
-                />
-              ) : null,
-            label: "Progress",
-          },
-          {
-            key: "refresh",
-            icon: (
-              <span role="img" aria-label="Refresh">
-                🔄
-              </span>
-            ),
-            label: "Refresh",
-            action: handleNext,
-            instant: true,
-          },
-          {
-            key: "timer",
-            icon: (
-              <span role="img" aria-label="Timer">
-                ⏲️
-              </span>
-            ),
-            content:
-              searchKanji && currentIndex < totalCount ? (
-                <TimerButton
-                  timerEnabled={timerEnabled}
-                  timerRunning={timerRunning}
-                  timerKey={timerKey}
-                  onEnable={() => {
-                    setTimerEnabled(true);
-                    setTimerRunning(true);
-                  }}
-                  onDisable={() => {
-                    setTimerEnabled(false);
-                    setTimerRunning(false);
-                  }}
-                  onTimeout={handleTimeout}
-                  duration={10}
-                />
-              ) : null,
-            label: "Timer",
-          },
-          {
-            key: "history",
-            icon: (
-              <span role="img" aria-label="History">
-                🗂️
-              </span>
-            ),
-            label: "History",
-            action: () => setShowHistory((v) => !v),
-            instant: true,
-          },
-        ]}
-        defaultOpen="search"
-      />
+      <Sidebar features={features} defaultOpen="search" />
       <div className={styles.quizMainWrapper}>
         {words.length > 0 && (
           <QuizCard
