@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import QuizLayout from "../layout";
@@ -11,7 +11,7 @@ import ProgressTracker from "@/app/components/quiz/progressTracker";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
 import TimerButton from "@/app/components/quiz/timerButton";
 import styles from "./freestyle.module.css";
-import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
+import { useQuizCommon } from "@/lib/hooks/useQuizCommon";
 
 export default function FreestyleQuizPage() {
   const {
@@ -42,75 +42,24 @@ export default function FreestyleQuizPage() {
   const totalCount = words.length;
   const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
 
-  const [answerHistory, setAnswerHistory] = useState<AnswerHistoryItem[]>([]);
-  const [timerKey, setTimerKey] = useState(0);
-  const [timerRunning, setTimerRunning] = useState(false);
-  const [timerEnabled, setTimerEnabled] = useState(false);
-  const [hasAnswered, setHasAnswered] = useState(false);
-  const [showHistory, setShowHistory] = useState(true);
-
-  useEffect(() => {
-    setHasAnswered(false);
-    setTimerKey((k) => k + 1);
-    if (timerEnabled) {
-      setTimerRunning(true);
-    } else {
-      setTimerRunning(false);
-    }
-  }, [currentIndex, selectedKanji, timerEnabled]);
-
-  const hasAnsweredRef = useRef(false);
-  useEffect(() => {
-    hasAnsweredRef.current = false;
-  }, [currentIndex, selectedKanji]);
-
-  const handleAnswer = (
-    result: "correct" | "incorrect",
-    userAnswer: string,
-    jukugo: string,
-    meaning: string,
-    kanji: string,
-    correctAnswer: string,
-    isTimeout = false,
-  ) => {
-    if (hasAnsweredRef.current) return;
-    hasAnsweredRef.current = true;
-    setHasAnswered(true);
-    setAnswerHistory((prev) => [
-      ...prev,
-      {
-        kanji,
-        jukugo,
-        meaning,
-        userAnswer,
-        correctAnswer,
-        isCorrect: result === "correct",
-      },
-    ]);
-    setTimerRunning(false);
-    if (isTimeout) {
-      setTimeout(() => {
-        handleNext();
-      }, 500);
-    }
-  };
-
-  const handleTimeout = () => {
-    if (!timerRunning || !selectedKanji || hasAnsweredRef.current) {
-      return;
-    }
-    setTimeout(() => {
-      handleAnswer(
-        "incorrect",
-        "",
-        words[currentIndex]?.written || "",
-        meanings[currentIndex]?.toString() || "",
-        selectedKanji?.toString() || "",
-        words[currentIndex]?.pronounced || "",
-        true,
-      );
-    }, 0);
-  };
+  const {
+    answerHistory,
+    timerKey,
+    timerRunning,
+    setTimerRunning,
+    timerEnabled,
+    setTimerEnabled,
+    showHistory,
+    setShowHistory,
+    handleAnswer,
+    handleTimeout,
+  } = useQuizCommon({
+    words,
+    meanings,
+    selectedKanji,
+    currentIndex,
+    handleNext,
+  });
 
   return (
     <QuizLayout>
@@ -199,6 +148,7 @@ export default function FreestyleQuizPage() {
               meanings[currentIndex]?.toString() || "",
               selectedKanji?.toString() || "",
               words[currentIndex]?.pronounced || "",
+              false,
             )
           }
         />

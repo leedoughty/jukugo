@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState, useRef } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import QuizScreen from "@/app/components/quiz/quizScreen";
 import QuizLayout from "../layout";
@@ -13,7 +13,7 @@ import LevelSelector from "@/app/components/quiz/levelSelector";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
-import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
+import { useQuizCommon } from "@/lib/hooks/useQuizCommon";
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
@@ -62,76 +62,24 @@ function JlptQuiz() {
     router.replace(`/quiz/jlpt?level=${newLevel}`);
   };
 
-  const [answerHistory, setAnswerHistory] = useState<AnswerHistoryItem[]>([]);
-  const [timerKey, setTimerKey] = useState(0);
-  const [timerRunning, setTimerRunning] = useState(false);
-  const [timerEnabled, setTimerEnabled] = useState(false);
-  const [hasAnswered, setHasAnswered] = useState(false);
-  const [showHistory, setShowHistory] = useState(true);
-
-  useEffect(() => {
-    setHasAnswered(false);
-    setTimerKey((k) => k + 1);
-    if (timerEnabled) {
-      setTimerRunning(true);
-    } else {
-      setTimerRunning(false);
-    }
-  }, [currentIndex, selectedKanji, timerEnabled]);
-
-  const hasAnsweredRef = useRef(false);
-  useEffect(() => {
-    hasAnsweredRef.current = false;
-  }, [currentIndex, selectedKanji]);
-
-  const handleAnswer = (
-    result: "correct" | "incorrect",
-    userAnswer: string,
-    jukugo: string,
-    meaning: string,
-    kanji: string,
-    correctAnswer: string,
-    isTimeout = false,
-  ) => {
-    if (hasAnsweredRef.current) return;
-    hasAnsweredRef.current = true;
-    setHasAnswered(true);
-    setAnswerHistory((prev) => [
-      ...prev,
-      {
-        kanji,
-        jukugo,
-        meaning,
-        userAnswer,
-        correctAnswer,
-        isCorrect: result === "correct",
-      },
-    ]);
-    setTimerRunning(false);
-    if (isTimeout) {
-      setTimeout(() => {
-        handleNext();
-      }, 500);
-    }
-  };
-
-  const handleTimeout = () => {
-    if (!timerRunning || !selectedKanji || hasAnsweredRef.current) {
-      return;
-    }
-
-    setTimeout(() => {
-      handleAnswer(
-        "incorrect",
-        "",
-        words[currentIndex]?.written || "",
-        meanings[currentIndex]?.toString() || "",
-        selectedKanji?.toString() || "",
-        words[currentIndex]?.pronounced || "",
-        true,
-      );
-    }, 0);
-  };
+  const {
+    answerHistory,
+    timerKey,
+    timerRunning,
+    setTimerRunning,
+    timerEnabled,
+    setTimerEnabled,
+    showHistory,
+    setShowHistory,
+    handleAnswer,
+    handleTimeout,
+  } = useQuizCommon({
+    words,
+    meanings,
+    selectedKanji,
+    currentIndex,
+    handleNext,
+  });
 
   return (
     <QuizLayout>
