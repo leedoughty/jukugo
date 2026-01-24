@@ -1,9 +1,10 @@
 import QuizCard from "@/app/components/quiz/quizCard";
 import styles from "./quizScreen.module.css";
+import type { Variant } from "@/lib/types/jukugoData";
 
 type QuizScreenProps = {
   selectedKanji: string | null;
-  words: any[];
+  words: Variant[];
   meanings: string[];
   currentIndex: number;
   handleNext: () => void;

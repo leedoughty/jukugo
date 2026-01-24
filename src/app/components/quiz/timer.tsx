@@ -5,7 +5,7 @@ interface TimerProps {
   duration: number;
   onTimeout: () => void;
   isRunning: boolean;
-  keyReset?: any;
+  keyReset?: number | string;
   onClick?: () => void;
 }
 

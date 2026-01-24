@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { useQuizAnswerHistory } from "./useQuizAnswerHistory";
 import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
+import type { Variant } from "@/lib/types/jukugoData";
 
 type UseQuizCommonProps = {
-  words: any[];
-  meanings: any[];
+  words: Variant[];
+  meanings: string[];
   selectedKanji: string | null | undefined;
   currentIndex: number;
   handleNext: () => void;

@@ -3,6 +3,7 @@ import styles from "./quizCard.module.css";
 import Button from "../layout/button";
 import SearchKanji from "./searchKanji";
 import Input from "../layout/input";
+import type { ReviewItem } from "@/lib/types/reviewItem";
 
 type Props = {
   word: { written: string; pronounced: string };
@@ -53,13 +54,13 @@ export default function QuizCard({
       setFeedback("incorrect");
       onAnswer?.("incorrect", userInput);
 
-      const reviewList = JSON.parse(
+      const reviewList: ReviewItem[] = JSON.parse(
         localStorage.getItem("jukugoReviewList") || "[]",
       );
 
       if (
         !reviewList.some(
-          (item: any) =>
+          (item) =>
             item.written === word.written &&
             item.pronounced === word.pronounced,
         )
