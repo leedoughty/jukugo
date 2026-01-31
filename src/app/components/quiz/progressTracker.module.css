@@ -5,36 +5,36 @@
   font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 16px;
-  border: 1px solid var(--charcoal);
-  background: var(--off-white);
-  border-radius: 6px;
+  border: var(--border-weight) solid var(--rule-color);
+  background: var(--background);
   padding: 8px 16px;
   justify-content: center;
 }
 
 .scoreDisplayDark {
-  background: var(--charcoal);
-  border-color: var(--mid-grey);
+  background: var(--background);
+  border-color: var(--rule-color);
 }
 
 .scoreDisplayDark span {
-  color: var(--off-white);
+  color: var(--foreground);
 }
 
 .scoreKanji {
   font-size: 1.3em;
-  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Meiryo",
-    "Yu Gothic", "MS PGothic", sans-serif;
+  font-family: "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic",
+    "MS PGothic", sans-serif;
   font-weight: 400;
 }
 
 .scoreDisplayDark .scoreKanji,
 .scoreDisplayDark .scoreCount {
-  color: var(--off-white);
+  color: var(--foreground);
 }
 
 .scoreCount {
-  color: var(--charcoal);
+  font-family: var(--font-mono);
+  color: var(--foreground);
   font-size: 1em;
   font-weight: 400;
 }

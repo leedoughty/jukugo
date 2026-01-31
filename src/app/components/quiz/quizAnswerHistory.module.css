@@ -2,51 +2,80 @@
   margin-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0;
 }
 
 .card {
-  background: var(--off-white);
-  border: 1px solid var(--light-grey);
-  padding: 12px;
-  font-size: 1em;
-  margin-top: 10px;
+  background: var(--background);
+  border-bottom: var(--border-weight) solid var(--rule-color);
+  padding: 14px 0;
+  font-family: var(--font-body);
+  font-size: 0.9em;
+  margin-top: 0;
+}
+
+.card:first-child {
+  border-top: var(--border-weight) solid var(--rule-color);
 }
 
 .correct {
-  border-left: 4px solid var(--green);
+  border-left: none;
 }
 
 .incorrect {
-  border-left: 4px solid var(--red);
+  border-left: none;
+}
+
+.correct .kanji::before {
+  content: "●";
+  color: var(--green);
+  font-size: 0.5em;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.incorrect .kanji::before {
+  content: "●";
+  color: var(--red);
+  font-size: 0.5em;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
 .kanji {
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 600;
+  margin-bottom: 2px;
 }
 
 .jukugo {
-  font-size: 1.1em;
-  margin-bottom: 4px;
+  font-size: 1em;
+  margin-bottom: 2px;
 }
 
 .meaning {
-  font-size: 0.95em;
-  color: var(--charcoal);
-  margin-bottom: 8px;
+  font-size: 0.85em;
+  color: var(--foreground);
+  opacity: 0.55;
+  margin-bottom: 6px;
 }
 
 .answers {
-  font-size: 0.95em;
+  font-size: 0.85em;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
+  opacity: 0.75;
 }
 
 .label {
+  font-family: var(--font-mono);
   font-weight: 500;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   margin-right: 4px;
+  opacity: 0.6;
 }
 
 @media (min-width: 920px) {
@@ -62,24 +91,23 @@
 }
 
 .historyWrapperDark {
-  background: var(--charcoal);
+  background: var(--background);
 }
 
 .cardDark {
-  background: var(--charcoal);
-  color: var(--off-white);
-  border-top: 1px solid var(--off-white);
-  border-right: 1px solid var(--off-white);
-  border-bottom: 1px solid var(--off-white);
+  background: var(--background);
+  color: var(--foreground);
+  border-bottom: var(--border-weight) solid var(--rule-color);
 }
 
 .cardDark .kanji,
 .cardDark .jukugo,
 .cardDark .answers,
 .cardDark .label {
-  color: var(--off-white);
+  color: var(--foreground);
 }
 
 .cardDark .meaning {
-  color: var(--light-grey);
+  color: var(--foreground);
+  opacity: 0.55;
 }

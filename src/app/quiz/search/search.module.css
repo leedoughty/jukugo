@@ -1,17 +1,17 @@
 .feedback {
+  font-family: var(--font-body);
   font-size: 1.1em;
   color: var(--red);
-  border: 1px solid var(--red);
-  border-radius: 4px;
+  border: var(--border-weight) solid var(--red);
   padding: 6px 12px;
   min-width: 230px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .container {
   position: relative;
   max-width: 600px;
   margin: auto;
+  font-family: var(--font-body);
   font-size: 1rem;
   padding: 16px 32px;
 }
@@ -29,7 +29,7 @@
 .levels {
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: 0;
   justify-content: center;
   width: 100%;
   max-width: 600px;
@@ -39,47 +39,56 @@
 
 .levelButton {
   width: 110px;
-  padding: 6px 0;
-  font-size: 0.95em;
-  background: var(--off-white);
-  color: var(--charcoal);
-  border: none;
-  border-radius: 6px;
+  padding: 8px 0;
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--foreground);
+  border: var(--border-weight) solid var(--rule-color);
+  border-right: none;
   cursor: pointer;
   text-align: center;
+  transition: opacity 0.2s;
+}
+
+.levelButton:last-child {
+  border-right: var(--border-weight) solid var(--rule-color);
+}
+
+.levelButton:hover {
+  opacity: 0.6;
 }
 
 .pickButton {
   background: transparent;
-  border-radius: 50%;
   padding: 8px 16px;
   font-size: 2em;
-  border: 1px solid var(--charcoal);
-  color: var(--charcoal);
+  border: var(--border-weight) solid var(--foreground);
+  color: var(--foreground);
   text-decoration: none;
-  transition:
-    background 0.2s,
-    border-color 0.2s;
+  transition: opacity 0.2s;
   cursor: pointer;
   outline: none;
 }
 
 .pickButtonDark {
-  border: 1.5px solid var(--off-white);
-  color: var(--off-white);
+  border-color: var(--foreground);
+  color: var(--foreground);
 }
 
 .pickButton:hover,
 .pickButton:focus {
-  border-color: var(--charcoal);
+  opacity: 0.6;
 }
 
 .kanji {
   margin-bottom: 8px;
   font-weight: 300;
   font-family:
-    "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Meiryo", "Yu Gothic",
-    "MS PGothic", sans-serif;
+    "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic", "MS PGothic", sans-serif;
   font-size: 30px;
 }
 
@@ -91,15 +100,25 @@
 }
 
 .jukugoWord {
+  font-family:
+    "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic", "MS PGothic", sans-serif;
   font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   width: 100%;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .jukugoMeaning {
-  font-size: 1.5rem;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  opacity: 0.65;
   width: 90vw;
+  padding-bottom: 20px;
+  border-bottom: var(--border-weight) solid var(--rule-color);
 }
 
 .inputRow {
@@ -110,7 +129,8 @@
 }
 
 .feedback {
-  font-size: 1.2em;
+  font-family: var(--font-body);
+  font-size: 1.1em;
 }
 
 .correct {
@@ -123,13 +143,21 @@
 
 .nextButton {
   margin-top: 16px;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-size: 1em;
-  border: none;
-  background: var(--cobalt-blue);
-  color: var(--off-white);
+  padding: 8px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: var(--border-weight) solid var(--foreground);
+  background: var(--foreground);
+  color: var(--background);
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.nextButton:hover {
+  opacity: 0.7;
 }
 
 .complete {
@@ -139,9 +167,11 @@
   justify-content: center;
   height: 80vh;
   text-align: center;
+  font-family: var(--font-body);
   font-size: 1.6em;
   align-self: center;
   width: 100%;
+  opacity: 0.75;
 }
 
 .pickButtonMobile {
@@ -175,6 +205,16 @@
     width: 120px;
   }
 
+  .levelButton {
+    width: 100%;
+    border-right: var(--border-weight) solid var(--rule-color);
+    border-bottom: none;
+  }
+
+  .levelButton:last-child {
+    border-bottom: var(--border-weight) solid var(--rule-color);
+  }
+
   .selectorRow {
     flex-direction: column;
     align-items: flex-start;
@@ -183,8 +223,15 @@
   }
 
   .jukugoWord {
-    white-space: nowrap;
-    font-size: 8rem;
+    font-size: 6rem;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .jukugoMeaning {
+    font-size: 1.25rem;
+    width: auto;
   }
 
   .inputRow {
@@ -207,7 +254,7 @@
     position: fixed;
     top: 100px;
     right: 20px;
-    max-width: 320px;
+    max-width: 280px;
     width: 100%;
     margin-left: 0;
     margin-right: 0;

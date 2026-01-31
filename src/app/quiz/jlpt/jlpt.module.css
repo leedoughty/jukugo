@@ -1,26 +1,23 @@
 .pickButton {
   background: transparent;
-  border-radius: 50%;
   padding: 8px 16px;
   font-size: 2em;
-  border: 1px solid var(--charcoal);
-  color: var(--charcoal);
+  border: var(--border-weight) solid var(--foreground);
+  color: var(--foreground);
   text-decoration: none;
-  transition:
-    background 0.2s,
-    border-color 0.2s;
+  transition: opacity 0.2s;
   cursor: pointer;
   outline: none;
 }
 
 .pickButtonDark {
-  border: 1.5px solid var(--off-white);
-  color: var(--off-white);
+  border-color: var(--foreground);
+  color: var(--foreground);
 }
 
 .pickButton:hover,
 .pickButton:focus {
-  border-color: var(--charcoal);
+  opacity: 0.6;
 }
 
 .quizMainWrapper {
@@ -42,7 +39,7 @@
   margin-bottom: 8px;
   font-weight: 300;
   font-family:
-    "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Meiryo", "Yu Gothic",
+    "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic",
     "MS PGothic", sans-serif;
   font-size: 30px;
 }
@@ -55,18 +52,28 @@
 }
 
 .jukugoWord {
+  font-family:
+    "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic", "MS PGothic", sans-serif;
   font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   width: 100%;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .jukugoMeaning {
-  font-size: 1.5rem;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  opacity: 0.65;
+  padding-bottom: 20px;
+  border-bottom: var(--border-weight) solid var(--rule-color);
 }
 
 .inputRow {
-  padding-top: 25%;
+  padding-top: 20px;
   padding-bottom: 24px;
   display: flex;
   align-items: center;
@@ -79,18 +86,29 @@
 
 .submitButton {
   margin-left: 8px;
-  padding: 10px 16px;
-  font-size: 1em;
-  border-radius: 6px;
-  border: none;
-  background: var(--cobalt-blue);
-  color: var(--off-white);
+  padding: 8px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: var(--border-weight) solid var(--foreground);
+  background: var(--foreground);
+  color: var(--background);
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.submitButton:hover {
+  opacity: 0.7;
 }
 
 .feedback {
-  margin-top: 12px;
-  font-size: 1.2em;
+  margin-top: 0;
+  padding-top: 16px;
+  border-top: var(--border-weight) solid var(--rule-color);
+  font-family: var(--font-body);
+  font-size: 1.1em;
 }
 
 .correct {
@@ -103,18 +121,28 @@
 
 .nextButton {
   margin-top: 16px;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-size: 1em;
-  border: none;
-  background: var(--cobalt-blue);
-  color: var(--off-white);
+  padding: 8px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: var(--border-weight) solid var(--foreground);
+  background: var(--foreground);
+  color: var(--background);
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.nextButton:hover {
+  opacity: 0.7;
 }
 
 .complete {
+  font-family: var(--font-body);
   font-size: 1.2em;
-  margin-top: 24px;
+  margin-top: 48px;
+  opacity: 0.75;
 }
 
 .pickButtonMobile {
@@ -129,8 +157,14 @@
   }
 
   .jukugoWord {
-    white-space: nowrap;
-    font-size: 8rem;
+    font-size: 6rem;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .jukugoMeaning {
+    font-size: 1.25rem;
   }
 
   .inputRow {
@@ -150,7 +184,7 @@
     position: fixed;
     top: 100px;
     right: 20px;
-    max-width: 320px;
+    max-width: 280px;
     width: 100%;
     margin-left: 0;
     margin-right: 0;

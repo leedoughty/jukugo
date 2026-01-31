@@ -1,37 +1,29 @@
 .button {
   background: transparent;
-  border: 1px solid var(--charcoal);
+  border: var(--border-weight) solid var(--foreground);
   padding: 6px 18px;
+  font-family: var(--font-body);
   font-size: 1.2rem;
   font-weight: 400;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+  transition: opacity 0.2s;
   outline: none;
-  color: var(--charcoal);
+  color: var(--foreground);
 }
 
 .buttonDark {
   background: transparent;
-  color: var(--off-white);
-  border-color: var(--off-white);
+  color: var(--foreground);
+  border-color: var(--foreground);
 }
 
 .button:hover,
 .button:focus {
   text-decoration: none;
-  background: var(--cobalt-blue);
-  color: var(--off-white);
+  opacity: 0.6;
 }
 
 .button:disabled {
-  opacity: 0.6;
+  opacity: 0.4;
   cursor: not-allowed;
-}
-
-@media (prefers-color-scheme: dark) {
-  .button {
-    background: var(--off-white);
-    color: var(--charcoal);
-    border-color: var(--off-white);
-  }
 }

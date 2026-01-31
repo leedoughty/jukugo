@@ -6,21 +6,29 @@
 }
 
 .jukugoWord {
+  font-family:
+    "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic", "MS PGothic", sans-serif;
   font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   width: 100%;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .jukugoMeaning {
-  font-size: 1.5rem;
-  height: 80px;
-  overflow-y: auto;
-  margin-bottom: 8px;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  opacity: 0.65;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+  border-bottom: var(--border-weight) solid var(--rule-color);
 }
 
 .inputRow {
-  padding-top: 10px;
+  padding-top: 20px;
   padding-bottom: 24px;
   display: flex;
   align-items: center;
@@ -28,8 +36,11 @@
 }
 
 .feedback {
-  margin-top: 12px;
-  font-size: 1.2em;
+  margin-top: 0;
+  padding-top: 16px;
+  border-top: var(--border-weight) solid var(--rule-color);
+  font-family: var(--font-body);
+  font-size: 1.1em;
 }
 
 .correct {
@@ -46,35 +57,53 @@
   gap: 32px;
 }
 
+.feedbackRow strong {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .nextButton {
-  margin-top: 16px;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-size: 1em;
-  border: none;
-  background: var(--cobalt-blue);
-  color: var(--off-white);
+  margin-top: 0;
+  padding: 8px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: var(--border-weight) solid var(--foreground);
+  background: var(--foreground);
+  color: var(--background);
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.nextButton:hover {
+  opacity: 0.7;
 }
 
 @media (min-width: 920px) {
   .quizCard {
-    margin-top: 70px;
+    margin-top: 0;
   }
 
   .jukugoWord {
-    white-space: nowrap;
-    font-size: 7rem;
+    font-size: 6rem;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .inputRow {
-    padding-top: 50px;
+    padding-top: 32px;
     display: flex;
     align-items: center;
     font-size: 1em;
   }
 
   .jukugoMeaning {
-    height: 100px;
+    font-size: 1.25rem;
   }
 }

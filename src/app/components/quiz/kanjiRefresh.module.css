@@ -1,12 +1,11 @@
 .pickButton {
   background: transparent;
-  border-radius: 50%;
   padding: 8px 16px;
   font-size: 2em;
-  border: 1px solid var(--charcoal);
-  color: var(--charcoal);
+  border: var(--border-weight) solid var(--foreground);
+  color: var(--foreground);
   text-decoration: none;
-  transition: background 0.2s, border-color 0.2s;
+  transition: opacity 0.2s;
   cursor: pointer;
   outline: none;
   width: 60px;
@@ -15,11 +14,11 @@
 }
 
 .pickButtonDark {
-  border: 1.5px solid var(--off-white);
-  color: var(--off-white);
+  border-color: var(--foreground);
+  color: var(--foreground);
 }
 
 .pickButton:hover,
 .pickButton:focus {
-  box-shadow: 0 0 0 1.3px currentColor;
+  opacity: 0.6;
 }

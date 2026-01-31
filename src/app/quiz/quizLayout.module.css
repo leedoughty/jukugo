@@ -1,3 +1,7 @@
+.container {
+  font-family: var(--font-body);
+}
+
 .quizMain {
   display: flex;
   flex-direction: column;
@@ -6,12 +10,20 @@
   box-sizing: border-box;
   width: 90vw;
   margin: 0 auto;
+  padding-top: 16px;
 }
 
 @media (min-width: 920px) {
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
   .quizMain {
     max-width: 600px;
     padding-left: 32px;
     padding-right: 32px;
+    margin: 0 auto;
+    padding-top: 10vh;
   }
 }

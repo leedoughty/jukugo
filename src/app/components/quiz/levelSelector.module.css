@@ -1,7 +1,7 @@
 .levels {
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: 0;
   justify-content: left;
   width: 100%;
   max-width: 600px;
@@ -11,53 +11,62 @@
 
 .levelButton {
   background: transparent;
-  border: 1px solid var(--charcoal);
-  padding: 10px;
-  font-size: 1.5rem;
-  font-weight: 400;
+  border: var(--border-weight) solid var(--rule-color);
+  border-right: none;
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  transition:
-    border-color 0.2s,
-    color 0.2s,
-    background 0.2s,
-    box-shadow 0.2s;
+  transition: opacity 0.2s;
   outline: none;
-  color: var(--charcoal);
+  color: var(--foreground);
+  text-align: center;
+}
+
+.levelButton:last-child {
+  border-right: var(--border-weight) solid var(--rule-color);
 }
 
 .levelButtonDark {
   background: transparent;
-  color: var(--off-white);
-  border-color: var(--off-white);
+  color: var(--foreground);
+  border-color: var(--rule-color);
+}
+
+.levelButtonDark:last-child {
+  border-right-color: var(--rule-color);
 }
 
 .levelButton:hover,
 .levelButton:focus {
   text-decoration: none;
-  background: var(--cobalt-blue);
-  color: var(--off-white);
+  opacity: 0.6;
 }
 
 .selected {
-  background: var(--cobalt-blue);
-  color: var(--off-white);
+  background: var(--foreground);
+  color: var(--background);
   text-decoration: none;
+  border-color: var(--foreground);
+}
+
+.selected:last-child {
+  border-right-color: var(--foreground);
+}
+
+.selected:hover,
+.selected:focus {
+  opacity: 1;
 }
 
 @media (min-width: 920px) {
   .levels {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     position: relative;
     margin: 0;
-    width: 120px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .levelButton {
-    background: var(--off-white);
-    color: var(--charcoal);
-    border-color: var(--off-white);
+    width: auto;
   }
 }
