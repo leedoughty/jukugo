@@ -1,31 +1,29 @@
 .levelButton {
   background: transparent;
-  border: 1px solid var(--charcoal);
-  padding: 20px 20px;
+  border: none;
+  padding: 28px 20px;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  font-weight: 400;
+  font-weight: 500;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+  transition: opacity 0.2s;
   outline: none;
-  color: var(--charcoal);
+  color: var(--foreground);
+  font-family: var(--font-body);
 }
 
 .levelButtonDark {
-  background: transparent;
-  color: var(--off-white);
-  border-color: var(--off-white);
+  color: var(--foreground);
 }
 
 .levelButton:hover,
 .levelButton:focus {
   text-decoration: none;
-  background: var(--cobalt-blue);
-  color: var(--off-white);
+  opacity: 0.5;
 }
 
 .selected {
@@ -34,18 +32,9 @@
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  .levelButton {
-    background: var(--off-white);
-    color: var(--charcoal);
-    border-color: var(--off-white);
-  }
-}
-
 @media (min-width: 920px) {
   .levelButton {
-    width: 300px;
-    padding: 20px 40px;
+    padding: 36px 40px;
     font-size: 2rem;
   }
 }

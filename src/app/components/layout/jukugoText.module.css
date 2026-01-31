@@ -1,18 +1,27 @@
 .jukugoText {
-  display: none;
+  margin-bottom: 16px;
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.kanji {
+  display: block;
+  font-size: 4rem;
+  font-family: "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic", "MS PGothic",
+    sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
 }
 
 @media (min-width: 920px) {
   .jukugoText {
-    display: block;
-    position: absolute;
-    right: -12px;
-    font-size: 6rem;
-    font-family: "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic", "MS PGothic",
-      sans-serif;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    user-select: none;
-    pointer-events: none;
+    margin-bottom: 24px;
+  }
+
+  .kanji {
+    font-size: 6.5rem;
   }
 }

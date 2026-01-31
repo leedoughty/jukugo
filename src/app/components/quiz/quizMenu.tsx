@@ -6,50 +6,51 @@ import { useTheme } from "@/app/ThemeProvider";
 
 const JLPT_LEVELS = [1, 2, 3, 4, 5];
 
+const MODES = [
+  { href: "/quiz/joyo", label: "Joyo", sub: "Common use" },
+  { href: "/quiz/freestyle", label: "Freestyle", sub: "All kanji" },
+  { href: "/quiz/search", label: "Search", sub: "Custom set" },
+  { href: "/quiz/review", label: "Review", sub: "Past mistakes" },
+];
+
 export default function QuizMenu() {
   const { dark } = useTheme();
 
   return (
-    <div className={styles.layoutRow}>
-      <div className={styles.buttonGroup}>
-        <p className={styles.text}>Level</p>
-        <div className={styles.levelsRow}>
-          {JLPT_LEVELS.map((level) => (
-            <Link
-              key={level}
-              className={styles.levelButtons}
-              href={`/quiz/jlpt?level=${level}`}
-              passHref
+    <div className={styles.menu}>
+      <div className={styles.sectionHeader}>
+        <span className={styles.sectionLabel}>JLPT Levels</span>
+        <span className={styles.sectionCount}>{JLPT_LEVELS.length}</span>
+      </div>
+      <div className={styles.levelsGrid}>
+        {JLPT_LEVELS.map((level) => (
+          <Link
+            key={level}
+            className={styles.levelLink}
+            href={`/quiz/jlpt?level=${level}`}
+          >
+            <LevelButton
+              level={level}
+              className={styles.levelButtonLarge}
             >
-              <LevelButton
-                level={level}
-                className={`${styles.levelButtonLarge} `}
-              >
-                JLPT N{level}
-              </LevelButton>
-            </Link>
-          ))}
-          <Link href="/quiz/joyo" className={styles.levelButtons}>
-            <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
-              Jōyō
+              <span className={styles.levelN}>N{level}</span>
             </LevelButton>
           </Link>
-          <Link href="/quiz/freestyle" className={styles.levelButtons}>
-            <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
-              Freestyle
-            </LevelButton>
+        ))}
+      </div>
+      <div className={styles.sectionHeader}>
+        <span className={styles.sectionLabel}>Modes</span>
+        <span className={styles.sectionCount}>{MODES.length}</span>
+      </div>
+      <div className={styles.modesGrid}>
+        {MODES.map((mode) => (
+          <Link key={mode.href} href={mode.href} className={styles.modeLink}>
+            <div className={`${styles.modeCard} ${dark ? styles.modeCardDark : ""}`}>
+              <span className={styles.modeLabel}>{mode.label}</span>
+              <span className={styles.modeSub}>{mode.sub}</span>
+            </div>
           </Link>
-          <Link href="/quiz/search" className={styles.levelButtons}>
-            <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
-              Search mode
-            </LevelButton>
-          </Link>
-          <Link href="/quiz/review" className={styles.levelButtons}>
-            <LevelButton level={0} className={`${styles.levelButtonLarge} `}>
-              Review
-            </LevelButton>
-          </Link>
-        </div>
+        ))}
       </div>
     </div>
   );

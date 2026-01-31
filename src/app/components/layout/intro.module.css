@@ -1,33 +1,65 @@
 .introWrapper {
   position: relative;
   width: 100%;
-  min-height: 30px;
-  margin-top: 0px;
   display: flex;
   flex-direction: column;
+  gap: 0;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--foreground);
+  opacity: 0.75;
+  margin-bottom: 20px;
 }
 
 .intro {
-  font-size: 11pt;
-  max-width: 700px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: 0;
-  line-height: 1.4;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.05rem;
+  max-width: 420px;
+  line-height: 1.6;
+  font-family: var(--font-body);
   font-weight: 400;
   text-align: left;
+  margin-bottom: 36px;
+  opacity: 0.8;
 }
 
-@media (min-width: 900px) {
-  .introWrapper {
-    margin-top: 16px;
-    margin-bottom: 48px;
-    min-height: 120px;
+.tag {
+  display: inline-flex;
+  align-self: flex-start;
+  border: var(--border-weight) solid var(--rule-color);
+  padding: 6px 14px;
+  border-radius: 0;
+}
+
+.tagText {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+@media (min-width: 920px) {
+  .intro {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    max-width: 440px;
   }
 
-  .intro {
-    margin-top: 24px;
-    font-size: 16pt;
+  .label {
+    font-size: 0.7rem;
+    margin-bottom: 24px;
+  }
+
+  .tag {
+    padding: 8px 16px;
+  }
+
+  .tagText {
+    font-size: 0.72rem;
   }
 }

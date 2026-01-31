@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
+
 :root {
   --white: #fff;
-  --off-white: #f7f7f6;
-  --charcoal: #181a1b;
+  --off-white: #ebe8e5;
+  --charcoal: #28282a;
   --grey: #333;
   --light-grey: #ccc;
   --cobalt-blue: #3d58e3;
@@ -11,11 +13,19 @@
 
   --background: var(--off-white);
   --foreground: var(--charcoal);
+
+  --font-body: "Instrument Sans", "Helvetica Neue", Helvetica, sans-serif;
+  --font-mono: "DM Mono", "SF Mono", "Consolas", monospace;
+  --border-weight: 1px;
+  --rule-color: rgba(40, 40, 42, 0.4);
 }
 
 html.dark {
+  --off-white: #ebe8e5;
+  --charcoal: #28282a;
   --background: var(--charcoal);
   --foreground: var(--off-white);
+  --rule-color: rgba(235, 232, 229, 0.2);
   color-scheme: dark;
 }
 
@@ -28,7 +38,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

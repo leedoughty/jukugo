@@ -5,10 +5,13 @@ export default function Intro() {
   return (
     <div className={styles.introWrapper}>
       <JukugoText />
+      <div className={styles.label}>Compound words</div>
       <div className={styles.intro}>
-        Jukugo helps you learn Japanese compound words (熟語) through fun
-        quizzes and a handy kanji search. Explore, play, and use this tool
-        however you like, and enjoy a smoother Japanese learning journey!
+        Learn Japanese compound words through quizzes and kanji search.
+        Explore, play, and use this tool however you like.
+      </div>
+      <div className={styles.tag}>
+        <span className={styles.tagText}>熟語 = Jukugo</span>
       </div>
     </div>
   );

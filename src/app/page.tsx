@@ -7,9 +7,13 @@ import Intro from "@/app/components/layout/intro";
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Intro />
-      <div className={styles.flexRow}>
-        <QuizMenu />
+      <div className={styles.grid}>
+        <div className={styles.heroCol}>
+          <Intro />
+        </div>
+        <div className={styles.menuCol}>
+          <QuizMenu />
+        </div>
       </div>
     </div>
   );
