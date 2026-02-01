@@ -2,26 +2,21 @@
   padding: 5px 10px;
   font-size: 1.3em;
   background: transparent;
-  color: var(--charcoal);
-  border-radius: 50%;
+  color: var(--foreground);
   text-decoration: none;
-  transition: background 0.2s;
-  border: 1px solid var(--charcoal);
-  margin-left: 8px;
+  transition: opacity 0.2s;
+  border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1 / 1;
   -webkit-tap-highlight-color: transparent;
 }
 
 .themeIcon:hover,
 .themeIcon:focus {
-  box-shadow: 0 0 0 1.3px currentColor;
+  opacity: 0.5;
 }
 
 .themeIconDark {
-  background: var(--charcoal);
-  color: var(--off-white);
-  border: 1px solid var(--off-white);
+  color: var(--foreground);
 }

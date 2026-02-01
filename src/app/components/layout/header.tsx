@@ -5,6 +5,7 @@ import styles from "./header.module.css";
 import { useTheme } from "@/app/ThemeProvider";
 import ThemeIcon from "./themeIcon";
 import SearchIcon from "./searchIcon";
+import InfoIcon from "./infoIcon";
 
 export default function Header() {
   const { dark, setDark } = useTheme();
@@ -17,9 +18,7 @@ export default function Header() {
         </Link>
       </h1>
       <nav className={styles.nav}>
-        <Link href="/about" className={styles.navLink}>
-          About
-        </Link>
+        <InfoIcon dark={dark} />
         <SearchIcon dark={dark} />
         <button
           aria-label="Toggle dark mode"

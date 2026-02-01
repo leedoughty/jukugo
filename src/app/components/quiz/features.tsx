@@ -4,6 +4,15 @@ import React from "react";
 import LevelSelector from "./levelSelector";
 import Input from "../layout/input";
 import Button from "../layout/button";
+import {
+  ProgressIcon,
+  RefreshIcon,
+  TimerIcon,
+  HistoryIcon,
+  DeleteIcon,
+  LevelIcon,
+  SearchIcon,
+} from "./sidebarIcons";
 
 export function progressFeature({
   selectedKanji,
@@ -16,11 +25,7 @@ export function progressFeature({
 }) {
   return {
     key: "progress",
-    icon: (
-      <span role="img" aria-label="Progress">
-        📈
-      </span>
-    ),
+    icon: <ProgressIcon />,
     content: selectedKanji ? (
       <ProgressTracker
         kanji={selectedKanji}
@@ -35,11 +40,7 @@ export function progressFeature({
 export function refreshFeature({ onRefresh }: { onRefresh: () => void }) {
   return {
     key: "refresh",
-    icon: (
-      <span role="img" aria-label="Refresh">
-        🔄
-      </span>
-    ),
+    icon: <RefreshIcon />,
     label: "Refresh",
     action: onRefresh,
     instant: true,
@@ -67,11 +68,7 @@ export function timerFeature({
 }) {
   return {
     key: "timer",
-    icon: (
-      <span role="img" aria-label="Timer">
-        ⏲️
-      </span>
-    ),
+    icon: <TimerIcon />,
     content:
       currentIndex < totalCount ? (
         <TimerButton
@@ -101,11 +98,7 @@ export function historyFeature({
 }) {
   return {
     key: "history",
-    icon: (
-      <span role="img" aria-label="History">
-        🗂️
-      </span>
-    ),
+    icon: <HistoryIcon />,
     label: "History",
     action: () => setShowHistory((v) => !v),
     instant: true,
@@ -115,11 +108,7 @@ export function historyFeature({
 export function deleteFeature({ onDelete }: { onDelete: () => void }) {
   return {
     key: "delete",
-    icon: (
-      <span role="img" aria-label="Delete">
-        🗑️
-      </span>
-    ),
+    icon: <DeleteIcon />,
     label: "Delete",
     action: onDelete,
     instant: true,
@@ -139,11 +128,7 @@ export function levelFeature({
 }) {
   return {
     key: "level",
-    icon: (
-      <span role="img" aria-label="Level">
-        🎚️
-      </span>
-    ),
+    icon: <LevelIcon />,
     content: (
       <div className={className}>
         <LevelSelector
@@ -176,11 +161,7 @@ export function searchFeature({
 }) {
   return {
     key: "search",
-    icon: (
-      <span role="img" aria-label="Search">
-        🔍
-      </span>
-    ),
+    icon: <SearchIcon />,
     content: (
       <form onSubmit={handleSearch} className={styles.inputRow}>
         <Input

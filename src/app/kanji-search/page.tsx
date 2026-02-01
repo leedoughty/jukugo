@@ -45,24 +45,15 @@ export default function KanjiSearch() {
         />
         <Button type="submit">Search</Button>
       </form>
-      {error ? (
+      {error && <div className={styles.error}>{error}</div>}
+      {!error && state.length === 0 && (
         <div
           className={`${styles.emptyPrompt} ${
             dark ? styles.emptyPromptDark : ""
           }`}
         >
-          {error}
+          Enter a kanji to explore related Jukugo meanings and readings.
         </div>
-      ) : (
-        state.length === 0 && (
-          <div
-            className={`${styles.emptyPrompt} ${
-              dark ? styles.emptyPromptDark : ""
-            }`}
-          >
-            Enter a kanji to explore related Jukugo meanings and readings.
-          </div>
-        )
       )}
       <ul className={styles.wordList}>
         {state.map((word, i) => (

@@ -4,6 +4,7 @@ import Button from "../layout/button";
 import SearchKanji from "./searchKanji";
 import Input from "../layout/input";
 import type { ReviewItem } from "@/lib/types/reviewItem";
+import { CorrectIcon, IncorrectIcon } from "./feedbackIcons";
 
 type Props = {
   word: { written: string; pronounced: string };
@@ -103,7 +104,7 @@ export default function QuizCard({
         >
           <div className={styles.feedbackRow}>
             <span tabIndex={-1}>
-              {feedback === "correct" ? "✅ Correct!" : "❌ Incorrect."}
+              {feedback === "correct" ? <><CorrectIcon /> Correct!</> : <><IncorrectIcon /> Incorrect.</>}
               <br />
               <strong>Answer:</strong> {word.pronounced}
             </span>

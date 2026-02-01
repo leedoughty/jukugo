@@ -65,6 +65,8 @@
   font-size: 1em;
   cursor: pointer;
   margin-left: 16px;
+  padding: 0;
+  color: var(--foreground);
 }
 
 @media (min-width: 600px) {

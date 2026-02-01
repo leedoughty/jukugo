@@ -1,15 +1,16 @@
 .container {
   width: 100%;
-  padding: 0px 16px;
+  padding: 20px 20px;
+  font-family: var(--font-body);
 }
 
 .form {
   display: flex;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 0;
   width: 100%;
   max-width: none;
-  padding: 0;
+  padding: 0 0 20px;
 }
 
 @media (min-width: 900px) {
@@ -17,65 +18,99 @@
     width: 33.33%;
     min-width: 320px;
     max-width: 400px;
-    padding-left: 0;
   }
 }
 
 .input {
   flex: 1;
+  font-family: var(--font-body);
   font-size: 1.1em;
   padding: 8px;
-  border-radius: 6px;
-  border: 1px solid var(--light-grey);
+  border: var(--border-weight) solid var(--foreground);
+  background: var(--background);
+  color: var(--foreground);
 }
 
 .button {
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: none;
-  background: var(--cobalt-blue);
-  color: var(--off-white);
-  font-size: 1em;
+  padding: 8px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: var(--border-weight) solid var(--foreground);
+  background: var(--foreground);
+  color: var(--background);
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.error {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--red);
+  padding: 8px 0;
 }
 
 .wordList {
   list-style: none;
-  padding: 0;
+  padding: 16px 0 0;
+  margin: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 0;
 }
 
 .wordCard {
-  background: var(--off-white);
-  border: 1px solid var(--light-grey);
-  border-radius: 8px;
-  padding: 16px;
+  background: var(--background);
+  border-bottom: var(--border-weight) solid var(--rule-color);
+  border-top: var(--border-weight) solid var(--rule-color);
+  margin-top: -1px;
+  padding: 16px 0;
+}
+
+.wordCard strong {
+  font-family:
+    "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic", "MS PGothic", sans-serif;
+  font-size: 1.5em;
+  font-weight: 400;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .wordCardDark {
-  background: var(--charcoal);
-  border: 1px solid var(--grey);
-  color: var(--off-white);
+  background: var(--background);
+  color: var(--foreground);
+  border-bottom-color: var(--rule-color);
 }
 
 .reading {
-  font-size: 1.1em;
-  color: var(--cobalt-blue);
+  font-family: var(--font-body);
+  font-size: 1em;
+  color: var(--foreground);
+  opacity: 0.8;
 }
 
 .readingDark {
-  color: var(--light-cobalt-blue);
+  color: var(--foreground);
 }
 
 .meaning {
-  font-size: 1em;
-  color: var(--charcoal);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  opacity: 0.55;
+  margin-top: 4px;
 }
 
 .meaningDark {
-  color: var(--off-white);
+  color: var(--foreground);
 }
 
 .emptyPrompt {
@@ -85,32 +120,55 @@
   justify-content: center;
   min-height: 60vh;
   text-align: center;
-  font-size: 1.6em;
+  font-family: var(--font-body);
+  font-size: 1.3em;
   margin: 0 auto;
   width: 80vw;
+  opacity: 0.65;
 }
 
 .emptyPromptDark {
-  color: var(--off-white);
+  color: var(--foreground);
 }
 
 @media (min-width: 600px) {
   .wordList {
     grid-template-columns: 1fr 1fr;
   }
+
+  .wordCard {
+    padding: 16px 20px;
+    border-right: var(--border-weight) solid var(--rule-color);
+  }
+
+  .wordCard:nth-child(2n) {
+    border-right: none;
+  }
 }
 
 @media (min-width: 900px) {
   .container {
-    padding: 8px 32px;
+    padding: 24px 36px;
   }
 
   .wordList {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
+  .wordCard {
+    border-right: var(--border-weight) solid var(--rule-color);
+  }
+
+  .wordCard:nth-child(2n) {
+    border-right: var(--border-weight) solid var(--rule-color);
+  }
+
+  .wordCard:nth-child(3n) {
+    border-right: none;
+  }
+
   .emptyPrompt {
-    font-size: 2em;
+    font-size: 1.6em;
     width: 40vw;
   }
 }
