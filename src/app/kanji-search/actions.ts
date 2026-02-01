@@ -2,20 +2,6 @@
 
 import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 
-type Meaning = {
-  glosses: string[];
-};
-
-type Variant = {
-  written: string;
-  pronounced: string;
-};
-
-type Word = {
-  meanings: Meaning[];
-  variants: Variant[];
-};
-
 type JukugoResult = {
   compound: string;
   reading: string;

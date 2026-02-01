@@ -20,9 +20,8 @@ export default function LevelButton({
   const { dark } = useTheme();
 
   return (
-    <span
-      role="button"
-      tabIndex={0}
+    <button
+      type="button"
       className={`${styles.levelButton} ${dark ? styles.levelButtonDark : ""} ${
         selected ? styles.selected : ""
       } ${className}`}
@@ -30,6 +29,6 @@ export default function LevelButton({
       onClick={() => onClick?.(level)}
     >
       {children ?? `JLPT N${level}`}
-    </span>
+    </button>
   );
 }

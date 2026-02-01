@@ -57,9 +57,9 @@ export default function KanjiSearch() {
         </div>
       )}
       <ul className={styles.wordList}>
-        {state.map((word, i) => (
+        {state.map((word) => (
           <li
-            key={i}
+            key={`${word.compound}-${word.reading}`}
             className={`${styles.wordCard} ${dark ? styles.wordCardDark : ""}`}
           >
             <div>

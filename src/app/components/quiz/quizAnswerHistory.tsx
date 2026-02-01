@@ -21,7 +21,7 @@ export default function QuizAnswerHistory({ history, className }: Props) {
     >
       {history.map((item, i) => (
         <div
-          key={i}
+          key={`${item.jukugo}-${item.userAnswer}-${i}`}
           className={`${styles.card} ${
             item.isCorrect ? styles.correct : styles.incorrect
           } ${dark ? styles.cardDark : ""}`}

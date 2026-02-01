@@ -15,10 +15,9 @@ export default function LevelSelector({ levels, selected, onSelect }: Props) {
   return (
     <div className={styles.levels}>
       {levels.map((level) => (
-        <span
+        <button
+          type="button"
           key={level}
-          role="button"
-          tabIndex={0}
           className={[
             styles.levelButton,
             dark ? styles.levelButtonDark : "",
@@ -28,7 +27,7 @@ export default function LevelSelector({ levels, selected, onSelect }: Props) {
           onClick={() => onSelect(level)}
         >
           {level === 0 ? "All" : `N${level}`}
-        </span>
+        </button>
       ))}
     </div>
   );

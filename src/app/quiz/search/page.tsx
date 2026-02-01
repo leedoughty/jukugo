@@ -136,7 +136,7 @@ export default function SearchQuizPage() {
                 result,
                 userAnswer,
                 words[currentIndex]?.written || "",
-                meanings[currentIndex]?.toString() || "",
+                meanings[currentIndex] || "",
                 searchKanji,
                 words[currentIndex]?.pronounced || "",
               )

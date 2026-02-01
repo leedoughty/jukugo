@@ -72,8 +72,8 @@ export function useQuizCommon({
         "incorrect",
         "",
         words[currentIndex]?.written || "",
-        meanings[currentIndex]?.toString() || "",
-        normalizedKanji?.toString() || "",
+        meanings[currentIndex] || "",
+        normalizedKanji || "",
         words[currentIndex]?.pronounced || "",
         true,
       );

@@ -5,6 +5,7 @@ export async function fetchKanjiList(path: string): Promise<string[]> {
   const response = await fetch(url, { next: { revalidate: 86400 } });
 
   if (!response.ok) {
+    console.error(`Failed to fetch kanji list for "${path}": ${response.status}`);
     return [];
   }
 

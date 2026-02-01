@@ -10,6 +10,7 @@ export async function fetchJukugoData(
   });
 
   if (!response.ok) {
+    console.error(`Failed to fetch jukugo data for "${kanji}": ${response.status}`);
     return { kanji, variants: [], meanings: [] };
   }
 

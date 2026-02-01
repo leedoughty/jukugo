@@ -15,15 +15,7 @@ import {
   historyFeature,
   levelFeature,
 } from "@/app/components/quiz/features";
-
-type Feature = {
-  key: string;
-  icon: React.ReactNode;
-  content?: React.ReactNode;
-  label: string;
-  action?: () => void;
-  instant?: boolean;
-};
+import type { Feature } from "@/lib/types/feature";
 
 type StandardQuizPageProps = {
   kanjiList: string[];
@@ -131,8 +123,8 @@ export default function StandardQuizPage({
               result,
               userAnswer,
               words[currentIndex]?.written || "",
-              meanings[currentIndex]?.toString() || "",
-              selectedKanji?.toString() || "",
+              meanings[currentIndex] || "",
+              selectedKanji || "",
               words[currentIndex]?.pronounced || "",
               false,
             )

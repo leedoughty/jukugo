@@ -1,26 +1,20 @@
+"use client";
+
 import React, { useState } from "react";
 import styles from "./sidebar.module.css";
-
-type Feature = {
-  key: string;
-  icon: React.ReactNode;
-  content?: React.ReactNode;
-  label: string;
-  action?: () => void;
-  instant?: boolean;
-};
+import { useTheme } from "@/app/ThemeProvider";
+import type { Feature } from "@/lib/types/feature";
 
 type SidebarProps = {
   features: Feature[];
   defaultOpen?: string;
-  darkMode?: boolean;
 };
 
 export default function Sidebar({
   features,
   defaultOpen,
-  darkMode,
 }: SidebarProps) {
+  const { dark: darkMode } = useTheme();
   const initialOpen = defaultOpen
     ? Array.isArray(defaultOpen)
       ? defaultOpen

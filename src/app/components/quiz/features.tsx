@@ -5,6 +5,7 @@ import LevelSelector from "./levelSelector";
 import Input from "../layout/input";
 import Button from "../layout/button";
 import ErrorMessage from "../layout/errorMessage";
+import type { Feature } from "@/lib/types/feature";
 import {
   ProgressIcon,
   RefreshIcon,
@@ -23,7 +24,7 @@ export function progressFeature({
   selectedKanji: string;
   progress: number;
   totalCount: number;
-}) {
+}): Feature {
   return {
     key: "progress",
     icon: <ProgressIcon />,
@@ -38,7 +39,7 @@ export function progressFeature({
   };
 }
 
-export function refreshFeature({ onRefresh }: { onRefresh: () => void }) {
+export function refreshFeature({ onRefresh }: { onRefresh: () => void }): Feature {
   return {
     key: "refresh",
     icon: <RefreshIcon />,
@@ -66,7 +67,7 @@ export function timerFeature({
   setTimerEnabled: (enabled: boolean) => void;
   setTimerRunning: (running: boolean) => void;
   handleTimeout: () => void;
-}) {
+}): Feature {
   return {
     key: "timer",
     icon: <TimerIcon />,
@@ -96,7 +97,7 @@ export function historyFeature({
   setShowHistory,
 }: {
   setShowHistory: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+}): Feature {
   return {
     key: "history",
     icon: <HistoryIcon />,
@@ -106,7 +107,7 @@ export function historyFeature({
   };
 }
 
-export function deleteFeature({ onDelete }: { onDelete: () => void }) {
+export function deleteFeature({ onDelete }: { onDelete: () => void }): Feature {
   return {
     key: "delete",
     icon: <DeleteIcon />,
@@ -126,7 +127,7 @@ export function levelFeature({
   selected: number | null;
   onSelect: (level: number) => void;
   className?: string;
-}) {
+}): Feature {
   return {
     key: "level",
     icon: <LevelIcon />,
@@ -159,7 +160,7 @@ export function searchFeature({
   loading: boolean;
   handleSearch: (e: React.FormEvent) => void;
   styles: { [key: string]: string };
-}) {
+}): Feature {
   return {
     key: "search",
     icon: <SearchIcon />,
