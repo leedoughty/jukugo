@@ -5,6 +5,7 @@ import styles from "./review.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import Sidebar from "@/app/components/quiz/sidebar";
 import { progressFeature, deleteFeature } from "@/app/components/quiz/features";
+import { getReviewList, clearReviewList } from "@/lib/utils/reviewListStorage";
 import type { ReviewItem } from "@/lib/types/reviewItem";
 import sharedStyles from "../quizPage.module.css";
 
@@ -13,14 +14,7 @@ export default function ReviewQuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("jukugoReviewList");
-      if (stored) {
-        setReviewList(JSON.parse(stored));
-      }
-    } catch {
-      localStorage.removeItem("jukugoReviewList");
-    }
+    setReviewList(getReviewList());
   }, []);
 
   const handleNext = () => {
@@ -28,7 +22,7 @@ export default function ReviewQuizPage() {
   };
 
   const handleClear = () => {
-    localStorage.removeItem("jukugoReviewList");
+    clearReviewList();
     setReviewList([]);
     setCurrentIndex(0);
   };

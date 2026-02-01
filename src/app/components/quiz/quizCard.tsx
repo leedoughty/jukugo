@@ -3,7 +3,7 @@ import styles from "./quizCard.module.css";
 import Button from "../layout/button";
 import SearchKanji from "./searchKanji";
 import Input from "../layout/input";
-import type { ReviewItem } from "@/lib/types/reviewItem";
+import { addToReviewList } from "@/lib/utils/reviewListStorage";
 import { CorrectIcon, IncorrectIcon } from "./feedbackIcons";
 
 type Props = {
@@ -55,32 +55,11 @@ export default function QuizCard({
       setFeedback("incorrect");
       onAnswer?.("incorrect", userInput);
 
-      try {
-        const reviewList: ReviewItem[] = JSON.parse(
-          localStorage.getItem("jukugoReviewList") || "[]",
-        );
-
-        if (
-          !reviewList.some(
-            (item) =>
-              item.written === word.written &&
-              item.pronounced === word.pronounced,
-          )
-        ) {
-          reviewList.push({
-            written: word.written,
-            pronounced: word.pronounced,
-            meaning,
-          });
-
-          localStorage.setItem(
-            "jukugoReviewList",
-            JSON.stringify(reviewList),
-          );
-        }
-      } catch {
-        localStorage.removeItem("jukugoReviewList");
-      }
+      addToReviewList({
+        written: word.written,
+        pronounced: word.pronounced,
+        meaning,
+      });
     }
   };
 
