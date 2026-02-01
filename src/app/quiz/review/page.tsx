@@ -1,12 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import QuizLayout from "../layout";
 import styles from "./review.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
-import Button from "@/app/components/layout/button";
 import Sidebar from "@/app/components/quiz/sidebar";
-import ProgressTracker from "@/app/components/quiz/progressTracker";
 import { progressFeature, deleteFeature } from "@/app/components/quiz/features";
 
 type ReviewItem = {
@@ -44,7 +41,7 @@ export default function ReviewQuizPage() {
       : "";
 
   return (
-    <QuizLayout>
+    <>
       <Sidebar
         features={[
           progressFeature({
@@ -59,17 +56,15 @@ export default function ReviewQuizPage() {
         defaultOpen="progress"
       />
       {reviewList.length > 0 && currentIndex < reviewList.length ? (
-        <>
-          <QuizCard
-            word={{
-              written: reviewList[currentIndex].written,
-              pronounced: reviewList[currentIndex].pronounced,
-            }}
-            meaning={reviewList[currentIndex].meaning}
-            onNext={handleNext}
-            kanji={currentKanji}
-          />
-        </>
+        <QuizCard
+          word={{
+            written: reviewList[currentIndex].written,
+            pronounced: reviewList[currentIndex].pronounced,
+          }}
+          meaning={reviewList[currentIndex].meaning}
+          onNext={handleNext}
+          kanji={currentKanji}
+        />
       ) : (
         <div className={styles.complete}>
           {reviewList.length === 0
@@ -77,6 +72,6 @@ export default function ReviewQuizPage() {
             : "Review complete."}
         </div>
       )}
-    </QuizLayout>
+    </>
   );
 }

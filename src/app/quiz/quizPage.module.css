@@ -1,0 +1,27 @@
+.quizMainWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 920px) {
+  .quizMainWrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 80px;
+    margin-left: 50px;
+  }
+
+  .historyWrapper {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    max-width: 280px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    align-self: flex-start;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 10;
+  }
+}

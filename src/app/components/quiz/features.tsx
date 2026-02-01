@@ -4,6 +4,7 @@ import React from "react";
 import LevelSelector from "./levelSelector";
 import Input from "../layout/input";
 import Button from "../layout/button";
+import ErrorMessage from "../layout/errorMessage";
 import {
   ProgressIcon,
   RefreshIcon,
@@ -163,21 +164,24 @@ export function searchFeature({
     key: "search",
     icon: <SearchIcon />,
     content: (
-      <form onSubmit={handleSearch} className={styles.inputRow}>
-        <Input
-          value={kanji}
-          onChange={(e) => {
-            setKanji(e.target.value);
-            if (error) setError("");
-          }}
-          placeholder="Enter kanji"
-          disabled={loading}
-          maxLength={1}
-        />
-        <Button type="submit" disabled={loading}>
-          {loading ? "Searching..." : "Search"}
-        </Button>
-      </form>
+      <>
+        <form onSubmit={handleSearch} className={styles.inputRow}>
+          <Input
+            value={kanji}
+            onChange={(e) => {
+              setKanji(e.target.value);
+              if (error) setError("");
+            }}
+            placeholder="Enter kanji"
+            disabled={loading}
+            maxLength={1}
+          />
+          <Button type="submit" disabled={loading}>
+            {loading ? "Searching..." : "Search"}
+          </Button>
+        </form>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+      </>
     ),
     label: "Search",
   };

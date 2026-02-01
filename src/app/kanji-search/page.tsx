@@ -8,6 +8,7 @@ import { useTheme } from "@/app/ThemeProvider";
 import Button from "@/app/components/layout/button";
 import Input from "@/app/components/layout/input";
 import { isKanji } from "@/lib/utils/kanji";
+import ErrorMessage from "@/app/components/layout/errorMessage";
 
 export default function KanjiSearch() {
   const [state, formAction] = useActionState(fetchJukugoWords, []);
@@ -45,7 +46,7 @@ export default function KanjiSearch() {
         />
         <Button type="submit">Search</Button>
       </form>
-      {error && <div className={styles.error}>{error}</div>}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       {!error && state.length === 0 && (
         <div
           className={`${styles.emptyPrompt} ${

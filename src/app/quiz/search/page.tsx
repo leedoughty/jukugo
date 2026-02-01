@@ -1,17 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import TimerButton from "@/app/components/quiz/timerButton";
+import sharedStyles from "../quizPage.module.css";
 import styles from "./search.module.css";
-import QuizLayout from "../layout";
 import QuizCard from "@/app/components/quiz/quizCard";
-import KanjiRefresh from "@/app/components/quiz/kanjiRefresh";
-import Button from "@/app/components/layout/button";
-import Input from "@/app/components/layout/input";
 import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
 import { isKanji } from "@/lib/utils/kanji";
 import Sidebar from "@/app/components/quiz/sidebar";
-import ProgressTracker from "@/app/components/quiz/progressTracker";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
 import type { Variant } from "@/lib/types/jukugoData";
 import { useQuizCommon } from "@/lib/hooks/useQuizCommon";
@@ -127,9 +122,9 @@ export default function SearchQuizPage() {
   ];
 
   return (
-    <QuizLayout>
+    <>
       <Sidebar features={features} defaultOpen="search" />
-      <div className={styles.quizMainWrapper}>
+      <div className={sharedStyles.quizMainWrapper}>
         {words.length > 0 && (
           <QuizCard
             word={words[currentIndex]}
@@ -152,22 +147,20 @@ export default function SearchQuizPage() {
         {showHistory && (
           <QuizAnswerHistory
             history={answerHistory}
-            className={styles.historyWrapper}
+            className={sharedStyles.historyWrapper}
           />
         )}
 
-        {error && <div className={styles.feedback}>{error}</div>}
-
         {!searchKanji && !loading && (
-          <div className={styles.complete}>
+          <div className={styles.emptyPrompt}>
             Search a kanji to start the quiz.
           </div>
         )}
 
         {searchKanji && words.length === 0 && !loading && (
-          <div className={styles.complete}>No results found.</div>
+          <div className={styles.emptyPrompt}>No results found.</div>
         )}
       </div>
-    </QuizLayout>
+    </>
   );
 }

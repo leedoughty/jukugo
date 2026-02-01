@@ -65,6 +65,7 @@
   display: flex;
   gap: 0;
   border-top: var(--border-weight) solid var(--rule-color);
+  border-bottom: var(--border-weight) solid var(--rule-color);
   position: fixed;
   bottom: 0;
   left: 0;

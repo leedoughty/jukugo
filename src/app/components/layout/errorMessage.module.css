@@ -1,0 +1,6 @@
+.error {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--red);
+  padding: 8px 0;
+}
