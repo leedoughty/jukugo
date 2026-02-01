@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./kanjiRefresh.module.css";
 import { useTheme } from "@/app/ThemeProvider";
 

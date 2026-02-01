@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { getKanjiList } from "@/app/quiz/actions";
 import StandardQuizPage from "@/app/components/quiz/standardQuizPage";
+
+export const metadata: Metadata = {
+  title: "JLPT Quiz | Jukugo",
+};
 
 type Props = {
   searchParams: Promise<{ level?: string }>;

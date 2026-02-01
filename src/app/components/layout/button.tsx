@@ -1,3 +1,5 @@
+"use client";
+
 import React, { forwardRef } from "react";
 import styles from "./button.module.css";
 import { useTheme } from "@/app/ThemeProvider";

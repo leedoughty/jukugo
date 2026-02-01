@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "./page.module.css";
 import QuizMenu from "@/app/components/quiz/quizMenu";
 import Intro from "@/app/components/layout/intro";

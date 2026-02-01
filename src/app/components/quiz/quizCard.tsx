@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import styles from "./quizCard.module.css";
 import Button from "../layout/button";
@@ -37,12 +39,6 @@ export default function QuizCard({
   useEffect(() => {
     if (feedback && nextButtonRef.current) {
       nextButtonRef.current.focus();
-    }
-  }, [feedback]);
-
-  useEffect(() => {
-    if (feedback === null) {
-      inputRef.current?.focus();
     }
   }, [feedback]);
 

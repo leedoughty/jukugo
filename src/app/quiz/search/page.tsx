@@ -28,23 +28,27 @@ export default function SearchQuizPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (searchKanji) {
-      fetchWords(searchKanji);
-    }
+    if (!searchKanji) return;
+
+    let stale = false;
+    const fetchWords = async () => {
+      setLoading(true);
+      setWords([]);
+      setMeanings([]);
+      setCurrentIndex(0);
+
+      const { variants, meanings } = await getSearchQuizData(searchKanji);
+
+      if (!stale) {
+        setWords(variants);
+        setMeanings(meanings);
+        setLoading(false);
+      }
+    };
+
+    fetchWords();
+    return () => { stale = true; };
   }, [searchKanji]);
-
-  const fetchWords = async (kanjiCharacter: string) => {
-    setLoading(true);
-    setWords([]);
-    setMeanings([]);
-    setCurrentIndex(0);
-
-    const { variants, meanings } = await getSearchQuizData(kanjiCharacter);
-
-    setWords(variants);
-    setMeanings(meanings);
-    setLoading(false);
-  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

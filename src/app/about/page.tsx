@@ -1,7 +1,10 @@
-"use client";
-
+import type { Metadata } from "next";
 import styles from "./about.module.css";
 import JukugoCycle from "@/app/components/layout/jukugoCycle";
+
+export const metadata: Metadata = {
+  title: "About | Jukugo",
+};
 
 export default function AboutPage() {
   return (

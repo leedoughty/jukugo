@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./progressTracker.module.css";
 import { useTheme } from "@/app/ThemeProvider";
 

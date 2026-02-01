@@ -5,23 +5,23 @@ export async function fetchRandomizedJukugoQuizData(
   kanjiList: string[],
   filter?: (variant: Variant, kanji: string) => boolean
 ): Promise<{ kanji: string; variants: Variant[]; meanings: string[] } | null> {
-  if (!kanjiList.length) {
-    return null;
-  }
+  const remaining = [...kanjiList];
 
-  const randomKanji = kanjiList[Math.floor(Math.random() * kanjiList.length)];
+  while (remaining.length > 0) {
+    const index = Math.floor(Math.random() * remaining.length);
+    const randomKanji = remaining[index];
 
-  const { kanji, variants, meanings } = await fetchJukugoData(
-    randomKanji,
-    filter
-  );
-
-  if (variants.length === 0) {
-    return fetchRandomizedJukugoQuizData(
-      kanjiList.filter((k) => k !== randomKanji),
+    const { kanji, variants, meanings } = await fetchJukugoData(
+      randomKanji,
       filter
     );
+
+    if (variants.length > 0) {
+      return { kanji, variants, meanings };
+    }
+
+    remaining.splice(index, 1);
   }
 
-  return { kanji, variants, meanings };
+  return null;
 }

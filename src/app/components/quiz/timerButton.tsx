@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Timer from "./timer";
 import styles from "./timerButton.module.css";

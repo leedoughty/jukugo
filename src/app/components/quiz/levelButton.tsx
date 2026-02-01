@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import styles from "./levelButton.module.css";
 import { useTheme } from "@/app/ThemeProvider";
