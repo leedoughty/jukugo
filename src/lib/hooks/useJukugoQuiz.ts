@@ -1,12 +1,12 @@
 import { useState, useCallback } from "react";
 import type { Variant } from "@/lib/types/jukugoData";
-import { fetchRandomizedJukugoQuizData } from "@/lib/utils/fetchRandomizedJukugoQuizData";
+import { getQuizData } from "@/app/quiz/actions";
 
 export function useJukugoQuiz(
   initialKanjiList: string[] = [],
-  filter?: (variant: Variant, kanji: string) => boolean
+  filterType?: string,
 ) {
-  const [kanjiList, setKanjiList] = useState(initialKanjiList);
+  const [kanjiList] = useState(initialKanjiList);
   const [selectedKanji, setSelectedKanji] = useState<string | null>(null);
   const [words, setWords] = useState<Variant[]>([]);
   const [meanings, setMeanings] = useState<string[]>([]);
@@ -15,7 +15,7 @@ export function useJukugoQuiz(
   const pickRandomKanji = useCallback(
     async (list?: string[]) => {
       const sourceList = list ?? kanjiList;
-      const result = await fetchRandomizedJukugoQuizData(sourceList, filter);
+      const result = await getQuizData(sourceList, filterType);
 
       if (!result) {
         setSelectedKanji(null);
@@ -30,7 +30,7 @@ export function useJukugoQuiz(
       setMeanings(result.meanings);
       setCurrentIndex(0);
     },
-    [kanjiList, filter]
+    [kanjiList, filterType],
   );
 
   const handleNext = useCallback(() => {
@@ -39,7 +39,6 @@ export function useJukugoQuiz(
 
   return {
     kanjiList,
-    setKanjiList,
     selectedKanji,
     words,
     meanings,

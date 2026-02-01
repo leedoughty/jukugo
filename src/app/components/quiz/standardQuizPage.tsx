@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
-import { fetchKanjiList } from "@/lib/utils/fetchKanjiList";
 import QuizScreen from "@/app/components/quiz/quizScreen";
 import Sidebar from "@/app/components/quiz/sidebar";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
@@ -13,8 +13,8 @@ import {
   refreshFeature,
   timerFeature,
   historyFeature,
+  levelFeature,
 } from "@/app/components/quiz/features";
-import type { Variant } from "@/lib/types/jukugoData";
 
 type Feature = {
   key: string;
@@ -26,38 +26,39 @@ type Feature = {
 };
 
 type StandardQuizPageProps = {
-  fetchSource: string | null;
-  filter?: (variant: Variant, kanji: string) => boolean;
+  kanjiList: string[];
+  filterType?: string;
   extraFeatures?: Feature[];
   defaultSidebarOpen?: string;
+  levelConfig?: {
+    levels: number[];
+    selected: number | null;
+  };
 };
 
 export default function StandardQuizPage({
-  fetchSource,
-  filter,
+  kanjiList,
+  filterType,
   extraFeatures = [],
   defaultSidebarOpen = "progress",
+  levelConfig,
 }: StandardQuizPageProps) {
+  const router = useRouter();
+
   const {
-    setKanjiList,
     selectedKanji,
     words,
     meanings,
     currentIndex,
     pickRandomKanji,
     handleNext,
-  } = useJukugoQuiz([], filter);
+  } = useJukugoQuiz(kanjiList, filterType);
 
   useEffect(() => {
-    if (!fetchSource) return;
-
-    fetchKanjiList(fetchSource).then((list) => {
-      setKanjiList(list);
-      if (list.length > 0) {
-        pickRandomKanji(list);
-      }
-    });
-  }, [fetchSource, setKanjiList]);
+    if (kanjiList.length > 0) {
+      pickRandomKanji(kanjiList);
+    }
+  }, [kanjiList]);
 
   const totalCount = words.length;
   const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
@@ -81,6 +82,18 @@ export default function StandardQuizPage({
     handleNext,
   });
 
+  const levelFeatureItem = useMemo(() => {
+    if (!levelConfig) return null;
+    return levelFeature({
+      levels: levelConfig.levels,
+      selected: levelConfig.selected,
+      onSelect: (newLevel: number) => {
+        router.replace(`/quiz/jlpt?level=${newLevel}`);
+      },
+      className: sharedStyles.selectorRow,
+    });
+  }, [levelConfig, router]);
+
   const features = [
     progressFeature({
       selectedKanji: selectedKanji ?? "",
@@ -89,6 +102,7 @@ export default function StandardQuizPage({
     }),
     refreshFeature({ onRefresh: pickRandomKanji }),
     ...extraFeatures,
+    ...(levelFeatureItem ? [levelFeatureItem] : []),
     timerFeature({
       currentIndex,
       totalCount,

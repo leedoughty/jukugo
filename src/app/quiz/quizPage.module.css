@@ -3,6 +3,16 @@
   flex-direction: column;
 }
 
+.selectorRow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: left;
+  width: 100%;
+  position: static;
+}
+
 @media (min-width: 920px) {
   .quizMainWrapper {
     flex-direction: row;
@@ -23,5 +33,12 @@
     max-height: 80vh;
     overflow-y: auto;
     z-index: 10;
+  }
+
+  .selectorRow {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
+    width: 100%;
   }
 }

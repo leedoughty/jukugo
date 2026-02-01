@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import sharedStyles from "../quizPage.module.css";
 import styles from "./search.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
-import { fetchJukugoData } from "@/lib/utils/fetchJukugoData";
+import { getSearchQuizData } from "@/app/quiz/actions";
 import { isKanji } from "@/lib/utils/kanji";
 import Sidebar from "@/app/components/quiz/sidebar";
 import QuizAnswerHistory from "@/app/components/quiz/quizAnswerHistory";
@@ -39,7 +39,7 @@ export default function SearchQuizPage() {
     setMeanings([]);
     setCurrentIndex(0);
 
-    const { variants, meanings } = await fetchJukugoData(kanjiCharacter);
+    const { variants, meanings } = await getSearchQuizData(kanjiCharacter);
 
     setWords(variants);
     setMeanings(meanings);

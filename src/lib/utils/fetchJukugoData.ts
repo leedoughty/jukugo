@@ -5,7 +5,9 @@ export async function fetchJukugoData(
   kanji: string,
   filter?: (variant: Variant, kanji: string) => boolean
 ): Promise<{ kanji: string; variants: Variant[]; meanings: string[] }> {
-  const response = await fetch(`${WORDS_ENDPOINT}/${kanji}`);
+  const response = await fetch(`${WORDS_ENDPOINT}/${kanji}`, {
+    next: { revalidate: 86400 },
+  });
 
   if (!response.ok) {
     return { kanji, variants: [], meanings: [] };
