@@ -4,7 +4,7 @@ import styles from "./quizMenu.module.css";
 import LevelButton from "./levelButton";
 import { useTheme } from "@/app/ThemeProvider";
 
-const JLPT_LEVELS = [1, 2, 3, 4, 5];
+const JLPT_LEVELS = [1, 2, 3, 4, 5, 0];
 
 const MODES = [
   { href: "/quiz/joyo", label: "Joyo", sub: "Common use" },
@@ -27,13 +27,12 @@ export default function QuizMenu() {
           <Link
             key={level}
             className={styles.levelLink}
-            href={`/quiz/jlpt?level=${level}`}
+            href={`/quiz/jlpt?level=${level === 0 ? "all" : level}`}
           >
-            <LevelButton
-              level={level}
-              className={styles.levelButtonLarge}
-            >
-              <span className={styles.levelN}>N{level}</span>
+            <LevelButton level={level} className={styles.levelButtonLarge}>
+              <span className={styles.levelN}>
+                {level === 0 ? "All" : `N${level}`}
+              </span>
             </LevelButton>
           </Link>
         ))}
@@ -45,7 +44,9 @@ export default function QuizMenu() {
       <div className={styles.modesGrid}>
         {MODES.map((mode) => (
           <Link key={mode.href} href={mode.href} className={styles.modeLink}>
-            <div className={`${styles.modeCard} ${dark ? styles.modeCardDark : ""}`}>
+            <div
+              className={`${styles.modeCard} ${dark ? styles.modeCardDark : ""}`}
+            >
               <span className={styles.modeLabel}>{mode.label}</span>
               <span className={styles.modeSub}>{mode.sub}</span>
             </div>

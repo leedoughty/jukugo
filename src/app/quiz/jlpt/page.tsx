@@ -7,14 +7,27 @@ type Props = {
 
 export default async function JlptQuizPage({ searchParams }: Props) {
   const { level } = await searchParams;
-  const levelNum = level ? parseInt(level, 10) : null;
-  const kanjiList = levelNum ? await getKanjiList(`jlpt-${levelNum}`) : [];
+  const isAll = level === "all";
+  const levelNum = !isAll && level ? parseInt(level, 10) : null;
+
+  let kanjiList: string[] = [];
+  if (isAll) {
+    const lists = await Promise.all(
+      [1, 2, 3, 4, 5].map((l) => getKanjiList(`jlpt-${l}`)),
+    );
+    kanjiList = [...new Set(lists.flat())];
+  } else if (levelNum) {
+    kanjiList = await getKanjiList(`jlpt-${levelNum}`);
+  }
 
   return (
     <StandardQuizPage
       kanjiList={kanjiList}
       filterType="jlpt"
-      levelConfig={{ levels: [1, 2, 3, 4, 5], selected: levelNum }}
+      levelConfig={{
+        levels: [1, 2, 3, 4, 5, 0],
+        selected: isAll ? 0 : levelNum,
+      }}
     />
   );
 }

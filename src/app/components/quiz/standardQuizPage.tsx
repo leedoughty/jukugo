@@ -88,7 +88,7 @@ export default function StandardQuizPage({
       levels: levelConfig.levels,
       selected: levelConfig.selected,
       onSelect: (newLevel: number) => {
-        router.replace(`/quiz/jlpt?level=${newLevel}`);
+        router.replace(`/quiz/jlpt?level=${newLevel === 0 ? "all" : newLevel}`);
       },
       className: sharedStyles.selectorRow,
     });

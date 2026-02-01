@@ -27,7 +27,7 @@ export default function LevelSelector({ levels, selected, onSelect }: Props) {
           aria-pressed={selected === level}
           onClick={() => onSelect(level)}
         >
-          N{level}
+          {level === 0 ? "All" : `N${level}`}
         </span>
       ))}
     </div>

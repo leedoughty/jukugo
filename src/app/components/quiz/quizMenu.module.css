@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 24px;
+  padding: 14px 20px 14px 24px;
   border-top: var(--border-weight) solid var(--rule-color);
   border-bottom: var(--border-weight) solid var(--rule-color);
 }
@@ -33,6 +33,7 @@
   font-family: var(--font-mono);
   font-size: 0.65rem;
   opacity: 0.6;
+  padding-right: 10px;
 }
 
 /* ---- JLPT Levels Grid ---- */
@@ -53,8 +54,8 @@
   border-right: none;
 }
 
-.levelLink:nth-child(5) {
-  grid-column: 1 / -1;
+.levelLink:nth-last-child(-n + 2) {
+  border-bottom: none;
 }
 
 .levelButtonLarge {
@@ -149,12 +150,7 @@
     border-right: none;
   }
 
-  .levelLink:nth-child(5) {
-    grid-column: auto;
-  }
-
-  .levelLink:nth-child(4),
-  .levelLink:nth-child(5) {
+  .levelLink:nth-last-child(-n + 3) {
     border-bottom: none;
   }
 

@@ -51,19 +51,20 @@
 
 .wordList {
   list-style: none;
-  padding: 16px 0 0;
+  padding: 0;
   margin: 0;
   display: grid;
   grid-template-columns: 1fr;
   gap: 0;
+  border-top: var(--border-weight) solid var(--rule-color);
+  border-left: var(--border-weight) solid var(--rule-color);
+  border-right: var(--border-weight) solid var(--rule-color);
 }
 
 .wordCard {
   background: var(--background);
   border-bottom: var(--border-weight) solid var(--rule-color);
-  border-top: var(--border-weight) solid var(--rule-color);
-  margin-top: -1px;
-  padding: 16px 0;
+  padding: 16px 16px;
 }
 
 .wordCard strong {
@@ -146,10 +147,6 @@
 
   .wordList {
     grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  .wordCard {
-    border-right: var(--border-weight) solid var(--rule-color);
   }
 
   .wordCard:nth-child(2n) {
