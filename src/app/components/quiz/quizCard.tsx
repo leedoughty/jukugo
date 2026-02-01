@@ -55,24 +55,31 @@ export default function QuizCard({
       setFeedback("incorrect");
       onAnswer?.("incorrect", userInput);
 
-      const reviewList: ReviewItem[] = JSON.parse(
-        localStorage.getItem("jukugoReviewList") || "[]",
-      );
+      try {
+        const reviewList: ReviewItem[] = JSON.parse(
+          localStorage.getItem("jukugoReviewList") || "[]",
+        );
 
-      if (
-        !reviewList.some(
-          (item) =>
-            item.written === word.written &&
-            item.pronounced === word.pronounced,
-        )
-      ) {
-        reviewList.push({
-          written: word.written,
-          pronounced: word.pronounced,
-          meaning,
-        });
+        if (
+          !reviewList.some(
+            (item) =>
+              item.written === word.written &&
+              item.pronounced === word.pronounced,
+          )
+        ) {
+          reviewList.push({
+            written: word.written,
+            pronounced: word.pronounced,
+            meaning,
+          });
 
-        localStorage.setItem("jukugoReviewList", JSON.stringify(reviewList));
+          localStorage.setItem(
+            "jukugoReviewList",
+            JSON.stringify(reviewList),
+          );
+        }
+      } catch {
+        localStorage.removeItem("jukugoReviewList");
       }
     }
   };

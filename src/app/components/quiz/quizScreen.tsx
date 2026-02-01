@@ -8,7 +8,6 @@ type QuizScreenProps = {
   meanings: string[];
   currentIndex: number;
   handleNext: () => void;
-  Selector?: React.ReactNode;
   completeMessage?: string;
   onAnswer?: (result: "correct" | "incorrect", userAnswer: string) => void;
 };
@@ -19,14 +18,11 @@ export default function QuizScreen({
   meanings,
   currentIndex,
   handleNext,
-  Selector,
   completeMessage = "Quiz complete!",
   onAnswer,
 }: QuizScreenProps) {
   return (
     <>
-      <div className={styles.selectorRow}>{Selector}</div>
-
       {words.length > 0 && currentIndex < words.length && (
         <QuizCard
           word={words[currentIndex]}
