@@ -18,30 +18,6 @@
   border-top: var(--border-weight) solid var(--rule-color);
 }
 
-.correct {
-  border-left: none;
-}
-
-.incorrect {
-  border-left: none;
-}
-
-.correct .kanji::before {
-  content: "●";
-  color: var(--green);
-  font-size: 0.55em;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
-.incorrect .kanji::before {
-  content: "●";
-  color: var(--red);
-  font-size: 0.55em;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
 .kanji {
   font-size: 1.1em;
   font-weight: 600;
@@ -77,6 +53,11 @@
   color: var(--text-muted);
 }
 
+.kanjiRow {
+  display: flex;
+  align-items: center;
+}
+
 @media (min-width: 920px) {
   .historyWrapper {
     margin-top: 0;
@@ -88,4 +69,3 @@
     align-self: flex-start;
   }
 }
-
