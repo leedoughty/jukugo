@@ -21,7 +21,7 @@
   font-family: var(--font-body);
   font-size: 1.15rem;
   line-height: 1.4;
-  opacity: 0.65;
+  color: var(--text-muted);
   margin-bottom: 0;
   padding-bottom: 20px;
   border-bottom: var(--border-weight) solid var(--rule-color);

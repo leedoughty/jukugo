@@ -76,35 +76,19 @@
   margin-bottom: 4px;
 }
 
-.wordCardDark {
-  background: var(--background);
-  color: var(--foreground);
-  border-bottom-color: var(--rule-color);
-}
-
 .reading {
   font-family: var(--font-body);
   font-size: 1em;
-  color: var(--foreground);
-  opacity: 0.8;
-}
-
-.readingDark {
-  color: var(--foreground);
+  color: var(--text-muted);
 }
 
 .meaning {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--foreground);
-  opacity: 0.55;
+  color: var(--text-subtle);
   margin-top: 4px;
-}
-
-.meaningDark {
-  color: var(--foreground);
 }
 
 .emptyPrompt {
@@ -118,11 +102,7 @@
   font-size: 1.3em;
   margin: 0 auto;
   width: 80vw;
-  opacity: 0.65;
-}
-
-.emptyPromptDark {
-  color: var(--foreground);
+  color: var(--text-muted);
 }
 
 @media (min-width: 600px) {

@@ -8,11 +8,10 @@
 
 .label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--foreground);
-  opacity: 0.75;
+  color: var(--text-muted);
   margin-bottom: 20px;
 }
 
@@ -24,7 +23,7 @@
   font-weight: 400;
   text-align: left;
   margin-bottom: 36px;
-  opacity: 0.8;
+  color: var(--text-muted);
 }
 
 .tag {
@@ -40,7 +39,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.04em;
   font-weight: 400;
-  opacity: 0.75;
+  color: var(--text-muted);
 }
 
 @media (min-width: 920px) {
@@ -51,7 +50,7 @@
   }
 
   .label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     margin-bottom: 24px;
   }
 

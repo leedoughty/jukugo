@@ -4,7 +4,6 @@ import { useActionState } from "react";
 import { useRef, useState } from "react";
 import { fetchJukugoWords } from "./actions";
 import styles from "./kanji-search.module.css";
-import { useTheme } from "@/app/ThemeProvider";
 import Button from "@/app/components/layout/button";
 import Input from "@/app/components/layout/input";
 import { isKanji } from "@/lib/utils/kanji";
@@ -12,7 +11,6 @@ import ErrorMessage from "@/app/components/layout/errorMessage";
 
 export default function KanjiSearch() {
   const [state, formAction] = useActionState(fetchJukugoWords, []);
-  const { dark } = useTheme();
   const formRef = useRef<HTMLFormElement>(null);
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
@@ -48,11 +46,7 @@ export default function KanjiSearch() {
       </form>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       {!error && state.length === 0 && (
-        <div
-          className={`${styles.emptyPrompt} ${
-            dark ? styles.emptyPromptDark : ""
-          }`}
-        >
+        <div className={styles.emptyPrompt}>
           Enter a kanji to explore related Jukugo meanings and readings.
         </div>
       )}
@@ -60,26 +54,18 @@ export default function KanjiSearch() {
         {state.map((word) => (
           <li
             key={`${word.compound}-${word.reading}`}
-            className={`${styles.wordCard} ${dark ? styles.wordCardDark : ""}`}
+            className={styles.wordCard}
           >
             <div>
               <strong>{word.compound}</strong>
             </div>
             <div>
-              <span
-                className={`${styles.reading} ${
-                  dark ? styles.readingDark : ""
-                }`}
-              >
+              <span className={styles.reading}>
                 {word.reading}
               </span>
             </div>
             <div>
-              <span
-                className={`${styles.meaning} ${
-                  dark ? styles.meaningDark : ""
-                }`}
-              >
+              <span className={styles.meaning}>
                 {word.meaning}
               </span>
             </div>

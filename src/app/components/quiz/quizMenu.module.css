@@ -26,13 +26,13 @@
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-weight: 600;
-  opacity: 0.75;
+  color: var(--text-muted);
 }
 
 .sectionCount {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  opacity: 0.6;
+  font-size: 0.7rem;
+  color: var(--text-muted);
   padding-right: 10px;
 }
 
@@ -125,10 +125,10 @@
 
 .modeSub {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  opacity: 0.65;
+  color: var(--text-muted);
 }
 
 /* ---- Desktop ---- */
@@ -169,10 +169,10 @@
   }
 
   .modeLabel {
-    font-size: 1.15rem;
+    font-size: 1.4rem;
   }
 
   .modeSub {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
   }
 }

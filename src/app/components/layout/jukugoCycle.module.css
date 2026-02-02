@@ -45,13 +45,13 @@
   font-family: var(--font-body);
   font-size: 1.1rem;
   font-weight: 400;
-  opacity: 0.6;
+  color: var(--text-muted);
 }
 
 .meaning {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  opacity: 0.4;
+  color: var(--text-subtle);
 }

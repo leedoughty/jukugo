@@ -2,5 +2,5 @@
   font-family: var(--font-body);
   font-size: 1.2em;
   margin-top: 48px;
-  opacity: 0.75;
+  color: var(--text-muted);
 }

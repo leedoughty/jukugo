@@ -17,7 +17,10 @@
   --font-body: "Instrument Sans", "Helvetica Neue", Helvetica, sans-serif;
   --font-mono: "DM Mono", "SF Mono", "Consolas", monospace;
   --border-weight: 1px;
-  --rule-color: rgba(40, 40, 42, 0.4);
+  --rule-color: rgba(40, 40, 42, 0.45);
+
+  --text-muted: #434345;
+  --text-subtle: #52504d;
 }
 
 html.dark {
@@ -25,7 +28,11 @@ html.dark {
   --charcoal: #28282a;
   --background: var(--charcoal);
   --foreground: var(--off-white);
-  --rule-color: rgba(235, 232, 229, 0.2);
+  --rule-color: rgba(235, 232, 229, 0.35);
+
+  --text-muted: #c8c5c2;
+  --text-subtle: #9e9b98;
+
   color-scheme: dark;
 }
 

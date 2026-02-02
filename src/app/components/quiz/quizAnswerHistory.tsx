@@ -2,7 +2,6 @@
 
 import React from "react";
 import styles from "./quizAnswerHistory.module.css";
-import { useTheme } from "@/app/ThemeProvider";
 import type { AnswerHistoryItem } from "@/lib/types/answerHistoryItem";
 
 type Props = {
@@ -11,22 +10,16 @@ type Props = {
 };
 
 export default function QuizAnswerHistory({ history, className }: Props) {
-  const { dark } = useTheme();
-
   if (!history.length) return null;
 
   return (
-    <div
-      className={`${className ? className : styles.historyWrapper} ${
-        dark ? styles.historyWrapperDark : ""
-      }`}
-    >
+    <div className={className ? className : styles.historyWrapper}>
       {history.map((item, i) => (
         <div
           key={`${item.jukugo}-${item.userAnswer}-${i}`}
           className={`${styles.card} ${
             item.isCorrect ? styles.correct : styles.incorrect
-          } ${dark ? styles.cardDark : ""}`}
+          }`}
         >
           <div className={styles.kanji}>{item.kanji}</div>
           <div className={styles.jukugo}>{item.jukugo}</div>
