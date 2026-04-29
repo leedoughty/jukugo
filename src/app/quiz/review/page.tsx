@@ -31,7 +31,7 @@ export default function ReviewQuizPage() {
   const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
   const currentKanji =
     reviewList.length > 0 && currentIndex < reviewList.length
-      ? reviewList[currentIndex].written[0]
+      ? reviewList[currentIndex].written?.[0] ?? ""
       : "";
 
   return (

@@ -24,6 +24,7 @@ export default function SearchQuizPage() {
   const [words, setWords] = useState<Variant[]>([]);
   const [meanings, setMeanings] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [wordsViewed, setWordsViewed] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -36,6 +37,7 @@ export default function SearchQuizPage() {
       setWords([]);
       setMeanings([]);
       setCurrentIndex(0);
+      setWordsViewed(0);
 
       const { variants, meanings } = await getSearchQuizData(searchKanji);
 
@@ -67,11 +69,12 @@ export default function SearchQuizPage() {
         nextIndex = (nextIndex + 1) % words.length;
       }
       setCurrentIndex(nextIndex);
+      setWordsViewed((v) => v + 1);
     }
   };
 
   const totalCount = words.length;
-  const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
+  const progress = totalCount > 0 ? Math.min(wordsViewed + 1, totalCount) : 0;
 
   const {
     answerHistory,

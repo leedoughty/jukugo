@@ -67,17 +67,15 @@ export function useQuizCommon({
 
   const handleTimeout = () => {
     if (!timerRunning || !normalizedKanji || hasAnsweredRef.current) return;
-    setTimeout(() => {
-      handleAnswer(
-        "incorrect",
-        "",
-        words[currentIndex]?.written || "",
-        meanings[currentIndex] || "",
-        normalizedKanji || "",
-        words[currentIndex]?.pronounced || "",
-        true,
-      );
-    }, 0);
+    handleAnswer(
+      "incorrect",
+      "",
+      words[currentIndex]?.written || "",
+      meanings[currentIndex] || "",
+      normalizedKanji || "",
+      words[currentIndex]?.pronounced || "",
+      true,
+    );
   };
 
   return {

@@ -40,7 +40,6 @@ const Timer: React.FC<TimerProps> = ({
       setTimeLeft((prev) => {
         if (prev <= 1) {
           if (intervalRef.current) clearInterval(intervalRef.current);
-          onTimeout();
           return 0;
         }
         return prev - 1;
@@ -49,7 +48,13 @@ const Timer: React.FC<TimerProps> = ({
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isRunning, onTimeout, keyReset, safeDuration]);
+  }, [isRunning, keyReset, safeDuration]);
+
+  useEffect(() => {
+    if (timeLeft === 0 && isRunning) {
+      onTimeout();
+    }
+  }, [timeLeft, isRunning, onTimeout]);
 
   return (
     <div

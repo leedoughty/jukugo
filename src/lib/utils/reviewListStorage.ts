@@ -4,7 +4,16 @@ const KEY = "jukugoReviewList";
 
 export function getReviewList(): ReviewItem[] {
   try {
-    return JSON.parse(localStorage.getItem(KEY) || "[]");
+    const parsed = JSON.parse(localStorage.getItem(KEY) || "[]");
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(
+      (item: unknown): item is ReviewItem =>
+        typeof item === "object" &&
+        item !== null &&
+        typeof (item as ReviewItem).written === "string" &&
+        typeof (item as ReviewItem).pronounced === "string" &&
+        typeof (item as ReviewItem).meaning === "string",
+    );
   } catch {
     return [];
   }

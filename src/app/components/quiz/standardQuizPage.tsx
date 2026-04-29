@@ -50,7 +50,7 @@ export default function StandardQuizPage({
     if (kanjiList.length > 0) {
       pickRandomKanji(kanjiList);
     }
-  }, [kanjiList]);
+  }, [kanjiList, pickRandomKanji]);
 
   const totalCount = words.length;
   const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;

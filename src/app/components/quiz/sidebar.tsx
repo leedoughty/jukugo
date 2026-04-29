@@ -16,9 +16,7 @@ export default function Sidebar({
 }: SidebarProps) {
   const { dark: darkMode } = useTheme();
   const initialOpen = defaultOpen
-    ? Array.isArray(defaultOpen)
-      ? defaultOpen
-      : [defaultOpen]
+    ? [defaultOpen]
     : features[0]?.key
       ? [features[0].key]
       : [];
