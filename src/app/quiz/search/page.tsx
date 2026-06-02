@@ -134,6 +134,7 @@ export default function SearchQuizPage() {
       <div className={sharedStyles.quizMainWrapper}>
         {words.length > 0 && (
           <QuizCard
+            key={`${searchKanji}-${currentIndex}`}
             word={words[currentIndex]}
             meaning={meanings[currentIndex]}
             onNext={handleNext}

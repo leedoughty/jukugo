@@ -34,9 +34,9 @@ const TimerButton: React.FC<TimerButtonProps> = ({
     </button>
   ) : (
     <Timer
+      key={timerKey}
       onTimeout={onTimeout}
       isRunning={timerRunning}
-      keyReset={timerKey}
       duration={duration}
       onClick={onDisable}
     />

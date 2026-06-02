@@ -1,18 +1,14 @@
 "use client";
 
-import React, { forwardRef } from "react";
+import React from "react";
 import styles from "./input.module.css";
 import { useTheme } from "@/app/ThemeProvider";
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+type InputProps = React.ComponentPropsWithRef<"input">;
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export default function Input({ ref, ...props }: InputProps) {
   const { dark } = useTheme();
   const className = dark ? `${styles.input} ${styles.inputDark}` : styles.input;
 
   return <input ref={ref} {...props} className={className} />;
-});
-
-Input.displayName = "Input";
-
-export default Input;
+}

@@ -25,6 +25,7 @@ export default function QuizScreen({
     <>
       {words.length > 0 && currentIndex < words.length && (
         <QuizCard
+          key={`${selectedKanji ?? ""}-${currentIndex}`}
           word={words[currentIndex]}
           meaning={meanings[currentIndex]}
           onNext={handleNext}

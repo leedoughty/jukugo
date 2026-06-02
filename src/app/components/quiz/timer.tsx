@@ -7,29 +7,21 @@ interface TimerProps {
   duration: number;
   onTimeout: () => void;
   isRunning: boolean;
-  keyReset?: number | string;
   onClick?: () => void;
 }
 
-export const TIMER_MIN = 5;
-export const TIMER_MAX = 15;
 export const TIMER_DEFAULT = 10;
 
 const Timer: React.FC<TimerProps> = ({
   duration,
   onTimeout,
   isRunning,
-  keyReset,
   onClick,
 }) => {
   const safeDuration =
     typeof duration === "number" && duration > 0 ? duration : TIMER_DEFAULT;
   const [timeLeft, setTimeLeft] = useState(safeDuration);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    setTimeLeft(safeDuration);
-  }, [keyReset, safeDuration]);
 
   useEffect(() => {
     if (!isRunning) {
@@ -48,7 +40,7 @@ const Timer: React.FC<TimerProps> = ({
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isRunning, keyReset, safeDuration]);
+  }, [isRunning, safeDuration]);
 
   useEffect(() => {
     if (timeLeft === 0 && isRunning) {
@@ -60,7 +52,19 @@ const Timer: React.FC<TimerProps> = ({
     <div
       className={styles.timerWrapper}
       aria-label="Timer"
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
       onClick={onClick}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick();
+              }
+            }
+          : undefined
+      }
       style={{ cursor: onClick ? "pointer" : "default" }}
     >
       <div

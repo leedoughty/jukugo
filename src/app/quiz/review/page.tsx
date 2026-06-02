@@ -52,6 +52,7 @@ export default function ReviewQuizPage() {
       <div className={sharedStyles.quizMainWrapper}>
         {reviewList.length > 0 && currentIndex < reviewList.length ? (
           <QuizCard
+            key={currentIndex}
             word={{
               written: reviewList[currentIndex].written,
               pronounced: reviewList[currentIndex].pronounced,

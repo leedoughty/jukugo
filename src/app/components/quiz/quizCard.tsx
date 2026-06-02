@@ -31,10 +31,8 @@ export default function QuizCard({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setUserInput("");
-    setFeedback(null);
     inputRef.current?.focus();
-  }, [word]);
+  }, []);
 
   useEffect(() => {
     if (feedback && nextButtonRef.current) {

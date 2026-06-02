@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, use, useEffect, useMemo, useState } from "react";
 
 type ThemeContextType = {
   dark: boolean;
@@ -10,7 +10,7 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function useTheme() {
-  const context = useContext(ThemeContext);
+  const context = use(ThemeContext);
 
   if (!context) {
     throw new Error("useTheme must be used within ThemeProvider");
@@ -41,9 +41,9 @@ export default function ThemeProvider({
     localStorage.setItem("darkMode", String(dark));
   }, [dark]);
 
+  const value = useMemo(() => ({ dark, setDark }), [dark]);
+
   return (
-    <ThemeContext.Provider value={{ dark, setDark }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }

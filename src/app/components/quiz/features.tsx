@@ -178,7 +178,7 @@ export function searchFeature({
             maxLength={1}
           />
           <Button type="submit" disabled={loading}>
-            {loading ? "Searching..." : "Search"}
+            {loading ? "Searching…" : "Search"}
           </Button>
         </form>
         {error && <ErrorMessage>{error}</ErrorMessage>}

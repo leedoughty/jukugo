@@ -21,6 +21,7 @@ export default function Header() {
         <InfoIcon dark={dark} />
         <SearchIcon dark={dark} />
         <button
+          type="button"
           aria-label="Toggle dark mode"
           onClick={() => setDark((d) => !d)}
           className={styles.darkModeToggle}

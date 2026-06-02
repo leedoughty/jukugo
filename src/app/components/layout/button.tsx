@@ -1,18 +1,14 @@
 "use client";
 
-import React, { forwardRef } from "react";
+import React from "react";
 import styles from "./button.module.css";
 import { useTheme } from "@/app/ThemeProvider";
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonProps = React.ComponentPropsWithRef<"button">;
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+export default function Button({ ref, ...props }: ButtonProps) {
   const { dark } = useTheme();
   const className = `${styles.button} ${dark ? styles.buttonDark : ""}`;
 
-  return <button ref={ref} {...props} className={className} />;
-});
-
-Button.displayName = "Button";
-
-export default Button;
+  return <button type="button" {...props} ref={ref} className={className} />;
+}

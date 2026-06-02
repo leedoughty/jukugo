@@ -17,7 +17,7 @@ export default function SearchIcon({ dark }: SearchIconProps) {
   );
 }
 
-export function MagnifyingGlassIcon(props: React.SVGProps<SVGSVGElement>) {
+function MagnifyingGlassIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       id="Layer_1"

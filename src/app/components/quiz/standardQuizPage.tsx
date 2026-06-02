@@ -17,6 +17,8 @@ import {
 } from "@/app/components/quiz/features";
 import type { Feature } from "@/lib/types/feature";
 
+const EMPTY_FEATURES: Feature[] = [];
+
 type StandardQuizPageProps = {
   kanjiList: string[];
   filterType?: string;
@@ -31,7 +33,7 @@ type StandardQuizPageProps = {
 export default function StandardQuizPage({
   kanjiList,
   filterType,
-  extraFeatures = [],
+  extraFeatures = EMPTY_FEATURES,
   defaultSidebarOpen = "progress",
   levelConfig,
 }: StandardQuizPageProps) {
