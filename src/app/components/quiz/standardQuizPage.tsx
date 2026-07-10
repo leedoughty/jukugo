@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useJukugoQuiz } from "@/lib/hooks/useJukugoQuiz";
 import QuizScreen from "@/app/components/quiz/quizScreen";
@@ -14,6 +14,7 @@ import {
   timerFeature,
   historyFeature,
   levelFeature,
+  sentenceFeature,
 } from "@/app/components/quiz/features";
 import type { Feature } from "@/lib/types/feature";
 
@@ -76,6 +77,8 @@ export default function StandardQuizPage({
     handleNext,
   });
 
+  const [showSentence, setShowSentence] = useState(false);
+
   const levelFeatureItem = useMemo(() => {
     if (!levelConfig) return null;
     return levelFeature({
@@ -97,6 +100,7 @@ export default function StandardQuizPage({
     refreshFeature({ onRefresh: pickRandomKanji }),
     ...extraFeatures,
     ...(levelFeatureItem ? [levelFeatureItem] : []),
+    sentenceFeature({ setShowSentence }),
     timerFeature({
       currentIndex,
       totalCount,
@@ -120,6 +124,7 @@ export default function StandardQuizPage({
           meanings={meanings}
           currentIndex={currentIndex}
           handleNext={handleNext}
+          showSentence={showSentence}
           onAnswer={(result, userAnswer) =>
             handleAnswer(
               result,

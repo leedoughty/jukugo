@@ -1,0 +1,60 @@
+.sentenceBlock {
+  border-top: var(--border-weight) solid var(--rule-color);
+  padding-top: 16px;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.japanese {
+  font-family:
+    "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic", "MS PGothic", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.target {
+  font-style: normal;
+  -webkit-text-emphasis: filled dot;
+  text-emphasis: filled dot;
+}
+
+.english {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-subtle);
+  overflow-wrap: break-word;
+}
+
+.message {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-subtle);
+}
+
+.retry {
+  align-self: flex-start;
+}
+
+@media (min-width: 920px) {
+  .japanese {
+    font-size: 1.5rem;
+  }
+
+  .english {
+    font-size: 0.95rem;
+  }
+}

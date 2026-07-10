@@ -16,6 +16,7 @@ import {
   timerFeature,
   historyFeature,
   searchFeature,
+  sentenceFeature,
 } from "@/app/components/quiz/features";
 
 export default function SearchQuizPage() {
@@ -27,6 +28,7 @@ export default function SearchQuizPage() {
   const [wordsViewed, setWordsViewed] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showSentence, setShowSentence] = useState(false);
 
   useEffect(() => {
     if (!searchKanji) return;
@@ -49,7 +51,9 @@ export default function SearchQuizPage() {
     };
 
     fetchWords();
-    return () => { stale = true; };
+    return () => {
+      stale = true;
+    };
   }, [searchKanji]);
 
   const handleSearch = (e: React.FormEvent) => {
@@ -113,6 +117,7 @@ export default function SearchQuizPage() {
     refreshFeature({
       onRefresh: handleNext,
     }),
+    sentenceFeature({ setShowSentence }),
     timerFeature({
       currentIndex,
       totalCount,
@@ -139,6 +144,7 @@ export default function SearchQuizPage() {
             meaning={meanings[currentIndex]}
             onNext={handleNext}
             kanji={searchKanji}
+            showSentence={showSentence}
             onAnswer={(result, userAnswer) =>
               handleAnswer(
                 result,

@@ -14,6 +14,7 @@ import {
   DeleteIcon,
   LevelIcon,
   SearchIcon,
+  SentenceIcon,
 } from "./sidebarIcons";
 
 export function progressFeature({
@@ -39,7 +40,11 @@ export function progressFeature({
   };
 }
 
-export function refreshFeature({ onRefresh }: { onRefresh: () => void }): Feature {
+export function refreshFeature({
+  onRefresh,
+}: {
+  onRefresh: () => void;
+}): Feature {
   return {
     key: "refresh",
     icon: <RefreshIcon />,
@@ -141,6 +146,20 @@ export function levelFeature({
       </div>
     ),
     label: "Level",
+  };
+}
+
+export function sentenceFeature({
+  setShowSentence,
+}: {
+  setShowSentence: React.Dispatch<React.SetStateAction<boolean>>;
+}): Feature {
+  return {
+    key: "sentence",
+    icon: <SentenceIcon />,
+    label: "Sentence",
+    action: () => setShowSentence((v) => !v),
+    instant: true,
   };
 }
 

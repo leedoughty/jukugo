@@ -10,6 +10,7 @@ type QuizScreenProps = {
   handleNext: () => void;
   completeMessage?: string;
   onAnswer?: (result: "correct" | "incorrect", userAnswer: string) => void;
+  showSentence?: boolean;
 };
 
 export default function QuizScreen({
@@ -20,6 +21,7 @@ export default function QuizScreen({
   handleNext,
   completeMessage = "Quiz complete!",
   onAnswer,
+  showSentence,
 }: QuizScreenProps) {
   return (
     <>
@@ -31,6 +33,7 @@ export default function QuizScreen({
           onNext={handleNext}
           kanji={selectedKanji ?? undefined}
           onAnswer={onAnswer}
+          showSentence={showSentence}
         />
       )}
 

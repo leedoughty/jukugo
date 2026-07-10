@@ -5,6 +5,7 @@ import styles from "./quizCard.module.css";
 import Button from "../layout/button";
 import SearchKanji from "./searchKanji";
 import Input from "../layout/input";
+import SentenceDisplay from "./sentenceDisplay";
 import { addToReviewList } from "@/lib/utils/reviewListStorage";
 import { CorrectIcon, IncorrectIcon } from "./feedbackIcons";
 
@@ -14,6 +15,7 @@ type Props = {
   onNext: () => void;
   kanji?: string;
   onAnswer?: (result: "correct" | "incorrect", userAnswer: string) => void;
+  showSentence?: boolean;
 };
 
 export default function QuizCard({
@@ -22,6 +24,7 @@ export default function QuizCard({
   onNext,
   kanji,
   onAnswer,
+  showSentence,
 }: Props) {
   const [userInput, setUserInput] = useState("");
   const [feedback, setFeedback] = useState<null | "correct" | "incorrect">(
@@ -84,7 +87,15 @@ export default function QuizCard({
         >
           <div className={styles.feedbackRow}>
             <span tabIndex={-1}>
-              {feedback === "correct" ? <><CorrectIcon /> Correct!</> : <><IncorrectIcon /> Incorrect.</>}
+              {feedback === "correct" ? (
+                <>
+                  <CorrectIcon /> Correct!
+                </>
+              ) : (
+                <>
+                  <IncorrectIcon /> Incorrect.
+                </>
+              )}
               <br />
               <strong>Answer:</strong> {word.pronounced}
             </span>
@@ -98,6 +109,7 @@ export default function QuizCard({
           </div>
         </div>
       )}
+      {showSentence && <SentenceDisplay jukugo={word.written} />}
     </div>
   );
 }

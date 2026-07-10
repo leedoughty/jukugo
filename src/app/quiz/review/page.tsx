@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import styles from "./review.module.css";
 import QuizCard from "@/app/components/quiz/quizCard";
 import Sidebar from "@/app/components/quiz/sidebar";
-import { progressFeature, deleteFeature } from "@/app/components/quiz/features";
+import {
+  progressFeature,
+  deleteFeature,
+  sentenceFeature,
+} from "@/app/components/quiz/features";
 import { getReviewList, clearReviewList } from "@/lib/utils/reviewListStorage";
 import type { ReviewItem } from "@/lib/types/reviewItem";
 import sharedStyles from "../quizPage.module.css";
@@ -12,6 +16,7 @@ import sharedStyles from "../quizPage.module.css";
 export default function ReviewQuizPage() {
   const [reviewList, setReviewList] = useState<ReviewItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showSentence, setShowSentence] = useState(false);
 
   useEffect(() => {
     setReviewList(getReviewList());
@@ -31,7 +36,7 @@ export default function ReviewQuizPage() {
   const progress = totalCount > 0 ? Math.min(currentIndex + 1, totalCount) : 0;
   const currentKanji =
     reviewList.length > 0 && currentIndex < reviewList.length
-      ? reviewList[currentIndex].written?.[0] ?? ""
+      ? (reviewList[currentIndex].written?.[0] ?? "")
       : "";
 
   return (
@@ -46,6 +51,7 @@ export default function ReviewQuizPage() {
           deleteFeature({
             onDelete: handleClear,
           }),
+          sentenceFeature({ setShowSentence }),
         ]}
         defaultOpen="progress"
       />
@@ -60,6 +66,7 @@ export default function ReviewQuizPage() {
             meaning={reviewList[currentIndex].meaning}
             onNext={handleNext}
             kanji={currentKanji}
+            showSentence={showSentence}
           />
         ) : (
           <div className={styles.complete}>
